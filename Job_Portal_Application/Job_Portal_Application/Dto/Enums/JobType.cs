@@ -1,4 +1,4 @@
-﻿namespace Job_Portal_Application.Dto
+﻿namespace Job_Portal_Application.Dto.Enums
 {
     public enum JobType
     {

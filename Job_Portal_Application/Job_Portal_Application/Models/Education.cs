@@ -16,7 +16,7 @@ namespace Job_Portal_Application.Models
 
         public DateOnly StartYear { get; set; }
 
-        public DateOnly? EndYear { get; set; } // EndYear is now nullable
+        public DateOnly? EndYear { get; set; }
 
         [Range(0, 100)]
         public float Percentage { get; set; }
@@ -25,6 +25,6 @@ namespace Job_Portal_Application.Models
         [StringLength(255)]
         public string InstitutionName { get; set; }
 
-        public bool IsCurrentlyStudying { get; set; } // New property to indicate if currently studying
+        public bool IsCurrentlyStudying { get; set; }
     }
 }

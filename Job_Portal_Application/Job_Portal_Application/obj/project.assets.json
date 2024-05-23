@@ -4436,11 +4436,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\SRIKANTH\\Desktop\\presidio-tasks\\day-24\\Job_Portal_Application\\Job_Portal_Application\\Job_Portal_Application.csproj",
+      "projectUniqueName": "C:\\Users\\SRIKANTH\\OneDrive\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Job_Portal_Application.csproj",
       "projectName": "Job_Portal_Application",
-      "projectPath": "C:\\Users\\SRIKANTH\\Desktop\\presidio-tasks\\day-24\\Job_Portal_Application\\Job_Portal_Application\\Job_Portal_Application.csproj",
+      "projectPath": "C:\\Users\\SRIKANTH\\OneDrive\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Job_Portal_Application.csproj",
       "packagesPath": "C:\\Users\\SRIKANTH\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\SRIKANTH\\Desktop\\presidio-tasks\\day-24\\Job_Portal_Application\\Job_Portal_Application\\obj\\",
+      "outputPath": "C:\\Users\\SRIKANTH\\OneDrive\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\SRIKANTH\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -21,7 +21,7 @@ namespace Job_Portal_Application.Models
 
         public byte[] HasCode { get; set; }
 
-    
+
         public DateOnly Dob { get; set; }
 
         [MaxLength(200)]
@@ -30,12 +30,23 @@ namespace Job_Portal_Application.Models
         public string? City { get; set; }
 
         [MaxLength(200)]
+        [Url]
+        public string? PortfolioLink { get; set; }
+
+        [Phone]
+        public string? Phonenumber { get; set; }
+
+        [MaxLength(200)]
+        [Url]
         public string? ResumeUrl { get; set; }
+
+
+
 
         public ICollection<Education> Educations { get; set; } = new List<Education>();
         public ICollection<Experience> Experiences { get; set; } = new List<Experience>();
-        public ICollection<Skill> UserSkills { get; set; } = new List<Skill>();
-
+        public ICollection<UserSkills> UserSkills { get; set; } = new List<UserSkills>();
         public ICollection<JobActivity> JobActivities { get; set; } = new List<JobActivity>();
+        public ICollection<AreasOfInterest> AreasOfInterests { get; set; } = new List<AreasOfInterest>();
     }
 }

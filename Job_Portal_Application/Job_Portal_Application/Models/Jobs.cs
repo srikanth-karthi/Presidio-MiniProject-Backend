@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using Job_Portal_Application.Dto;
+using Job_Portal_Application.Dto.Enums;
+
 
 namespace Job_Portal_Application.Models
 {
@@ -9,8 +10,10 @@ namespace Job_Portal_Application.Models
         [Key]
         public Guid JobId { get; set; } = Guid.NewGuid();
 
- 
+
         public Guid CompanyId { get; set; }
+
+        public Company Company { get; set; }
 
         public JobType JobType { get; set; }
 
@@ -21,19 +24,22 @@ namespace Job_Portal_Application.Models
         public Title Title { get; set; }
 
 
-        public ICollection<Skill> SkillsRequired { get; set; }
-
-    
-        public float? ExperienceRequired { get; set; } 
 
 
-        public DateTime DatePosted { get; set; } 
+        public float? ExperienceRequired { get; set; }
+
+
+        public float? Lpa { get; set; }
+        public DateTime DatePosted { get; set; }
 
         [StringLength(1000)]
-        public string JobDescription { get; set; } 
+        public string JobDescription { get; set; }
 
-     
-        public bool Status { get; set; }
+
+        public bool Status { get; set; } = true;
+
+
+        public ICollection<JobSkills> JobSkills { get; set; } = new List<JobSkills>();
 
         public ICollection<JobActivity> JobActivities { get; set; } = new List<JobActivity>();
     }

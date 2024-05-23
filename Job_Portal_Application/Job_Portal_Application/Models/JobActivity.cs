@@ -1,4 +1,5 @@
-﻿using Job_Portal_Application.Dto;
+﻿using Job_Portal_Application.Dto.Enums;
+
 using System.ComponentModel.DataAnnotations;
 
 namespace Job_Portal_Application.Models
@@ -12,9 +13,12 @@ namespace Job_Portal_Application.Models
             public User User { get; set; }
             public Guid JobId { get; set; }
             public Job Job { get; set; }
-            public JobStatus Status { get; set; } 
-            public DateTime AppliedDate { get; set; }
-            public DateTime UpdatedDate { get; set; }
+        public JobStatus Status { get; set; } = JobStatus.Applied;
+        public bool ResumeViewed { get; set; }=false;
+
+        public string? Comments { get; set; }=string.Empty;
+        public DateTime AppliedDate { get; set; }= DateTime.Now;
+            public DateTime? UpdatedDate { get; set; }
         
     }
 }

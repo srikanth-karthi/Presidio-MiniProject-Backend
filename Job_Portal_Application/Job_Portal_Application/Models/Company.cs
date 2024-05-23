@@ -5,11 +5,11 @@ namespace Job_Portal_Application.Models
     public class Company
     {
         [Key]
-        public Guid CompanyId { get; set; }=Guid.NewGuid();
+        public Guid CompanyId { get; set; } = Guid.NewGuid();
 
 
         [StringLength(100)]
-        public string CompanyName { get; set; } 
+        public string CompanyName { get; set; }
 
 
         [EmailAddress]
@@ -25,7 +25,7 @@ namespace Job_Portal_Application.Models
 
         public string? City { get; set; }
 
-        public int CompanySize { get; set; } 
+        public int CompanySize { get; set; }
 
         [Url]
         public string CompanyWebsite { get; set; }
