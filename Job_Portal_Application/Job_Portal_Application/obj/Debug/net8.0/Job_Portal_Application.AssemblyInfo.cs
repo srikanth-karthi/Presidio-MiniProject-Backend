@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Job_Portal_Application")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f9e2f16e414c7dea114f03b938f07df78092ff6b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+68b74ab58de848507b4fef916c93e8c0145bffa5")]
 [assembly: System.Reflection.AssemblyProductAttribute("Job_Portal_Application")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Job_Portal_Application")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -83,12 +83,12 @@ namespace Job_Portal_Application.Controllers
             }
         }
 
-        [HttpPut("status/{jobActivityId}")]
-        public async Task<IActionResult> UpdateJobActivityStatus(Guid jobActivityId, JobStatus newStatus)
+        [HttpPut("Update")]
+        public async Task<IActionResult> UpdateJobActivityStatus(UpdateJobactivityDto updateJobactivityDto)
         {
             try
             {
-                var jobActivityDto = await _jobActivityService.UpdateJobActivityStatus(jobActivityId, newStatus);
+                var jobActivityDto = await _jobActivityService.UpdateJobActivityStatus(updateJobactivityDto);
                 return Ok(jobActivityDto);
             }
             catch (JobActivityNotFoundException ex)

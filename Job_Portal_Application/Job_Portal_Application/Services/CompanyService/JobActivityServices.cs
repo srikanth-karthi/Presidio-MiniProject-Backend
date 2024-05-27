@@ -58,11 +58,12 @@ namespace Job_Portal_Application.Services
             return jobActivities.Select(j => MapToJobDto(j.Job));
         }
 
-        public async Task<JobActivityDto> UpdateJobActivityStatus(Guid jobActivityId, JobStatus newStatus)
+        public async Task<JobActivityDto> UpdateJobActivityStatus(UpdateJobactivityDto jobactivity)
         {
-            var jobActivity = await _jobActivityRepository.Get(jobActivityId) ?? throw new JobActivityNotFoundException("Job activity not found.");
-            jobActivity.Status = newStatus;
+            var jobActivity = await _jobActivityRepository.Get(jobactivity.JobactivityId) ?? throw new JobActivityNotFoundException("Job activity not found.");
+            jobActivity.Status = jobactivity.status;
             jobActivity.UpdatedDate = DateTime.UtcNow;
+            jobActivity.ResumeViewed = true;
 
             return MapToDto(await _jobActivityRepository.Update(jobActivity));
         }
