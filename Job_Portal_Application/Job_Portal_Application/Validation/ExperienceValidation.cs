@@ -1,4 +1,4 @@
-﻿using Job_Portal_Application.Dto;
+﻿using Job_Portal_Application.Dto.ExperienceDto;
 using System;
 using System.ComponentModel.DataAnnotations;
 
@@ -10,7 +10,7 @@ namespace Job_Portal_Application.Validation
         {
             var experienceDto = (AddExperienceDto)validationContext.ObjectInstance;
 
-            if (experienceDto.EndYear < experienceDto.StartYear)
+            if (experienceDto.EndYear <= experienceDto.StartYear)
             {
                 return new ValidationResult("EndYear must be greater than or equal to StartYear.");
             }

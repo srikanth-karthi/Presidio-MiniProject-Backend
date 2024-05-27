@@ -277,3 +277,4 @@ C:\Users\SRIKANTH\OneDrive\Desktop\Presidio-Mini-Project\Job_Portal_Application\
 C:\Users\SRIKANTH\OneDrive\Desktop\Presidio-Mini-Project\Job_Portal_Application\Job_Portal_Application\obj\Debug\net8.0\Job_Portal_Application.pdb
 C:\Users\SRIKANTH\OneDrive\Desktop\Presidio-Mini-Project\Job_Portal_Application\Job_Portal_Application\obj\Debug\net8.0\Job_Portal_Application.genruntimeconfig.cache
 C:\Users\SRIKANTH\OneDrive\Desktop\Presidio-Mini-Project\Job_Portal_Application\Job_Portal_Application\obj\Debug\net8.0\ref\Job_Portal_Application.dll
+C:\Users\SRIKANTH\OneDrive\Desktop\Presidio-Mini-Project\Job_Portal_Application\Job_Portal_Application\bin\Debug\net8.0\libman.json

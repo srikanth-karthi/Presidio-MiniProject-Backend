@@ -30,7 +30,7 @@ namespace Job_Portal_Application.Models
 
 
         public float? Lpa { get; set; }
-        public DateTime DatePosted { get; set; }
+        public DateOnly DatePosted { get; set; }= DateOnly.FromDateTime(DateTime.Now);
 
         [StringLength(1000)]
         public string JobDescription { get; set; }

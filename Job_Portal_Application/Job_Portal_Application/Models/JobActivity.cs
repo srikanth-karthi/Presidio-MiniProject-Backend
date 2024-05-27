@@ -17,8 +17,9 @@ namespace Job_Portal_Application.Models
         public bool ResumeViewed { get; set; }=false;
 
         public string? Comments { get; set; }=string.Empty;
-        public DateTime AppliedDate { get; set; }= DateTime.Now;
-            public DateTime? UpdatedDate { get; set; }
+        public DateOnly AppliedDate { get; set; } = DateOnly.FromDateTime(DateTime.Now);
+
+        public DateTime? UpdatedDate { get; set; }
         
     }
 }
