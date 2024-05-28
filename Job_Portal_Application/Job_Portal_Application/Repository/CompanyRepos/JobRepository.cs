@@ -43,6 +43,16 @@ namespace Job_Portal_Application.Repository.CompanyRepos
 
         }
 
+        public async Task<Job> Get(Guid id,Guid companyId)
+        {
+            return await _context.Jobs
+                 .Include(j => j.Company)
+                 .Include(job => job.Title)
+                 .Include(j => j.JobSkills).ThenInclude(js => js.Skill)
+                 .FirstOrDefaultAsync(j => j.JobId == id && j.CompanyId== companyId);
+
+        }
+
         public async Task<IEnumerable<Job>> GetAll()
         {
             return  await _context.Jobs

@@ -86,6 +86,18 @@ namespace Job_Portal_Application.Controllers
         [HttpPut("Update")]
         public async Task<IActionResult> UpdateJobActivityStatus(UpdateJobactivityDto updateJobactivityDto)
         {
+            if (!ModelState.IsValid)
+            {
+                var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage);
+                var customErrorResponse = new
+                {
+                    Title = "One or more validation errors occurred.",
+                    Errors = errors
+                };
+
+
+                return BadRequest(customErrorResponse);
+            }
             try
             {
                 var jobActivityDto = await _jobActivityService.UpdateJobActivityStatus(updateJobactivityDto);
@@ -120,7 +132,7 @@ namespace Job_Portal_Application.Controllers
         }
 
 
-        [HttpGet("job/activities/{jobId}")]
+        [HttpGet("job/{jobId}")]
         public async Task<IActionResult> GetJobActivitiesByJobId(Guid jobId)
         {
             try

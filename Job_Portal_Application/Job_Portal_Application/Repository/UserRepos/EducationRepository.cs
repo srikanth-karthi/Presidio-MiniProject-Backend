@@ -6,7 +6,7 @@ using Job_Portal_Application.Exceptions;
 using Microsoft.EntityFrameworkCore;
 using Job_Portal_Application.Models;
 using Job_Portal_Application.Interfaces.IRepository;
-using Job_Portal_Application.Dto.EducationDto;
+using Job_Portal_Application.Dto.EducationDtos;
 
 namespace Job_Portal_Application.Repository.UserRepos
 {
@@ -40,6 +40,11 @@ namespace Job_Portal_Application.Repository.UserRepos
            return await _context.Educations.FirstOrDefaultAsync(e => e.EducationId == id);
 
         }
+        public async Task<Education> Get(Guid id, Guid UserId)
+        {
+            return await _context.Educations.FirstOrDefaultAsync(e => e.EducationId == id && e.UserId == UserId);
+        }
+
 
         public async Task<IEnumerable<Education>> GetAll()
         {

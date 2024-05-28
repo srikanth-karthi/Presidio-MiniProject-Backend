@@ -1,9 +1,9 @@
-﻿using Job_Portal_Application.Dto.ExperienceDto;
+﻿
 using System.ComponentModel.DataAnnotations;
 
-namespace Job_Portal_Application.Dto.EducationDto
+namespace Job_Portal_Application.Dto.ExperienceDtos
 {
-    public class ExperienceDto : AddExperienceDto
+    public class GetExperienceDto : AddExperienceDto
     {
 
 

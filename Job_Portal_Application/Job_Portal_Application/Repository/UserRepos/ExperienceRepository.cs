@@ -40,6 +40,11 @@ namespace Job_Portal_Application.Repository.UserRepos
             return await _context.Experiences.Include(job => job.Title).FirstOrDefaultAsync(e => e.ExperienceId == id);
 
         }
+        public async Task<Experience> Get(Guid id,Guid Userid)
+        {
+            return await _context.Experiences.Include(job => job.Title).FirstOrDefaultAsync(e => e.ExperienceId == id && e.UserId==Userid);
+
+        }
 
         public async Task<IEnumerable<Experience>> GetAll()
         {

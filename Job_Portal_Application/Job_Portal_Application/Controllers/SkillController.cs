@@ -41,6 +41,7 @@ namespace Job_Portal_Application.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Skill>>> GetAllSkills()
         {
+
    
             try
             {

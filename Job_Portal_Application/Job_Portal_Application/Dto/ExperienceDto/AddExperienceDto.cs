@@ -3,9 +3,9 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Job_Portal_Application.Validation;
 
-namespace Job_Portal_Application.Dto.ExperienceDto
+namespace Job_Portal_Application.Dto.ExperienceDtos
 {
- 
+
     public class AddExperienceDto
     {
 
@@ -23,16 +23,10 @@ namespace Job_Portal_Application.Dto.ExperienceDto
 
         [Required(ErrorMessage = "EndYear is required")]
         [DataType(DataType.Date)]
-        public DateTime EndYear { get; set; }
         [ExperienceValidation]
-        [NotMapped]
-        public int ExperienceDuration
-        {
-            get
-            {
-                return EndYear.Year - StartYear.Year;
-            }
-        }
+        public DateTime EndYear { get; set; }
+
+
     }
 
 }

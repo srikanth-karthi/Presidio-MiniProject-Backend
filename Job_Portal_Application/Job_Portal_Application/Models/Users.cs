@@ -43,10 +43,10 @@ namespace Job_Portal_Application.Models
 
 
 
-        public ICollection<Education> Educations { get; set; } = new List<Education>();
-        public ICollection<Experience> Experiences { get; set; } = new List<Experience>();
-        public ICollection<UserSkills> UserSkills { get; set; } = new List<UserSkills>();
-        public ICollection<JobActivity> JobActivities { get; set; } = new List<JobActivity>();
-        public ICollection<AreasOfInterest> AreasOfInterests { get; set; } = new List<AreasOfInterest>();
+        public ICollection<Education> Educations { get; set; } = [];
+        public ICollection<Experience> Experiences { get; set; } = [];
+        public ICollection<UserSkills> UserSkills { get; set; } = [];
+        public ICollection<JobActivity> JobActivities { get; set; } = [];
+        public ICollection<AreasOfInterest> AreasOfInterests { get; set; } = [];
     }
 }

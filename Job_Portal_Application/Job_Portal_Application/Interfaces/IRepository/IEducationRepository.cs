@@ -6,5 +6,7 @@ namespace Job_Portal_Application.Interfaces.IRepository
     {
 
         Task<IEnumerable<Education>> GetAll(Guid UserId);
+
+         Task<Education> Get(Guid id, Guid UserId);
     }
 }

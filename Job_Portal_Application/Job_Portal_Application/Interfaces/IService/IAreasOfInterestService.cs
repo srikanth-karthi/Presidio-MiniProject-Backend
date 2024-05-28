@@ -1,4 +1,4 @@
-﻿using Job_Portal_Application.Dto.AreasOfInterestDto;
+﻿using Job_Portal_Application.Dto.AreasOfInterestDtos;
 
 using Job_Portal_Application.Models;
 using System;

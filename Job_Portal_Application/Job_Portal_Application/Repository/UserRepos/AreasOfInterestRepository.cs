@@ -41,6 +41,12 @@ namespace Job_Portal_Application.Repository.UserRepos
                 .FirstOrDefaultAsync(a => a.AreasOfInterestId == id);
         }
 
+        public async Task<AreasOfInterest> Get(Guid id,Guid UserId)
+        {
+            return await _context.AreasOfInterests.Include(a => a.Title)
+                .FirstOrDefaultAsync(a => a.AreasOfInterestId == id && a.UserId==UserId);
+        }
+
         public async Task<IEnumerable<AreasOfInterest>> GetAll()
         {
             return await _context.AreasOfInterests

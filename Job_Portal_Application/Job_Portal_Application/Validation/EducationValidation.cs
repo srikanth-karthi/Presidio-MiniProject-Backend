@@ -1,6 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using Job_Portal_Application.Dto.EducationDto;
+using Job_Portal_Application.Dto.EducationDtos;
 
 namespace Job_Portal_Application.Validation
 {

@@ -29,9 +29,16 @@ namespace Job_Portal_Application.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
-            }
+                var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage);
+                var customErrorResponse = new
+                {
+                    Title = "One or more validation errors occurred.",
+                    Errors = errors
+                };
 
+
+                return BadRequest(customErrorResponse);
+            }
             try
             {
                 var (addedJob, notFoundSkills) = await _jobService.AddJob(newJob);
@@ -67,9 +74,16 @@ namespace Job_Portal_Application.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
-            }
+                var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage);
+                var customErrorResponse = new
+                {
+                    Title = "One or more validation errors occurred.",
+                    Errors = errors
+                };
 
+
+                return BadRequest(customErrorResponse);
+            }
             try
             {
                 var updatedJob = await _jobService.UpdateJob(jobUpdateDto);
@@ -142,6 +156,18 @@ namespace Job_Portal_Application.Controllers
         [HttpPost("search")] 
         public async Task<IActionResult> GetJobs([FromBody] JobsSearchRequest request)
         {
+            if (!ModelState.IsValid)
+            {
+                var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage);
+                var customErrorResponse = new
+                {
+                    Title = "One or more validation errors occurred.",
+                    Errors = errors
+                };
+
+
+                return BadRequest(customErrorResponse);
+            }
             try
             {
                 var jobs = await _jobService.GetJobs(
@@ -171,6 +197,18 @@ namespace Job_Portal_Application.Controllers
         [HttpPost("update-job-skills")]
         public async Task<IActionResult> UpdateJobSkills(JobSkillsDto jobSkillsDto)
         {
+            if (!ModelState.IsValid)
+            {
+                var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage);
+                var customErrorResponse = new
+                {
+                    Title = "One or more validation errors occurred.",
+                    Errors = errors
+                };
+
+
+                return BadRequest(customErrorResponse);
+            }
             try
             {
                 await _jobService.UpdateJobSkills(jobSkillsDto);

@@ -43,8 +43,6 @@ namespace Job_Portal_Application.Repository.UserRepos
         public async Task<IEnumerable<UserSkills>> GetAll()
         {
             return await _context.UserSkills
-                .Include(us => us.User)
-                .Include(us => us.Skill)
                 .ToListAsync();
         }
 

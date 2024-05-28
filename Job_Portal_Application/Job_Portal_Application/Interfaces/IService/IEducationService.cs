@@ -1,4 +1,4 @@
-﻿using Job_Portal_Application.Dto.EducationDto;
+﻿using Job_Portal_Application.Dto.EducationDtos;
 using Job_Portal_Application.Models;
 using System;
 using System.Collections.Generic;

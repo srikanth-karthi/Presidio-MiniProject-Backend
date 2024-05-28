@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+
+using Job_Portal_Application.Dto.profile;
+using Job_Portal_Application.Dto;
 using Job_Portal_Application.Dto.Enums;
 using Job_Portal_Application.Dto.JobDto;
 using Job_Portal_Application.Dto.UserDto;
@@ -12,6 +15,8 @@ using Job_Portal_Application.Interfaces.IService;
 using Job_Portal_Application.Models;
 using Job_Portal_Application.Repository.CompanyRepos;
 using Job_Portal_Application.Repository.UserRepos;
+using UserSkillDto = Job_Portal_Application.Dto.UserSkillDto;
+
 
 namespace Job_Portal_Application.Services.UsersServices
 {
@@ -88,10 +93,13 @@ namespace Job_Portal_Application.Services.UsersServices
 
         public async Task<IEnumerable<JobDto>> GetRecommendedJobs( int pageNumber, int pageSize)
         {
-            return (await _userRepository.GetRecommendedJobsForUser(_authorizeService.Gettoken(), pageNumber, pageSize)).Select(j=> MapToJobDto(j));    
+            var jobs = await _userRepository.GetRecommendedJobsForUser(_authorizeService.Gettoken(), pageNumber, pageSize);
+            if (jobs == null) throw new JobNotFoundException(" Job does not exist.");
+
+            return jobs.Select(j => MapToJobDto(j));
         }
 
-        public async Task<UserDto> UpdateUser(UserDto userDto)
+        public async Task<UserDto> UpdateUser(UpdateUserDto userDto)
         {
             var user = await _userRepository.Get(_authorizeService.Gettoken()) ?? throw new UserNotFoundException("User not found.");
  
@@ -114,19 +122,68 @@ namespace Job_Portal_Application.Services.UsersServices
             return await _userRepository.Delete(user);
         }
 
-
-        public async Task<User> GetUserProfile(Guid userId)
+        public async Task<UserProfileDto> GetUserProfile(Guid userId)
         {
             var user = await _userRepository.GetUserProfile(userId) ?? throw new UserNotFoundException("User not found.");
 
-            user.Password = [];
-            user.HasCode = [];
-            user.JobActivities = [];
-            return user;
+         
 
+            var userProfileDto = new UserProfileDto
+            {
+                UserId = user.UserId,
+                Dob = user.Dob.ToDateTime(TimeOnly.MinValue),
+                Email = user.Email,
+                Name = user.Name,
+                Address = user.Address,
+                City = user.City,
+                PortfolioLink = user.PortfolioLink,
+                PhoneNumber = user.Phonenumber,
+                ResumeUrl = user.ResumeUrl,
+                Educations = user.Educations.Select(e => new EducationDto
+                {
+                    EducationId = e.EducationId,
+                    Level = e.Level,
+                    StartYear = e.StartYear,
+                    EndYear = e.EndYear,
+                    Percentage = e.Percentage,
+                    InstitutionName = e.InstitutionName,
+                    IsCurrentlyStudying = e.IsCurrentlyStudying
+                }).ToList(),
+                Experiences = user.Experiences.Select(e => new ExperienceDto
+                {
+                    ExperienceId = e.ExperienceId,
+                    CompanyName = e.CompanyName,
+                    TitleName = e.Title.TitleName,
+                    StartYear = e.StartYear,
+                    EndYear = e.EndYear,
+                    ExperienceDuration = e.ExperienceDuration
+                }).ToList(),
+                UserSkills = user.UserSkills.Select(us => new Dto.profile.UserSkillDto
+                {
+                    SkillId = us.Skill.SkillId,
+                    SkillName = us.Skill.Skill_Name
+                }).ToList(),
 
+                AreasOfInterests = user.AreasOfInterests.Select(aoi => new AreaOfInterestDto
+                {
+                    AreaOfInterestId = aoi.AreasOfInterestId,
+                    TitleName = aoi.Title.TitleName,
+                    Lpa = aoi.Lpa
+                }).ToList()
+            };
 
+            return userProfileDto;
         }
+
+
+        public async Task<UserDto> UpdateResumeUrl(Guid userId, string resumeUrl)
+        {
+            var user = await _userRepository.Get(userId) ?? throw new UserNotFoundException("User not found.");
+
+            user.ResumeUrl = resumeUrl;
+            return ToUserDto(await _userRepository.Update(user));
+        }
+
 
         private JobDto MapToJobDto(Job job)
         {

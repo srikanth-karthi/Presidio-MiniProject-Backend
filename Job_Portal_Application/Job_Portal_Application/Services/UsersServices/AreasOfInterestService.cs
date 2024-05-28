@@ -1,5 +1,5 @@
-﻿using Job_Portal_Application.Dto.AreasOfInterestDto;
-using Job_Portal_Application.Dto.EducationDto;
+﻿using Job_Portal_Application.Dto.AreasOfInterestDtos;
+using Job_Portal_Application.Dto.EducationDtos;
 using Job_Portal_Application.Exceptions;
 using Job_Portal_Application.Interfaces.IRepository;
 using Job_Portal_Application.Interfaces.IService;
@@ -43,7 +43,7 @@ namespace Job_Portal_Application.Services.UsersServices
 
         public async Task<AreasOfInterest> UpdateAreasOfInterest(AreasOfInterestDto areasOfInterestDto)
         {
-            var areasOfInterest = await _areasOfInterestRepository.Get(areasOfInterestDto.AreasOfInterestId)
+            var areasOfInterest = await _areasOfInterestRepository.Get(areasOfInterestDto.AreasOfInterestId, _authorizeService.Gettoken())
                                   ?? throw new AreasOfInterestNotFoundException("Areas of Interest record not found");
 
             areasOfInterest.TitleId = areasOfInterestDto.TitleId;
@@ -54,14 +54,14 @@ namespace Job_Portal_Application.Services.UsersServices
 
         public async Task<bool> DeleteAreasOfInterest(Guid areasOfInterestId)
         {
-            var areasOfInterest = await _areasOfInterestRepository.Get(areasOfInterestId)
+            var areasOfInterest = await _areasOfInterestRepository.Get(areasOfInterestId, _authorizeService.Gettoken())
                                   ?? throw new AreasOfInterestNotFoundException("Areas of Interest record not found");
             return await _areasOfInterestRepository.Delete(areasOfInterest);
         }
 
         public async Task<AreasOfInterest> GetAreasOfInterest(Guid areasOfInterestId)
         {
-             return  await _areasOfInterestRepository.Get(areasOfInterestId)
+             return  await _areasOfInterestRepository.Get(areasOfInterestId, _authorizeService.Gettoken())
                                   ?? throw new AreasOfInterestNotFoundException("Areas of Interest record not found");
 
 

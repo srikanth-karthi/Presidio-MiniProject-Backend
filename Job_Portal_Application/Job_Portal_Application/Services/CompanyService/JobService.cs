@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Job_Portal_Application.Dto.EducationDto;
+using Job_Portal_Application.Dto.EducationDtos;
 using Job_Portal_Application.Dto.Enums;
 using Job_Portal_Application.Dto.JobDto;
 using Job_Portal_Application.Dto.JobDtos;
@@ -76,7 +76,7 @@ namespace Job_Portal_Application.Services.CompanyService
 
         public async Task<JobDto> UpdateJob(UpdateJobDto jobUpdateDto)
         {
-            var job = await _jobRepository.Get(jobUpdateDto.JobId) ?? throw new JobNotFoundException("Invalid JobId. Job does not exist.");
+            var job = await _jobRepository.Get(jobUpdateDto.JobId, _authorizeService.Gettoken()) ?? throw new JobNotFoundException("Invalid JobId. Job does not exist.");
             _ = await _titleRepository.Get(jobUpdateDto.TitleId) ?? throw new TitleNotFoundException("Invalid TitleId. Title does not exist.");
 
             job.TitleId = jobUpdateDto.TitleId;
@@ -92,7 +92,7 @@ namespace Job_Portal_Application.Services.CompanyService
 
         public async Task<bool> DeleteJob(Guid jobId)
         {
-            return await _jobRepository.Delete(await _jobRepository.Get(jobId) ?? throw new JobNotFoundException("Invalid JobId. Job does not exist."));
+            return await _jobRepository.Delete(await _jobRepository.Get(jobId, _authorizeService.Gettoken()) ?? throw new JobNotFoundException("Invalid JobId. Job does not exist."));
         }
 
         public async Task<JobDto> GetJob(Guid jobId)
@@ -100,7 +100,7 @@ namespace Job_Portal_Application.Services.CompanyService
 
 
 
-            return MapToJobDto(await _jobRepository.Get(jobId) ?? throw new JobNotFoundException("Invalid JobId. Job does not exist."));
+            return MapToJobDto(await _jobRepository.Get(jobId, _authorizeService.Gettoken()) ?? throw new JobNotFoundException("Invalid JobId. Job does not exist."));
 
         }
 
@@ -128,7 +128,7 @@ namespace Job_Portal_Application.Services.CompanyService
 
         public async Task UpdateJobSkills(JobSkillsDto jobSkillsDto)
         {
-            var job = await _jobRepository.Get(jobSkillsDto.JobId) ?? throw new JobNotFoundException("Invalid JobId. Job does not exist.");
+            var job = await _jobRepository.Get(jobSkillsDto.JobId, _authorizeService.Gettoken()) ?? throw new JobNotFoundException("Invalid JobId. Job does not exist.");
 
             await _jobSkillsRepository.UpdateJobSkills(jobSkillsDto.JobId, jobSkillsDto.SkillsToAdd, jobSkillsDto.SkillsToRemove);
         }

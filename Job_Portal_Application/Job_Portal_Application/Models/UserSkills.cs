@@ -10,6 +10,6 @@
         public Guid SkillId { get; set; }
 
         public Skill Skill { get; set; }
-        public User User { get; internal set; }
+        public User User { get;  set; }
     }
 }

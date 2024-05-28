@@ -13,6 +13,7 @@ namespace Job_Portal_Application.Interfaces.IRepository
         Task<IEnumerable<Job>> GetAll();
         Task<Job> Update(Job entity);
         Task<IEnumerable<Job>> GetAllJobsPosted(Guid companyId);
+        public Task<Job> Get(Guid id, Guid companyId);
         Task<JobActivity> GetByUserIdAndJobId(Guid userId, Guid jobId);
 
         Task<IEnumerable<Job>> GetJobs(

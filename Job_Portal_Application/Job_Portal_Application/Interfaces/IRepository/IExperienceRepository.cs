@@ -8,6 +8,8 @@ namespace Job_Portal_Application.Interfaces.IRepository
     {
 
         public  Task<IEnumerable<Experience>> GetAll(Guid UserId);
-       
+        public Task<Experience> Get(Guid id, Guid Userid);
+
+
     }
 }

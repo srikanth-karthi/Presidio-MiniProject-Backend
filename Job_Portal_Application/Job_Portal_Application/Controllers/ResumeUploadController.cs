@@ -12,19 +12,18 @@ namespace Job_Portal_Application.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ResumeUploadController : ControllerBase
+    public class ResumeController : ControllerBase
     {
         private readonly IAuthorizeService _authorizeService;
         private readonly IUserService _userService;
         private readonly IJobActivityService _jobActivityService;
 
-        public ResumeUploadController(IUserService userService, IAuthorizeService authorizeService, IJobActivityService jobActivityService)
+        public ResumeController(IUserService userService, IAuthorizeService authorizeService, IJobActivityService jobActivityService)
         {
             _authorizeService = authorizeService;
             _userService = userService;
             _jobActivityService = jobActivityService;
         }
-
         [HttpPost("upload")]
         [DisableRequestSizeLimit]
         [Authorize]
@@ -51,7 +50,11 @@ namespace Job_Portal_Application.Controllers
                 await file.CopyToAsync(stream);
             }
 
-            return Ok(new { message = "Resume uploaded successfully.", filePath });
+
+            var resumeUrl = $"{Request.Scheme}://{Request.Host}/api/resume/view/{_authorizeService.Gettoken()}";
+            var updatedUser = await _userService.UpdateResumeUrl(_authorizeService.Gettoken(), resumeUrl);
+
+            return Ok(new { message = "Resume uploaded successfully.", resumeUrl = updatedUser.ResumeUrl });
         }
 
         [HttpGet("download/{userId}")]
@@ -81,14 +84,10 @@ namespace Job_Portal_Application.Controllers
             return File(fileBytes, "application/pdf", tempFileName);
         }
 
-
-
         [HttpGet("view/{userId}/{jobactivityId}")]
         [Authorize]
         public async Task<IActionResult> View(Guid userId, Guid jobactivityId)
         {
-         
-
             string originalFileName = $"{userId}.pdf";
             var folderPath = Path.Combine(Directory.GetCurrentDirectory(), "UploadedFiles");
             var originalFilePath = Path.Combine(folderPath, originalFileName);
@@ -100,21 +99,20 @@ namespace Job_Portal_Application.Controllers
 
             byte[] fileBytes = await System.IO.File.ReadAllBytesAsync(originalFilePath);
 
-
             await _jobActivityService.UpdateJobActivityStatus(new UpdateJobactivityDto()
             {
                 JobactivityId = jobactivityId,
                 ResumeViewed = true
-            }); ;
-
+            });
 
             return File(fileBytes, "application/pdf");
         }
-        [HttpGet("view/{UserId}")]
+
+        [HttpGet("view/{userId}")]
         [Authorize]
-        public async Task<IActionResult> View(Guid UserId)
+        public async Task<IActionResult> View(Guid userId)
         {
-            string originalFileName = $"{UserId}.pdf";
+            string originalFileName = $"{userId}.pdf";
             var folderPath = Path.Combine(Directory.GetCurrentDirectory(), "UploadedFiles");
             var originalFilePath = Path.Combine(folderPath, originalFileName);
 
@@ -127,7 +125,4 @@ namespace Job_Portal_Application.Controllers
             return File(fileBytes, "application/pdf");
         }
     }
-
-
 }
-

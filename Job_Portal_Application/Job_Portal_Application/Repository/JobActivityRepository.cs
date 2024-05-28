@@ -73,14 +73,14 @@ namespace Job_Portal_Application.Repository
         }
 
         public async Task<IEnumerable<JobActivity>> GetFilteredUser(
-        Guid companyId,
-        Guid jobId,
-        int pageNumber = 1,
-        int pageSize = 25,
-        bool firstApplied = false,
-        bool perfectMatchSkills = false,
-        bool perfectMatchExperience = false,
-        bool hasExperienceInJobTitle = false)
+      Guid companyId,
+      Guid jobId,
+      int pageNumber = 1,
+      int pageSize = 25,
+      bool firstApplied = false,
+      bool perfectMatchSkills = false,
+      bool perfectMatchExperience = false,
+      bool hasExperienceInJobTitle = false)
         {
             var query = _context.JobActivities
                 .Include(ja => ja.User)
@@ -104,12 +104,14 @@ namespace Job_Portal_Application.Repository
 
             if (perfectMatchSkills)
             {
-                query = query.Where(ja => ja.User.UserSkills.All(us => ja.Job.JobSkills.Select(js => js.SkillId).Contains(us.SkillId)));
+                query = query.Where(ja =>
+                    ja.Job.JobSkills.All(js => ja.User.UserSkills.Any(us => us.SkillId == js.SkillId)));
             }
 
             if (perfectMatchExperience)
             {
-                query = query.Where(ja => ja.User.Experiences.Any(e => e.TitleId == ja.Job.TitleId && e.ExperienceDuration >= ja.Job.ExperienceRequired));
+                query = query.Where(ja =>
+                    ja.User.Experiences.Any(e => e.TitleId == ja.Job.TitleId && e.ExperienceDuration >= ja.Job.ExperienceRequired));
             }
 
             if (hasExperienceInJobTitle)
@@ -124,7 +126,6 @@ namespace Job_Portal_Application.Repository
 
             return jobActivities;
         }
-
 
         public async Task<IEnumerable<JobActivity>> GetJobsUserApplied(Guid userid)
         {

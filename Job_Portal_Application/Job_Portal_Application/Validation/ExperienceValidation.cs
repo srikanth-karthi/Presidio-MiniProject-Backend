@@ -1,4 +1,4 @@
-﻿using Job_Portal_Application.Dto.ExperienceDto;
+﻿using Job_Portal_Application.Dto.ExperienceDtos;
 using System;
 using System.ComponentModel.DataAnnotations;
 

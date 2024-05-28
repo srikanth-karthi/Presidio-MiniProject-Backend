@@ -24,7 +24,7 @@ namespace Job_Portal_Application.Models
         public string CompanyAddress { get; set; }
 
         public string? City { get; set; }
-
+            
         public int CompanySize { get; set; }
 
         [Url]

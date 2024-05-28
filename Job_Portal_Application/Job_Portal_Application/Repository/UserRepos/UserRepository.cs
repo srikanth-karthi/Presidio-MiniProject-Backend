@@ -38,7 +38,8 @@ namespace Job_Portal_Application.Repository.UserRepos
 
         public async Task<User> Get(Guid id)
         {
-       return await _context.Users.FirstOrDefaultAsync(u => u.UserId == id);
+            Console.WriteLine(id);
+                 return await _context.Users.FirstOrDefaultAsync(u => u.UserId == id);
 
         }
 
@@ -64,14 +65,14 @@ namespace Job_Portal_Application.Repository.UserRepos
 
         public async Task<User> GetUserProfile(Guid id)
         {
-           return await _context.Users
+            return await _context.Users
                 .Include(u => u.Educations)
-                .Include(u => u.Experiences)
+                .Include(u => u.Experiences).ThenInclude(e => e.Title)
                 .Include(u => u.UserSkills).ThenInclude(js => js.Skill)
-                .Include(u => u.AreasOfInterests)
+                .Include(u => u.AreasOfInterests).ThenInclude(aoi => aoi.Title)
                 .FirstOrDefaultAsync(u => u.UserId == id);
-
         }
+
 
         public async Task<JobActivity> GetJob(Guid id)
         {
@@ -102,56 +103,78 @@ namespace Job_Portal_Application.Repository.UserRepos
         }
 
 
-public async Task<IEnumerable<Job>> GetRecommendedJobsForUser(Guid userId, int pageNumber, int pageSize)
-    {
-        var userAreasOfInterest = await _context.AreasOfInterests
-            .Where(a => a.UserId == userId)
-            .Include(a => a.Title)
-            .ToListAsync();
-
-        var titleIds = userAreasOfInterest.Select(a => a.TitleId).ToList();
-        var lpas = userAreasOfInterest.Select(a => a.Lpa).ToList();
-
-        var jobs = await _context.Jobs
-            .Include(j => j.Company)
-            .Include(j => j.Title)
-            .Include(j => j.JobSkills).ThenInclude(js => js.Skill)
-               .Where(job => job.Status == true)
-            .Where(j => titleIds.Contains(j.TitleId) && lpas.Contains(j.Lpa ?? -1))
-            .ToListAsync();
-
-        var recommendedJobs = jobs
-            .OrderBy(j => j.DatePosted.ToDateTime(TimeOnly.MinValue))
-            .Skip((pageNumber - 1) * pageSize)
-            .Take(pageSize)
-            .ToList();
-
-        if (recommendedJobs.Count == 0)
+        public async Task<IEnumerable<Job>> GetRecommendedJobsForUser(Guid userId, int pageNumber, int pageSize)
         {
-            var fallbackJobs = await _context.Jobs
+            var remainingJobsNeeded = 0;
+            var userAreasOfInterest = await _context.AreasOfInterests
+                .Where(a => a.UserId == userId)
+                .Include(a => a.Title)
+                .ToListAsync();
+
+            var titleIds = userAreasOfInterest.Select(a => a.TitleId).ToList();
+            var lpas = userAreasOfInterest.Select(a => a.Lpa).ToList();
+
+            var userSkills = await _context.UserSkills
+                .Where(us => us.UserId == userId)
+                .Select(us => us.SkillId)
+                .ToListAsync();
+
+            var recommendedJobs = await _context.Jobs
                 .Include(j => j.Company)
                 .Include(j => j.Title)
                 .Include(j => j.JobSkills).ThenInclude(js => js.Skill)
-                     .Where(job => job.Status == true)
+                .Where(job => job.Status == true)
+                .Where(j => titleIds.Contains(j.TitleId) && lpas.Contains(j.Lpa ?? -1))
+                .Where(j => j.JobSkills.Any(js => userSkills.Contains(js.SkillId)))
                 .ToListAsync();
 
-          return  fallbackJobs
-                .OrderBy(j => j.DatePosted.ToDateTime(TimeOnly.MinValue))
-           .Skip((pageNumber - 1) * pageSize)
+            remainingJobsNeeded = pageSize - recommendedJobs.Count;
+
+            if (remainingJobsNeeded > 0)
+            {
+                var titleAndSkillJobs = await _context.Jobs
+                    .Include(j => j.Company)
+                    .Include(j => j.Title)
+                    .Include(j => j.JobSkills).ThenInclude(js => js.Skill)
+                    .Where(job => job.Status == true)
+                    .Where(j => titleIds.Contains(j.TitleId) && !lpas.Contains(j.Lpa ?? -1))
+                    .Where(j => j.JobSkills.Any(js => userSkills.Contains(js.SkillId)))
+                    .ToListAsync();
+
+                recommendedJobs.AddRange(titleAndSkillJobs);
+            }
+
+            if (recommendedJobs.Count < pageSize)
+            {
+                remainingJobsNeeded = pageSize - recommendedJobs.Count;
+
+                var recentJobs = await _context.Jobs
+                    .Include(j => j.Company)
+                    .Include(j => j.Title)
+                    .Include(j => j.JobSkills).ThenInclude(js => js.Skill)
+                    .Where(job => job.Status == true)
+                    .OrderBy(j => j.DatePosted)
+                    .Take(remainingJobsNeeded)
+                    .ToListAsync();
+
+                recommendedJobs.AddRange(recentJobs);
+            }
+
+            var distinctRecommendedJobs = recommendedJobs
+                .Distinct()
+                .OrderBy(j => j.DatePosted) // Order the jobs
+                .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
-                     .ToList();
+                .ToList();
 
-
-                
-       
+            return distinctRecommendedJobs;
         }
 
-            return recommendedJobs;
+
+
+
+
+
     }
-
-
-
-
-}
 }
 

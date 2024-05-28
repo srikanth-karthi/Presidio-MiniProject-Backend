@@ -1,6 +1,7 @@
 ﻿using Job_Portal_Application.Dto.Enums;
 using Job_Portal_Application.Dto.JobActivityDto;
 using Job_Portal_Application.Dto.JobDto;
+using Job_Portal_Application.Dto.UserDto;
 using Job_Portal_Application.Exceptions;
 using Job_Portal_Application.Interfaces.IRepository;
 using Job_Portal_Application.Interfaces.IService;
@@ -42,7 +43,7 @@ namespace Job_Portal_Application.Services
             return MapToDto(jobActivity);
         }
 
-        public async Task<IEnumerable<User>> GetFilteredUser(Guid jobId, int pageNumber = 1, int pageSize = 25, bool firstApplied = false, bool perfectMatchSkills = false, bool perfectMatchExperience = false, bool hasExperienceInJobTitle = false)
+        public async Task<IEnumerable<UserDto>> GetFilteredUser(Guid jobId, int pageNumber = 1, int pageSize = 25, bool firstApplied = false, bool perfectMatchSkills = false, bool perfectMatchExperience = false, bool hasExperienceInJobTitle = false)
         {
             var jobActivities = await _jobActivityRepository.GetFilteredUser(_authorizeService.Gettoken(), jobId, pageNumber, pageSize, firstApplied, perfectMatchSkills, perfectMatchExperience, hasExperienceInJobTitle);
             if (!jobActivities.Any())
@@ -100,21 +101,22 @@ namespace Job_Portal_Application.Services
         }
 
 
-        private static User MapToUserDto(User user)
+        private static UserDto MapToUserDto(User user)
         {
-            return new User
+            return new UserDto
             {
                 UserId = user.UserId,
                 Name = user.Name,
                 Email = user.Email,
-                Dob = user.Dob,
+                Dob = user.Dob.ToDateTime(TimeOnly.MinValue),
                 Address = user.Address,
                 City = user.City,
                 PortfolioLink = user.PortfolioLink,
-                Phonenumber = user.Phonenumber,
+                PhoneNumber = user.Phonenumber,
                 ResumeUrl = user.ResumeUrl
             };
         }
+
 
         private JobDto MapToJobDto(Job job)
         {

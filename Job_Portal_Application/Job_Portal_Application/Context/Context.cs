@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Job_Portal_Application.Models;
 using System;
+using System.ComponentModel.Design;
+using Job_Portal_Application.Dto.Enums;
 
 
 namespace Job_Portal_Application.Context
@@ -97,7 +99,8 @@ namespace Job_Portal_Application.Context
             modelBuilder.Entity<JobActivity>()
                 .HasOne(ja => ja.Job)
                 .WithMany(j => j.JobActivities)
-                .HasForeignKey(ja => ja.JobId);
+                .HasForeignKey(ja => ja.JobId)
+                 .OnDelete(DeleteBehavior.Restrict);
 
             // JobActivity and User
             modelBuilder.Entity<JobActivity>()
@@ -126,7 +129,17 @@ namespace Job_Portal_Application.Context
                 new Skill { SkillId = Guid.NewGuid(), Skill_Name = "Objective-C" },
                 new Skill { SkillId = Guid.NewGuid(), Skill_Name = "Ruby" },
                 new Skill { SkillId = Guid.NewGuid(), Skill_Name = "Rails" },
-                new Skill { SkillId = Guid.NewGuid(), Skill_Name = "PHP" }
+                new Skill { SkillId = Guid.NewGuid(), Skill_Name = "PHP" },
+                new Skill { SkillId = Guid.NewGuid(), Skill_Name = "C#" },
+                new Skill { SkillId = Guid.NewGuid(), Skill_Name = "ASP.NET" },
+                new Skill { SkillId = Guid.NewGuid(), Skill_Name = "Azure" },
+                new Skill { SkillId = Guid.NewGuid(), Skill_Name = "AWS" },
+                new Skill { SkillId = Guid.NewGuid(), Skill_Name = "GCP" },
+                new Skill { SkillId = Guid.NewGuid(), Skill_Name = "SQL" },
+                new Skill { SkillId = Guid.NewGuid(), Skill_Name = "NoSQL" },
+                new Skill { SkillId = Guid.NewGuid(), Skill_Name = "Docker" },
+                new Skill { SkillId = Guid.NewGuid(), Skill_Name = "Kubernetes" },
+                new Skill { SkillId = Guid.NewGuid(), Skill_Name = "GraphQL" }
             );
 
             // Seed data for Titles
@@ -150,8 +163,18 @@ namespace Job_Portal_Application.Context
                 new Title { TitleId = Guid.NewGuid(), TitleName = "Cloud Architect" },
                 new Title { TitleId = Guid.NewGuid(), TitleName = "Machine Learning Engineer" },
                 new Title { TitleId = Guid.NewGuid(), TitleName = "Artificial Intelligence Engineer" },
-                new Title { TitleId = Guid.NewGuid(), TitleName = "Technical Support Engineer" }
+                new Title { TitleId = Guid.NewGuid(), TitleName = "Technical Support Engineer" },
+                new Title { TitleId = Guid.NewGuid(), TitleName = "Cloud Engineer" },
+                new Title { TitleId = Guid.NewGuid(), TitleName = "Database Developer" },
+                new Title { TitleId = Guid.NewGuid(), TitleName = "Blockchain Developer" },
+                new Title { TitleId = Guid.NewGuid(), TitleName = "Game Developer" },
+                new Title { TitleId = Guid.NewGuid(), TitleName = "VR/AR Developer" }
+           
+         
             );
+
+
+
 
             base.OnModelCreating(modelBuilder);
         }

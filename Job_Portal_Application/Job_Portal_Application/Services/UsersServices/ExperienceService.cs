@@ -1,5 +1,6 @@
-﻿using Job_Portal_Application.Dto.EducationDto;
-using Job_Portal_Application.Dto.ExperienceDto;
+﻿using Job_Portal_Application.Dto.EducationDtos;
+using Job_Portal_Application.Dto.ExperienceDtos;
+using Job_Portal_Application.Dto.profile;
 using Job_Portal_Application.Exceptions;
 using Job_Portal_Application.Interfaces.IRepository;
 using Job_Portal_Application.Interfaces.IService;
@@ -29,7 +30,7 @@ namespace Job_Portal_Application.Services.UsersServices
             _titleRepository = titleRepository;
         }
 
-        public async Task<Experience> AddExperience(AddExperienceDto experienceDto)
+        public async Task<ExperienceDto> AddExperience(AddExperienceDto experienceDto)
         {
             _ = await _titleRepository.Get(experienceDto.TitleId) ?? throw new TitleNotFoundException("Invalid TitleId. Title does not exist.");
             
@@ -44,14 +45,14 @@ namespace Job_Portal_Application.Services.UsersServices
             };
 
             var addedExperience = await _experienceRepository.Add(experience);
-            return addedExperience;
+            return ToDto(addedExperience);
         }
 
-        public async Task<Experience> UpdateExperience(ExperienceDto experienceDto)
+        public async Task<ExperienceDto> UpdateExperience(GetExperienceDto experienceDto)
         {
             _ = await _titleRepository.Get(experienceDto.TitleId) ?? throw new TitleNotFoundException("Invalid TitleId. Title does not exist.");
 
-         var experience=   await _experienceRepository.Get(experienceDto.ExperienceId) ?? throw new ExperienceNotFoundException("Experience not found ");
+         var experience=   await _experienceRepository.Get(experienceDto.ExperienceId, _authorizeService.Gettoken()) ?? throw new ExperienceNotFoundException("Experience not found ");
 
 
             experience.CompanyName = experienceDto.CompanyName;
@@ -59,30 +60,43 @@ namespace Job_Portal_Application.Services.UsersServices
             experience.StartYear = DateOnly.FromDateTime(experienceDto.StartYear);
             experience.EndYear = DateOnly.FromDateTime(experienceDto.EndYear);
 
-            return await _experienceRepository.Update(experience);
+            return ToDto(await _experienceRepository.Update(experience));
         }
 
         public async Task<bool> DeleteExperience(Guid experienceId)
         {
-            return await _experienceRepository.Delete(await _experienceRepository.Get(experienceId) ?? throw new ExperienceNotFoundException("Experience not found "));
+            return await _experienceRepository.Delete(await _experienceRepository.Get(experienceId, _authorizeService.Gettoken()) ?? throw new ExperienceNotFoundException("Experience not found "));
         }
 
-        public async Task<Experience> GetExperience(Guid experienceId)
+        public async Task<ExperienceDto> GetExperience(Guid experienceId)
         {
-               return await _experienceRepository.Get(experienceId) ?? throw new ExperienceNotFoundException("Experience not found ");
+            return ToDto(await _experienceRepository.Get(experienceId, _authorizeService.Gettoken()) ?? throw new ExperienceNotFoundException("Experience not found "));
 
 
         }
 
 
-        public async Task<IEnumerable<Experience>> GetAllExperiences()
+        public async Task<IEnumerable<ExperienceDto>> GetAllExperiences()
         {
             var experiences=  await _experienceRepository.GetAll(_authorizeService.Gettoken());
             if (!experiences.Any())
             {
                  throw new ExperienceNotFoundException("Experience not found ");
             }
-            return experiences;
+            return experiences.Select(j=> ToDto(j));
+        }
+
+        public static ExperienceDto ToDto( Experience experience)
+        {
+            return new ExperienceDto
+            {
+                ExperienceId = experience.ExperienceId,
+                CompanyName = experience.CompanyName,
+                TitleName = experience.Title.TitleName, 
+                StartYear = experience.StartYear,
+                EndYear = experience.EndYear,
+                ExperienceDuration = (experience.EndYear.Year - experience.StartYear.Year)
+            };
         }
     }
 }

@@ -2,7 +2,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Job_Portal_Application.Dto.AreasOfInterestDto
+namespace Job_Portal_Application.Dto.AreasOfInterestDtos
 {
     public class AreasOfInterestDto : AddAreasOfInterestDTO
     {

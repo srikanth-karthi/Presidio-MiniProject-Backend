@@ -28,7 +28,15 @@ namespace Job_Portal_Application.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage);
+                var customErrorResponse = new
+                {
+                    Title = "One or more validation errors occurred.",
+                    Errors = errors
+                };
+
+
+                return BadRequest(customErrorResponse);
             }
 
             try
@@ -49,6 +57,18 @@ namespace Job_Portal_Application.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginDto companyDto)
         {
+            if (!ModelState.IsValid)
+            {
+                var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage);
+                var customErrorResponse = new
+                {
+                    Title = "One or more validation errors occurred.",
+                    Errors = errors
+                };
+
+
+                return BadRequest(customErrorResponse);
+            }
             try
             {
                 var token = await _companyService.Login(companyDto);
@@ -68,6 +88,18 @@ namespace Job_Portal_Application.Controllers
         [Authorize]
         public async Task<IActionResult> UpdateCompany([FromBody] CompanyUpdateDto company)
         {
+            if (!ModelState.IsValid)
+            {
+                var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage);
+                var customErrorResponse = new
+                {
+                    Title = "One or more validation errors occurred.",
+                    Errors = errors
+                };
+
+
+                return BadRequest(customErrorResponse);
+            }
             try
             {
                 var updatedCompany = await _companyService.UpdateCompany(company);
@@ -87,6 +119,7 @@ namespace Job_Portal_Application.Controllers
         [Authorize]
         public async Task<IActionResult> DeleteCompany()
         {
+
             try
             {
                 var success = await _companyService.DeleteCompany();
