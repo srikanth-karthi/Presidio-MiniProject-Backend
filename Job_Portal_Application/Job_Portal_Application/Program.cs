@@ -27,7 +27,28 @@ namespace Job_Portal_Application
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            builder.Services.AddControllers();
+
+                builder.Services.AddControllers(options =>
+
+                {
+
+                   
+
+                })
+
+                    .ConfigureApiBehaviorOptions(options =>
+
+                        options.SuppressModelStateInvalidFilter = true
+
+                    )
+
+                    .AddJsonOptions(options =>
+
+                    {
+
+                        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+
+                    });
 
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen(option =>
@@ -76,7 +97,7 @@ namespace Job_Portal_Application
             #endregion
 
             builder.Services.AddDbContext<JobportalContext>();
-            builder.Services.AddScoped<IAuthorizeService, AuthorizeService>();
+
             builder.Services.AddScoped<ITokenService, TokenServices>();
             builder.Services.AddScoped<IUserService, UserService>();
             builder.Services.AddScoped<IEducationService, EducationService>();
@@ -88,6 +109,7 @@ namespace Job_Portal_Application
             builder.Services.AddScoped<IJobActivityService, JobActivityService>();
             builder.Services.AddScoped<ITitleService, TitleService>();
             builder.Services.AddScoped<IUserSkillsService, UserSkillsService>();
+            builder.Services.AddScoped<IAdminService, AdminService>();
 
 
 

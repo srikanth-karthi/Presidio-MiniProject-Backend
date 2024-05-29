@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Job_Portal_Application.Dto;
 using Job_Portal_Application.Dto.JobDto;
 using Job_Portal_Application.Dto.JobDtos;
 
@@ -8,13 +9,13 @@ namespace Job_Portal_Application.Interfaces.IService
 {
     public interface IJobService
     {
-        Task<(JobDto job, List<Guid> notFoundSkills)> AddJob(PostJobDto newJob);
-        Task<JobDto> UpdateJob(UpdateJobDto jobUpdateDto);
-        Task<bool> DeleteJob(Guid jobId);
-        Task<JobDto> GetJob(Guid jobId);
+        Task<(JobDto job, List<Guid> notFoundSkills)> AddJob(PostJobDto newJob, Guid companyId);
+        Task<JobDto> UpdateJob(UpdateJobDto jobUpdateDto, Guid companyId);
+        Task<bool> DeleteJob(Guid jobId, Guid companyId);
+        Task<JobDto> GetJob(Guid jobId, Guid companyId);
         Task<IEnumerable<JobDto>> GetAllJobs();
         Task<IEnumerable<JobDto>> GetAllJobsPosted(Guid companyId);
-        Task UpdateJobSkills(JobSkillsDto jobSkillsDto);
+        Task<JobskillresponseDto> UpdateJobSkills(JobSkillsDto jobSkillsDto, Guid companyId);
         Task<IEnumerable<JobDto>> GetJobs(
             int pageNumber ,
             int pageSize ,

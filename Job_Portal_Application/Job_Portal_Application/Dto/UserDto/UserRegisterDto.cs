@@ -28,8 +28,8 @@ namespace Job_Portal_Application.Dto.UserDto
         [MaxLength(200, ErrorMessage = "Portfolio link cannot exceed 200 characters")]
         public string? PortfolioLink { get; set; }
 
-        [Phone(ErrorMessage = "Invalid phone number format")]
-        [MaxLength(15, ErrorMessage = "Phone number cannot exceed 15 characters")]
+        [RegularExpression(@"^\d{10}$", ErrorMessage = "Phone number must be exactly 10 digits")]
+        [StringLength(10, MinimumLength = 10, ErrorMessage = "Phone number must be exactly 10 characters long")]
         public string? Phonenumber { get; set; }
 
         [Url(ErrorMessage = "Invalid URL format")]
@@ -39,5 +39,6 @@ namespace Job_Portal_Application.Dto.UserDto
         [Required(ErrorMessage = "Password is required")]
         [MinLength(8, ErrorMessage = "Password must be at least 8 characters long")]
         public string Password { get; set; }
+
     }
 }

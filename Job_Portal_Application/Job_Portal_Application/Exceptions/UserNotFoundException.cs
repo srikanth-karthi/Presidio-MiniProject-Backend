@@ -1,9 +1,12 @@
-﻿using System.Runtime.Serialization;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Runtime.Serialization;
 
 namespace Job_Portal_Application.Exceptions
 {
     [Serializable]
-    internal class UserNotFoundException : Exception
+
+    [ExcludeFromCodeCoverage]
+    public class UserNotFoundException : Exception
     {
         public UserNotFoundException()
         {

@@ -40,6 +40,15 @@ namespace Job_Portal_Application.Repository.CompanyRepos
                 .FirstOrDefaultAsync(js => js.JobSkillsId == id);
         }
 
+        public async Task<JobSkills> GetbyjobIdandSkillId(Guid jobId, Guid skillId)
+        {
+            return await _context.JobSkills
+                .Include(js => js.Job)
+                .Include(js => js.Skill)
+          .FirstOrDefaultAsync(js => js.JobId == jobId && js.SkillId == skillId);
+        }
+
+
         public async Task<IEnumerable<JobSkills>> GetAll()
         {
             return await _context.JobSkills

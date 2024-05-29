@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Threading.Tasks;
+using Job_Portal_Application.Dto;
 using Job_Portal_Application.Dto.EducationDtos;
 using Job_Portal_Application.Dto.Enums;
 using Job_Portal_Application.Dto.JobDto;
@@ -23,26 +25,25 @@ namespace Job_Portal_Application.Services.CompanyService
         private readonly IRepository<Guid, Skill> _skillRepository;
         private readonly IJobSkillsRepository _jobSkillsRepository;
         private readonly IRepository<Guid, Title> _titleRepository;
-        private readonly IAuthorizeService _authorizeService;
 
-        public JobService(IAuthorizeService authorizeService, IJobRepository jobRepository, IRepository<Guid, Title> titleRepository, ICompanyRepository companyRepository, IRepository<Guid, Skill> skillRepository, IJobSkillsRepository jobSkillsRepository)
+        public JobService(IJobRepository jobRepository, IRepository<Guid, Title> titleRepository, ICompanyRepository companyRepository, IRepository<Guid, Skill> skillRepository, IJobSkillsRepository jobSkillsRepository)
         {
             _jobRepository = jobRepository;
             _companyRepository = companyRepository;
             _skillRepository = skillRepository;
             _jobSkillsRepository = jobSkillsRepository;
             _titleRepository = titleRepository;
-            _authorizeService = authorizeService;
+
         }
 
-        public async Task<(JobDto job, List<Guid> notFoundSkills)> AddJob(PostJobDto newJob)
+        public async Task<(JobDto job, List<Guid> notFoundSkills)> AddJob(PostJobDto newJob, Guid companyId)
         {
-            _ = await _companyRepository.Get(_authorizeService.Gettoken()) ?? throw new CompanyNotFoundException("Company not found.");
+            _ = await _companyRepository.Get(companyId) ?? throw new CompanyNotFoundException("Company not found.");
             _ = await _titleRepository.Get(newJob.TitleId) ?? throw new TitleNotFoundException("Invalid TitleId. Title does not exist.");
 
             var job = new Job
             {
-                CompanyId = _authorizeService.Gettoken(),
+                CompanyId = companyId,
                 TitleId = newJob.TitleId,
                 JobDescription = newJob.JobDescription,
                 Lpa = newJob.Lpa,
@@ -74,9 +75,9 @@ namespace Job_Portal_Application.Services.CompanyService
             return (jobDto, notFoundSkills);
         }
 
-        public async Task<JobDto> UpdateJob(UpdateJobDto jobUpdateDto)
+        public async Task<JobDto> UpdateJob(UpdateJobDto jobUpdateDto,Guid companyId)
         {
-            var job = await _jobRepository.Get(jobUpdateDto.JobId, _authorizeService.Gettoken()) ?? throw new JobNotFoundException("Invalid JobId. Job does not exist.");
+            var job = await _jobRepository.Get(jobUpdateDto.JobId, companyId) ?? throw new JobNotFoundException("Invalid JobId. Job does not exist.");
             _ = await _titleRepository.Get(jobUpdateDto.TitleId) ?? throw new TitleNotFoundException("Invalid TitleId. Title does not exist.");
 
             job.TitleId = jobUpdateDto.TitleId;
@@ -90,17 +91,17 @@ namespace Job_Portal_Application.Services.CompanyService
             return MapToJobDto(updatedJob);
         }
 
-        public async Task<bool> DeleteJob(Guid jobId)
+        public async Task<bool> DeleteJob(Guid jobId,Guid companyId)
         {
-            return await _jobRepository.Delete(await _jobRepository.Get(jobId, _authorizeService.Gettoken()) ?? throw new JobNotFoundException("Invalid JobId. Job does not exist."));
+            return await _jobRepository.Delete(await _jobRepository.Get(jobId, companyId) ?? throw new JobNotFoundException("Invalid JobId. Job does not exist."));
         }
 
-        public async Task<JobDto> GetJob(Guid jobId)
+        public async Task<JobDto> GetJob(Guid jobId,Guid companyId)
         {
 
 
 
-            return MapToJobDto(await _jobRepository.Get(jobId, _authorizeService.Gettoken()) ?? throw new JobNotFoundException("Invalid JobId. Job does not exist."));
+            return MapToJobDto(await _jobRepository.Get(jobId, companyId) ?? throw new JobNotFoundException("Invalid JobId. Job does not exist."));
 
         }
 
@@ -126,11 +127,57 @@ namespace Job_Portal_Application.Services.CompanyService
 
 
 
-        public async Task UpdateJobSkills(JobSkillsDto jobSkillsDto)
+        public async Task<JobskillresponseDto> UpdateJobSkills(JobSkillsDto jobSkillsDto,Guid companyId)
         {
-            var job = await _jobRepository.Get(jobSkillsDto.JobId, _authorizeService.Gettoken()) ?? throw new JobNotFoundException("Invalid JobId. Job does not exist.");
+            JobskillresponseDto response = new();
 
-            await _jobSkillsRepository.UpdateJobSkills(jobSkillsDto.JobId, jobSkillsDto.SkillsToAdd, jobSkillsDto.SkillsToRemove);
+            var job = await _jobRepository.Get(jobSkillsDto.JobId, companyId) ?? throw new JobNotFoundException("Invalid JobId. Job does not exist.");
+      
+            foreach (var skillId in jobSkillsDto.SkillsToAdd)
+            {
+                var existingJobSkill = await _jobSkillsRepository.GetbyjobIdandSkillId(skillId, job.JobId);
+       
+
+                if (existingJobSkill == null)
+                {
+                    var skill = await _skillRepository.Get(skillId);
+                    if (skill != null)
+                    {
+                        
+                        await _jobSkillsRepository.Add(new JobSkills { JobId = job.JobId, SkillId = skillId });
+                        response.AddedSkills.Add(skillId);
+                    }
+                    else
+                    {
+                        response.InvalidSkills.Add(skillId);
+                    }
+                }
+          
+            }
+
+
+            foreach (var skillId in jobSkillsDto.SkillsToRemove)
+            {
+                var existingJobSkill = await _jobSkillsRepository.GetbyjobIdandSkillId(skillId, job.JobId);
+
+
+                if (existingJobSkill != null)
+                {
+                    var skill = await _skillRepository.Get(skillId);
+                    if (skill != null)
+                    {
+                        response.RemovedSkills.Add(skillId);
+                        await _jobSkillsRepository.Delete(new JobSkills { JobId = job.JobId, SkillId = skillId });
+                    }
+                    else
+                    {
+                        response.InvalidSkills.Add(skillId);
+                    }
+                }
+
+            }
+            return response;
+
         }
 
 
@@ -142,7 +189,7 @@ namespace Job_Portal_Application.Services.CompanyService
                 JobType = Enum.GetName(typeof(JobType), job.JobType),
                 TitleId = job.TitleId,
                 CompanyName = job.Company.CompanyName,
-                DatePosted = job.DatePosted.ToDateTime(TimeOnly.MinValue),
+                DatePosted =job.DatePosted.ToDateTime(TimeOnly.MinValue),
                 TitleName = job.Title?.TitleName,
                 Status = job.Status,
                 ExperienceRequired = job.ExperienceRequired,
@@ -153,8 +200,8 @@ namespace Job_Portal_Application.Services.CompanyService
 
         }
         public async Task<IEnumerable<JobDto>> GetJobs(
-            int pageNumber,
-            int pageSize ,
+            int pageNumber=1,
+            int pageSize=25 ,
             string title = null,
             float? lpa = null,
             bool recentlyPosted = false,

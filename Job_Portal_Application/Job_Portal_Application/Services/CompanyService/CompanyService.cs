@@ -18,14 +18,13 @@ namespace Job_Portal_Application.Services.CompanyService
         private readonly ICompanyRepository _companyRepository;
         private readonly IUserRepository _userRepository;
         private readonly ITokenService _tokenService;
-        private readonly IAuthorizeService _authorizeService;
 
-        public CompanyService(IAuthorizeService authorizeService, ICompanyRepository companyRepository, IUserRepository userRepository, ITokenService tokenService)
+
+        public CompanyService( ICompanyRepository companyRepository, IUserRepository userRepository, ITokenService tokenService)
         {
             _companyRepository = companyRepository;
             _userRepository = userRepository;
             _tokenService = tokenService;
-            _authorizeService = authorizeService;
         }
 
         public async Task<CompanyDto> Register(CompanyRegisterDto companyDto)
@@ -82,9 +81,9 @@ namespace Job_Portal_Application.Services.CompanyService
             throw new InvalidCredentialsException("Invalid password.");
         }
 
-        public async Task<CompanyDto> UpdateCompany(CompanyUpdateDto companyDto)
+        public async Task<CompanyDto> UpdateCompany(CompanyUpdateDto companyDto, Guid UserId)
         {
-            var company = await _companyRepository.Get(_authorizeService.Gettoken()) ?? throw new CompanyNotFoundException("Company not found.");
+            var company = await _companyRepository.Get(UserId) ?? throw new CompanyNotFoundException("Company not found.");
 
             company.CompanyName = companyDto.CompanyName;
             company.CompanyAddress = companyDto.CompanyAddress;
@@ -96,9 +95,9 @@ namespace Job_Portal_Application.Services.CompanyService
             return MapToCompanyDto(updatedCompany);
         }
 
-        public async Task<bool> DeleteCompany()
+        public async Task<bool> DeleteCompany(Guid UserId)
         {
-            var company = await _companyRepository.Get(_authorizeService.Gettoken()) ?? throw new CompanyNotFoundException("Company not found.");
+            var company = await _companyRepository.Get(UserId) ?? throw new CompanyNotFoundException("Company not found.");
 
             return await _companyRepository.Delete(company);
         }

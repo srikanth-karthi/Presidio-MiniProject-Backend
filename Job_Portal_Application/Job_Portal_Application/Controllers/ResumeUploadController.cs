@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -12,15 +13,16 @@ namespace Job_Portal_Application.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [ExcludeFromCodeCoverage]
     public class ResumeController : ControllerBase
     {
-        private readonly IAuthorizeService _authorizeService;
+    
         private readonly IUserService _userService;
         private readonly IJobActivityService _jobActivityService;
 
-        public ResumeController(IUserService userService, IAuthorizeService authorizeService, IJobActivityService jobActivityService)
+        public ResumeController(IUserService userService, IJobActivityService jobActivityService)
         {
-            _authorizeService = authorizeService;
+     
             _userService = userService;
             _jobActivityService = jobActivityService;
         }
@@ -37,7 +39,7 @@ namespace Job_Portal_Application.Controllers
                 return BadRequest("Invalid file type. Only PDF files are allowed.");
 
             var folderPath = Path.Combine(Directory.GetCurrentDirectory(), "UploadedFiles");
-            var uniqueFileName = $"{_authorizeService.Gettoken()}.pdf";
+            var uniqueFileName = $"{Guid.Parse(User.FindFirst("id").Value)}.pdf";
             var filePath = Path.Combine(folderPath, uniqueFileName);
 
             if (System.IO.File.Exists(filePath))
@@ -51,8 +53,8 @@ namespace Job_Portal_Application.Controllers
             }
 
 
-            var resumeUrl = $"{Request.Scheme}://{Request.Host}/api/resume/view/{_authorizeService.Gettoken()}";
-            var updatedUser = await _userService.UpdateResumeUrl(_authorizeService.Gettoken(), resumeUrl);
+            var resumeUrl = $"{Request.Scheme}://{Request.Host}/api/resume/view/{Guid.Parse(User.FindFirst("id").Value)}";
+            var updatedUser = await _userService.UpdateResumeUrl( Guid.Parse(User.FindFirst("id").Value), resumeUrl);
 
             return Ok(new { message = "Resume uploaded successfully.", resumeUrl = updatedUser.ResumeUrl });
         }

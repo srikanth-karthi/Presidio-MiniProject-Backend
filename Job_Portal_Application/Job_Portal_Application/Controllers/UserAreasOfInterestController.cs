@@ -7,11 +7,13 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Job_Portal_Application.Models;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Job_Portal_Application.Controllers
 {
     [ApiController]
     [Route("api/UserAreasOfInterest")]
+    [ExcludeFromCodeCoverage]
     public class UserAreasOfInterestController : ControllerBase
     {
         private readonly IAreasOfInterestService _areasOfInterestService;
@@ -39,7 +41,7 @@ namespace Job_Portal_Application.Controllers
 
                     return BadRequest(customErrorResponse);
                 }
-                var addedAreaOfInterest = await _areasOfInterestService.AddAreasOfInterest(areasOfInterestDto);
+                var addedAreaOfInterest = await _areasOfInterestService.AddAreasOfInterest(areasOfInterestDto, Guid.Parse(User.FindFirst("id").Value));
                 return Ok(addedAreaOfInterest);
             }
             catch (Exception ex)
@@ -66,7 +68,7 @@ namespace Job_Portal_Application.Controllers
             }
             try
             {
-                var updatedAreaOfInterest = await _areasOfInterestService.UpdateAreasOfInterest(areasOfInterestDto);
+                var updatedAreaOfInterest = await _areasOfInterestService.UpdateAreasOfInterest(areasOfInterestDto, Guid.Parse(User.FindFirst("id").Value));
                 return Ok(updatedAreaOfInterest);
             }
             catch (AreasOfInterestNotFoundException ex)
@@ -83,21 +85,10 @@ namespace Job_Portal_Application.Controllers
         [Authorize]
         public async Task<ActionResult<bool>> DeleteAreaOfInterest(Guid areasOfInterestId)
         {
-            if (!ModelState.IsValid)
-            {
-                var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage);
-                var customErrorResponse = new
-                {
-                    Title = "One or more validation errors occurred.",
-                    Errors = errors
-                };
 
-
-                return BadRequest(customErrorResponse);
-            }
             try
             {
-                var result = await _areasOfInterestService.DeleteAreasOfInterest(areasOfInterestId);
+                var result = await _areasOfInterestService.DeleteAreasOfInterest(areasOfInterestId, Guid.Parse(User.FindFirst("id").Value));
                 if (result)
                     return Ok(new { message = "Successfully deleted the area of interest" });
 
@@ -117,21 +108,10 @@ namespace Job_Portal_Application.Controllers
         [Authorize]
         public async Task<ActionResult<AreasOfInterestDto>> GetAreaOfInterest(Guid areasOfInterestId)
         {
-            if (!ModelState.IsValid)
-            {
-                var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage);
-                var customErrorResponse = new
-                {
-                    Title = "One or more validation errors occurred.",
-                    Errors = errors
-                };
 
-
-                return BadRequest(customErrorResponse);
-            }
             try
             {
-                var areasOfInterest = await _areasOfInterestService.GetAreasOfInterest(areasOfInterestId);
+                var areasOfInterest = await _areasOfInterestService.GetAreasOfInterest(areasOfInterestId, Guid.Parse(User.FindFirst("id").Value));
                 return Ok(areasOfInterest);
             }
             catch (AreasOfInterestNotFoundException ex)
@@ -150,7 +130,7 @@ namespace Job_Portal_Application.Controllers
         {
             try
             {
-                var areasOfInterest = await _areasOfInterestService.GetAllAreasOfInterest();
+                var areasOfInterest = await _areasOfInterestService.GetAllAreasOfInterest( Guid.Parse(User.FindFirst("id").Value));
                 return Ok(areasOfInterest);
             }
             catch (AreasOfInterestNotFoundException ex)

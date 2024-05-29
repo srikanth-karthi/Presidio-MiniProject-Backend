@@ -8,6 +8,7 @@ using Job_Portal_Application.Interfaces.IService;
 using Job_Portal_Application.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -16,44 +17,51 @@ namespace Job_Portal_Application.Services
     public class JobActivityService : IJobActivityService
     {
         private readonly IJobActivityRepository _jobActivityRepository;
-        private readonly IAuthorizeService _authorizeService;
+
         private readonly IJobRepository _jobRepository;
 
-        public JobActivityService(IJobRepository jobRepository, IJobActivityRepository jobActivityRepository, IAuthorizeService authorizeService)
+        public JobActivityService(IJobRepository jobRepository, IJobActivityRepository jobActivityRepository)
         {
             _jobActivityRepository = jobActivityRepository;
-            _authorizeService = authorizeService;
             _jobRepository = jobRepository;
         }
 
-        public async Task<JobActivityDto> ApplyForJob(Guid jobId)
+        public async Task<JobActivityDto> ApplyForJob(Guid jobId,Guid companyId)
         {
             var job = await _jobRepository.Get(jobId) ?? throw new JobNotFoundException("Invalid JobId. Job does not exist.");
 
             if (!job.Status)
                 throw new JobDisabledException("This Job is not in active state.");
 
-            var userId = _authorizeService.Gettoken();
-            var existingJobActivity = await _jobRepository.GetByUserIdAndJobId(userId, jobId);
+           
+            var existingJobActivity = await _jobRepository.GetByUserIdAndJobId(companyId, jobId);
             if (existingJobActivity != null)
                 throw new JobAlreadyAppliedException("You have already applied for this job.");
 
-            var jobActivity = await _jobActivityRepository.Add(new JobActivity { UserId = userId, JobId = jobId });
+            var jobActivity = await _jobActivityRepository.Add(new JobActivity { UserId = companyId, JobId = jobId });
 
             return MapToDto(jobActivity);
         }
 
-        public async Task<IEnumerable<UserDto>> GetFilteredUser(Guid jobId, int pageNumber = 1, int pageSize = 25, bool firstApplied = false, bool perfectMatchSkills = false, bool perfectMatchExperience = false, bool hasExperienceInJobTitle = false)
+        public async Task<IEnumerable<UserDto>> GetFilteredUser(Guid jobId,Guid companyId, int pageNumber = 1, int pageSize = 25, bool firstApplied = false, bool perfectMatchSkills = false, bool perfectMatchExperience = false, bool hasExperienceInJobTitle = false)
         {
-            var jobActivities = await _jobActivityRepository.GetFilteredUser(_authorizeService.Gettoken(), jobId, pageNumber, pageSize, firstApplied, perfectMatchSkills, perfectMatchExperience, hasExperienceInJobTitle);
+
+            var jobActivities = await _jobActivityRepository.GetFilteredUser(companyId, jobId, pageNumber, pageSize, firstApplied, perfectMatchSkills, perfectMatchExperience, hasExperienceInJobTitle);
+
+   
             if (!jobActivities.Any())
-                throw new JobNotFoundException("JobActivity does not exist.");
+            {
+
+                throw new JobNotFoundException($"No User found for Job ID: {jobId} with the specified filters.");
+            }
+
             return jobActivities.Select(j => MapToUserDto(j.User));
         }
 
-        public async Task<IEnumerable<JobDto>> GetJobsUserApplied()
+
+        public async Task<IEnumerable<JobDto>> GetJobsUserApplied(Guid UserId)
         {
-            var jobActivities = await _jobActivityRepository.GetJobsUserApplied(_authorizeService.Gettoken());
+            var jobActivities = await _jobActivityRepository.GetJobsUserApplied(UserId);
             if (!jobActivities.Any())
                 throw new JobNotFoundException("JobActivity does not exist.");
             return jobActivities.Select(j => MapToJobDto(j.Job));

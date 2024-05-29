@@ -16,25 +16,25 @@ namespace Job_Portal_Application.Services.UsersServices
     public class EducationService : IEducationService
     {
         private readonly IEducationRepository _educationRepository;
-        private IAuthorizeService _authorizeService;
+    
 
 
-        public EducationService(IEducationRepository educationRepository, IAuthorizeService authorizeService)
+        public EducationService(IEducationRepository educationRepository)
         {
             _educationRepository = educationRepository;
-            _authorizeService = authorizeService;
+    
 
 
         }
 
-        public async Task<Education> AddEducation(AddEducationDto educationDto)
+        public async Task<Education> AddEducation(AddEducationDto educationDto, Guid UserId)
         {
 
 
 
             var education = new Education
             {
-                UserId = _authorizeService.Gettoken(),
+                UserId = UserId,
 
                 Level = educationDto.Level,
                 InstitutionName = educationDto.InstitutionName,
@@ -43,14 +43,16 @@ namespace Job_Portal_Application.Services.UsersServices
                 Percentage = educationDto.Percentage,
                 IsCurrentlyStudying = educationDto.IsCurrentlyStudying
             };
-
-            var addedEducation = await _educationRepository.Add(education);
-            return addedEducation;
+ 
+                var addedEducation = await _educationRepository.Add(education);
+                return addedEducation;
+            
+ 
         }
 
-        public async Task<Education> UpdateEducation(EducationDto educationDto)
+        public async Task<Education> UpdateEducation(EducationDto educationDto, Guid UserId)
         {
-            var education = await _educationRepository.Get(educationDto.EducationId, _authorizeService.Gettoken()) ?? throw new EducationNotFoundException("Education record not found");
+            var education = await _educationRepository.Get(educationDto.EducationId, UserId) ?? throw new EducationNotFoundException("Education record not found");
             education.EducationId = educationDto.EducationId;
             education.Level = educationDto.Level;
             education.InstitutionName = educationDto.InstitutionName;
@@ -64,15 +66,15 @@ namespace Job_Portal_Application.Services.UsersServices
 
         }
 
-        public async Task<bool> DeleteEducation(Guid educationId)
+        public async Task<bool> DeleteEducation(Guid educationId, Guid UserId)
         {
        
-            return await _educationRepository.Delete(await _educationRepository.Get(educationId, _authorizeService.Gettoken()) ?? throw new EducationNotFoundException("Education record not found"));
+            return await _educationRepository.Delete(await _educationRepository.Get(educationId, UserId) ?? throw new EducationNotFoundException("Education record not found"));
         }
 
-        public async Task<EducationDto> GetEducation(Guid educationId)
+        public async Task<EducationDto> GetEducation(Guid educationId, Guid UserId)
         {
-            var education = await _educationRepository.Get(educationId, _authorizeService.Gettoken()) ?? throw new EducationNotFoundException("Education record not found");
+            var education = await _educationRepository.Get(educationId,UserId) ?? throw new EducationNotFoundException("Education record not found");
 
 
             return new EducationDto
@@ -87,11 +89,11 @@ namespace Job_Portal_Application.Services.UsersServices
             };
         }
 
-        public async Task<IEnumerable<EducationDto>> GetAllEducations()
+        public async Task<IEnumerable<EducationDto>> GetAllEducations( Guid UserId)
         {
 
 
-            var educations = await _educationRepository.GetAll(_authorizeService.Gettoken());
+            var educations = await _educationRepository.GetAll(UserId);
 
             if (!educations.Any())
             {

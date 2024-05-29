@@ -5,12 +5,14 @@ using Microsoft.AspNetCore.Mvc;
 using Job_Portal_Application.Interfaces.IService;
 using Job_Portal_Application.Models;
 using Job_Portal_Application.Exceptions;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Job_Portal_Application.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize] // Requires authorization for all actions in this controller
+    [Authorize]
+    [ExcludeFromCodeCoverage]
     public class SkillController : ControllerBase
     {
         private readonly ISkillService _skillService;

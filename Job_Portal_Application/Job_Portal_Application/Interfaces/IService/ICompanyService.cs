@@ -9,8 +9,8 @@ namespace Job_Portal_Application.Interfaces.IService
     {
         Task<CompanyDto> Register(CompanyRegisterDto companyDto);
         Task<string> Login(LoginDto companyDto);
-        Task<CompanyDto> UpdateCompany(CompanyUpdateDto companyDto);
-        Task<bool> DeleteCompany();
+        Task<CompanyDto> UpdateCompany(CompanyUpdateDto companyDto, Guid guid);
+        Task<bool> DeleteCompany(Guid guid);
         Task<CompanyDto> GetCompany(Guid companyId);
         Task<IEnumerable<CompanyDto>> GetAllCompanies();
     }

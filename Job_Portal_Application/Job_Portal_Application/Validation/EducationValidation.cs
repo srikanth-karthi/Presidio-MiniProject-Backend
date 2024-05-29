@@ -1,9 +1,11 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 using Job_Portal_Application.Dto.EducationDtos;
 
 namespace Job_Portal_Application.Validation
 {
+    [ExcludeFromCodeCoverage]
     public class EducationValidation : ValidationAttribute
     {
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)

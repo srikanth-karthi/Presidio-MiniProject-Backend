@@ -18,26 +18,26 @@ namespace Job_Portal_Application.Services.UsersServices
     public class ExperienceService : IExperienceService
     {
         private readonly IExperienceRepository _experienceRepository;
-        private readonly IAuthorizeService _authorizeService;
+
       
         private readonly IRepository<Guid, Title> _titleRepository;
 
-        public ExperienceService(IRepository<Guid, Title> titleRepository,IExperienceRepository experienceRepository, IAuthorizeService authorizeService)
+        public ExperienceService(IRepository<Guid, Title> titleRepository,IExperienceRepository experienceRepository)
         {
             _experienceRepository = experienceRepository;
-            _authorizeService = authorizeService;
+
 
             _titleRepository = titleRepository;
         }
 
-        public async Task<ExperienceDto> AddExperience(AddExperienceDto experienceDto)
+        public async Task<ExperienceDto> AddExperience(AddExperienceDto experienceDto, Guid UserId)
         {
             _ = await _titleRepository.Get(experienceDto.TitleId) ?? throw new TitleNotFoundException("Invalid TitleId. Title does not exist.");
             
             
             var experience = new Experience
             {
-                UserId = _authorizeService.Gettoken(),
+                UserId =UserId,
                 CompanyName = experienceDto.CompanyName,
                 TitleId = experienceDto.TitleId,
                 StartYear = DateOnly.FromDateTime(experienceDto.StartYear),
@@ -48,11 +48,11 @@ namespace Job_Portal_Application.Services.UsersServices
             return ToDto(addedExperience);
         }
 
-        public async Task<ExperienceDto> UpdateExperience(GetExperienceDto experienceDto)
+        public async Task<ExperienceDto> UpdateExperience(GetExperienceDto experienceDto, Guid UserId)
         {
             _ = await _titleRepository.Get(experienceDto.TitleId) ?? throw new TitleNotFoundException("Invalid TitleId. Title does not exist.");
 
-         var experience=   await _experienceRepository.Get(experienceDto.ExperienceId, _authorizeService.Gettoken()) ?? throw new ExperienceNotFoundException("Experience not found ");
+         var experience=   await _experienceRepository.Get(experienceDto.ExperienceId, UserId) ?? throw new ExperienceNotFoundException("Experience not found ");
 
 
             experience.CompanyName = experienceDto.CompanyName;
@@ -63,22 +63,22 @@ namespace Job_Portal_Application.Services.UsersServices
             return ToDto(await _experienceRepository.Update(experience));
         }
 
-        public async Task<bool> DeleteExperience(Guid experienceId)
+        public async Task<bool> DeleteExperience(Guid experienceId, Guid UserId)
         {
-            return await _experienceRepository.Delete(await _experienceRepository.Get(experienceId, _authorizeService.Gettoken()) ?? throw new ExperienceNotFoundException("Experience not found "));
+            return await _experienceRepository.Delete(await _experienceRepository.Get(experienceId, UserId) ?? throw new ExperienceNotFoundException("Experience not found "));
         }
 
-        public async Task<ExperienceDto> GetExperience(Guid experienceId)
+        public async Task<ExperienceDto> GetExperience(Guid experienceId, Guid userId)
         {
-            return ToDto(await _experienceRepository.Get(experienceId, _authorizeService.Gettoken()) ?? throw new ExperienceNotFoundException("Experience not found "));
-
-
+            var experience = await _experienceRepository.Get(experienceId, userId);
+            return ToDto(experience) ?? throw new ExperienceNotFoundException("Experience not found");
         }
 
 
-        public async Task<IEnumerable<ExperienceDto>> GetAllExperiences()
+
+        public async Task<IEnumerable<ExperienceDto>> GetAllExperiences( Guid UserId)
         {
-            var experiences=  await _experienceRepository.GetAll(_authorizeService.Gettoken());
+            var experiences=  await _experienceRepository.GetAll(UserId);
             if (!experiences.Any())
             {
                  throw new ExperienceNotFoundException("Experience not found ");

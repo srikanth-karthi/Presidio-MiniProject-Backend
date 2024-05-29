@@ -9,12 +9,12 @@ namespace Job_Portal_Application.Interfaces.IService
     {
         Task<UserDto> Register(UserRegisterDto userDto);
         Task<string> Login(LoginDto userDto);
-        Task<IEnumerable<JobDto>> GetRecommendedJobs( int pageNumber, int pageSize);
-        Task<UserDto> UpdateUser(UpdateUserDto userDto);
-        Task<bool> DeleteUser();
+        Task<IEnumerable<JobDto>> GetRecommendedJobs( int pageNumber, int pageSize, Guid UserId);
+        Task<UserDto> UpdateUser(UpdateUserDto userDto, Guid UserId);
+        Task<bool> DeleteUser(Guid UserId);
         Task<UserDto> UpdateResumeUrl(Guid userId, string resumeUrl);
 
-
+        Task<double> CalculateJobMatchPercentage(Guid jobId, Guid userId);
         Task<UserProfileDto> GetUserProfile(Guid userId);
     }
 }

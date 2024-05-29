@@ -9,12 +9,14 @@ using Job_Portal_Application.Exceptions;
 using Job_Portal_Application.Dto.JobDto;
 using Job_Portal_Application.Dto.JobDtos;
 using Job_Portal_Application.Services.CompanyService;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Job_Portal_Application.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
     [Authorize]
+    [ExcludeFromCodeCoverage]
     public class JobController : ControllerBase
     {
         private readonly IJobService _jobService;
@@ -41,7 +43,7 @@ namespace Job_Portal_Application.Controllers
             }
             try
             {
-                var (addedJob, notFoundSkills) = await _jobService.AddJob(newJob);
+                var (addedJob, notFoundSkills) = await _jobService.AddJob(newJob, Guid.Parse(User.FindFirst("id").Value));
 
                 if (notFoundSkills.Count > 0)
                 {
@@ -86,7 +88,7 @@ namespace Job_Portal_Application.Controllers
             }
             try
             {
-                var updatedJob = await _jobService.UpdateJob(jobUpdateDto);
+                var updatedJob = await _jobService.UpdateJob(jobUpdateDto, Guid.Parse(User.FindFirst("id").Value));
                 return Ok(updatedJob);
             }
             catch (JobNotFoundException ex)
@@ -104,7 +106,7 @@ namespace Job_Portal_Application.Controllers
         {
             try
             {
-                var success = await _jobService.DeleteJob(id);
+                var success = await _jobService.DeleteJob(id,Guid.Parse(User.FindFirst("id").Value));
                 if (success)
                 {
                     return Ok(new { message = "Successfully deleted the job." });
@@ -126,7 +128,7 @@ namespace Job_Portal_Application.Controllers
         {
             try
             {
-                var job = await _jobService.GetJob(id);
+                var job = await _jobService.GetJob(id, Guid.Parse(User.FindFirst("id").Value));
                 return Ok(job);
             }
             catch (JobNotFoundException ex)
@@ -193,8 +195,7 @@ namespace Job_Portal_Application.Controllers
             }
         }
 
-
-        [HttpPost("update-job-skills")]
+        [HttpPut("jobskills")]
         public async Task<IActionResult> UpdateJobSkills(JobSkillsDto jobSkillsDto)
         {
             if (!ModelState.IsValid)
@@ -206,13 +207,21 @@ namespace Job_Portal_Application.Controllers
                     Errors = errors
                 };
 
-
                 return BadRequest(customErrorResponse);
             }
             try
             {
-                await _jobService.UpdateJobSkills(jobSkillsDto);
-                return Ok("Job skills updated successfully.");
+              
+                var result = await _jobService.UpdateJobSkills(jobSkillsDto, Guid.Parse(User.FindFirst("id").Value));
+
+
+                var response = new
+                {
+                    Message = "Job skills updated successfully.",
+                    result 
+                };
+
+                return Ok(response); 
             }
             catch (JobNotFoundException ex)
             {
@@ -223,5 +232,6 @@ namespace Job_Portal_Application.Controllers
                 return StatusCode(500, $"An error occurred: {ex.Message}");
             }
         }
+
     }
 }

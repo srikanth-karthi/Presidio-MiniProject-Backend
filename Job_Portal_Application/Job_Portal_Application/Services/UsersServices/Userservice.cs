@@ -16,6 +16,7 @@ using Job_Portal_Application.Models;
 using Job_Portal_Application.Repository.CompanyRepos;
 using Job_Portal_Application.Repository.UserRepos;
 using UserSkillDto = Job_Portal_Application.Dto.UserSkillDto;
+using System.Linq;
 
 
 namespace Job_Portal_Application.Services.UsersServices
@@ -25,14 +26,16 @@ namespace Job_Portal_Application.Services.UsersServices
         private readonly IUserRepository _userRepository;
         private readonly ITokenService _tokenService;
         private readonly ICompanyRepository _companyRepository;
-        private readonly IAuthorizeService _authorizeService;
+        private readonly IJobRepository _jobRepository;
 
-        public UserService(IAuthorizeService  authorizeService, ICompanyRepository companyRepository, IUserRepository userRepository, ITokenService tokenService)
+        public UserService(IJobRepository jobRepository, ICompanyRepository companyRepository, IUserRepository userRepository, ITokenService tokenService)
         {
             _userRepository = userRepository;
             _tokenService = tokenService;
             _companyRepository = companyRepository;
-            _authorizeService = authorizeService;
+            _jobRepository = jobRepository;
+
+
         }
 
         public async Task<UserDto> Register(UserRegisterDto userDto)
@@ -91,18 +94,17 @@ namespace Job_Portal_Application.Services.UsersServices
             throw new InvalidCredentialsException("Invalid password.");
         }
 
-        public async Task<IEnumerable<JobDto>> GetRecommendedJobs( int pageNumber, int pageSize)
+        public async Task<IEnumerable<JobDto>> GetRecommendedJobs( int pageNumber, int pageSize, Guid UserId)
         {
-            var jobs = await _userRepository.GetRecommendedJobsForUser(_authorizeService.Gettoken(), pageNumber, pageSize);
-            if (jobs == null) throw new JobNotFoundException(" Job does not exist.");
+            var jobs = await _userRepository.GetRecommendedJobsForUser(UserId, pageNumber, pageSize);
+            if (!jobs.Any()) throw new JobNotFoundException(" Job does not exist.");
 
             return jobs.Select(j => MapToJobDto(j));
         }
 
-        public async Task<UserDto> UpdateUser(UpdateUserDto userDto)
+        public async Task<UserDto> UpdateUser(UpdateUserDto userDto, Guid UserId)
         {
-            var user = await _userRepository.Get(_authorizeService.Gettoken()) ?? throw new UserNotFoundException("User not found.");
- 
+            var user = await _userRepository.Get(UserId) ?? throw new UserNotFoundException("User not found.");
 
             user.Name = userDto.Name;
             user.Address = userDto.Address;
@@ -115,9 +117,9 @@ namespace Job_Portal_Application.Services.UsersServices
 
         }
 
-        public async Task<bool> DeleteUser()
+        public async Task<bool> DeleteUser( Guid UserId)
         {
-            var user = await _userRepository.Get(_authorizeService.Gettoken()) ?? throw new UserNotFoundException("User not found.");
+            var user = await _userRepository.Get(UserId) ?? throw new UserNotFoundException("User not found.");
 
             return await _userRepository.Delete(user);
         }
@@ -175,6 +177,35 @@ namespace Job_Portal_Application.Services.UsersServices
             return userProfileDto;
         }
 
+        public  async Task<double> CalculateJobMatchPercentage(Guid jobId, Guid userId)
+        {
+            UserProfileDto userProfile = await GetUserProfile(userId);
+            Job job= await _jobRepository.Get(jobId);
+
+            var jobSkills = job.JobSkills.Select(js => js.SkillId);
+            var userSkills = userProfile.UserSkills.Select(us => us.SkillId);
+            var matchingSkills = jobSkills.Intersect(userSkills).Count();
+            var totalSkills = jobSkills.Count();
+            var skillMatchPercentage = totalSkills == 0 ? 0 : (double)matchingSkills / totalSkills;
+
+            var requiredExperience = job.ExperienceRequired ?? 0;
+            var jobTitle = job.Title.TitleName;
+            var userExperienceWithTitle = userProfile.Experiences
+                .Where(e => e.TitleName.Equals(jobTitle, StringComparison.OrdinalIgnoreCase))
+                .Sum(e => e.ExperienceDuration);
+            var experienceMatchPercentage = requiredExperience == 0 ? 0 : Math.Min(1, userExperienceWithTitle / requiredExperience);
+
+            var jobAreaOfInterestId = job.TitleId.ToString();
+            var userAreaOfInterestIds = userProfile.AreasOfInterests.Select(aoi => aoi.TitleName);
+            var areaOfInterestMatchPercentage = userAreaOfInterestIds.Contains(jobAreaOfInterestId) ? 1 : 0;
+
+            var totalWeightedPercentage = (skillMatchPercentage * 0.35) +
+                                          (experienceMatchPercentage * 0.35) +
+                                          (areaOfInterestMatchPercentage * 0.30);
+
+            return totalWeightedPercentage * 100;
+        }
+
 
         public async Task<UserDto> UpdateResumeUrl(Guid userId, string resumeUrl)
         {
@@ -219,5 +250,6 @@ namespace Job_Portal_Application.Services.UsersServices
                 ResumeUrl = user.ResumeUrl
             };
         }
+
     }
 }

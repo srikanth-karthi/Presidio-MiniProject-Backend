@@ -1,9 +1,11 @@
-﻿using System.Runtime.Serialization;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Runtime.Serialization;
 
 namespace Job_Portal_Application.Exceptions
 {
     [Serializable]
-    internal class JobAlreadyAppliedException : Exception
+    [ExcludeFromCodeCoverage]
+    public class JobAlreadyAppliedException : Exception
     {
         public JobAlreadyAppliedException()
         {

@@ -9,11 +9,13 @@ using Job_Portal_Application.Dto.CompanyDto;
 using Job_Portal_Application.Dto.CompanyDtos;
 using Job_Portal_Application.Dto.UserDto;
 using Microsoft.AspNetCore.Authorization;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Job_Portal_Application.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [ExcludeFromCodeCoverage]
     public class CompanyController : ControllerBase
     {
         private readonly ICompanyService _companyService;
@@ -102,7 +104,7 @@ namespace Job_Portal_Application.Controllers
             }
             try
             {
-                var updatedCompany = await _companyService.UpdateCompany(company);
+                var updatedCompany = await _companyService.UpdateCompany(company, Guid.Parse(User.FindFirst("id").Value));
                 return Ok(updatedCompany);
             }
             catch (CompanyNotFoundException ex)
@@ -122,7 +124,7 @@ namespace Job_Portal_Application.Controllers
 
             try
             {
-                var success = await _companyService.DeleteCompany();
+                var success = await _companyService.DeleteCompany( Guid.Parse(User.FindFirst("id").Value));
                 if (success)
                 {
                     return Ok(new { message = "Successfully deleted the Company" });

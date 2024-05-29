@@ -16,23 +16,23 @@ namespace Job_Portal_Application.Services.UsersServices
     public class AreasOfInterestService : IAreasOfInterestService
     {
         private readonly IAreasOfInterestRepository _areasOfInterestRepository;
-        private readonly IAuthorizeService _authorizeService;
+  
         private readonly IRepository<Guid, Title> _titleRepository;
 
-        public AreasOfInterestService(IRepository<Guid, Title> titleRepository,IAreasOfInterestRepository areasOfInterestRepository, IAuthorizeService authorizeService)
+        public AreasOfInterestService(IRepository<Guid, Title> titleRepository,IAreasOfInterestRepository areasOfInterestRepository)
         {
             _areasOfInterestRepository = areasOfInterestRepository;
-            _authorizeService = authorizeService;
+
             _titleRepository = titleRepository;
         }
 
-        public async Task<AreasOfInterest> AddAreasOfInterest(AddAreasOfInterestDTO areasOfInterestDto)
+        public async Task<AreasOfInterest> AddAreasOfInterest(AddAreasOfInterestDTO areasOfInterestDto, Guid UserId)
         {
             _ = await _titleRepository.Get(areasOfInterestDto.TitleId) ?? throw new TitleNotFoundException("Invalid TitleId. Title does not exist.");
           
             var areasOfInterest = new AreasOfInterest
             {
-                UserId = _authorizeService.Gettoken(),
+                UserId = UserId,
                 TitleId = areasOfInterestDto.TitleId,
                 Lpa = areasOfInterestDto.Lpa,
             };
@@ -41,9 +41,9 @@ namespace Job_Portal_Application.Services.UsersServices
             return addedAreasOfInterest;
         }
 
-        public async Task<AreasOfInterest> UpdateAreasOfInterest(AreasOfInterestDto areasOfInterestDto)
+        public async Task<AreasOfInterest> UpdateAreasOfInterest(AreasOfInterestDto areasOfInterestDto,Guid UserId)
         {
-            var areasOfInterest = await _areasOfInterestRepository.Get(areasOfInterestDto.AreasOfInterestId, _authorizeService.Gettoken())
+            var areasOfInterest = await _areasOfInterestRepository.Get(areasOfInterestDto.AreasOfInterestId, UserId)
                                   ?? throw new AreasOfInterestNotFoundException("Areas of Interest record not found");
 
             areasOfInterest.TitleId = areasOfInterestDto.TitleId;
@@ -52,24 +52,24 @@ namespace Job_Portal_Application.Services.UsersServices
             return await _areasOfInterestRepository.Update(areasOfInterest);
         }
 
-        public async Task<bool> DeleteAreasOfInterest(Guid areasOfInterestId)
+        public async Task<bool> DeleteAreasOfInterest(Guid areasOfInterestId, Guid UserId)
         {
-            var areasOfInterest = await _areasOfInterestRepository.Get(areasOfInterestId, _authorizeService.Gettoken())
+            var areasOfInterest = await _areasOfInterestRepository.Get(areasOfInterestId, UserId)
                                   ?? throw new AreasOfInterestNotFoundException("Areas of Interest record not found");
             return await _areasOfInterestRepository.Delete(areasOfInterest);
         }
 
-        public async Task<AreasOfInterest> GetAreasOfInterest(Guid areasOfInterestId)
+        public async Task<AreasOfInterest> GetAreasOfInterest(Guid areasOfInterestId, Guid UserId)
         {
-             return  await _areasOfInterestRepository.Get(areasOfInterestId, _authorizeService.Gettoken())
+             return  await _areasOfInterestRepository.Get(areasOfInterestId, UserId)
                                   ?? throw new AreasOfInterestNotFoundException("Areas of Interest record not found");
 
 
         }
 
-        public async Task<IEnumerable<AreasOfInterest>> GetAllAreasOfInterest()
+        public async Task<IEnumerable<AreasOfInterest>> GetAllAreasOfInterest( Guid UserId)
         {
-            var areasOfInterests = await _areasOfInterestRepository.GetAll(_authorizeService.Gettoken());
+            var areasOfInterests = await _areasOfInterestRepository.GetAll(UserId);
 
             if (!areasOfInterests.Any())
             {

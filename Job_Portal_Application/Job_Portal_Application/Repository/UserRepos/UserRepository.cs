@@ -38,7 +38,7 @@ namespace Job_Portal_Application.Repository.UserRepos
 
         public async Task<User> Get(Guid id)
         {
-            Console.WriteLine(id);
+           
                  return await _context.Users.FirstOrDefaultAsync(u => u.UserId == id);
 
         }
@@ -102,10 +102,8 @@ namespace Job_Portal_Application.Repository.UserRepos
 
         }
 
-
         public async Task<IEnumerable<Job>> GetRecommendedJobsForUser(Guid userId, int pageNumber, int pageSize)
         {
-            var remainingJobsNeeded = 0;
             var userAreasOfInterest = await _context.AreasOfInterests
                 .Where(a => a.UserId == userId)
                 .Include(a => a.Title)
@@ -125,50 +123,85 @@ namespace Job_Portal_Application.Repository.UserRepos
                 .Include(j => j.JobSkills).ThenInclude(js => js.Skill)
                 .Where(job => job.Status == true)
                 .Where(j => titleIds.Contains(j.TitleId) && lpas.Contains(j.Lpa ?? -1))
-                .Where(j => j.JobSkills.Any(js => userSkills.Contains(js.SkillId)))
-                .ToListAsync();
+                 .ToListAsync();
 
-            remainingJobsNeeded = pageSize - recommendedJobs.Count;
 
-            if (remainingJobsNeeded > 0)
+            recommendedJobs = recommendedJobs
+                        .OrderByDescending(j => j.DatePosted)
+                        .ToList();
+
+
+            if (recommendedJobs.Count < pageSize)
             {
-                var titleAndSkillJobs = await _context.Jobs
+              
+                var titleOnlyJobs = await _context.Jobs
                     .Include(j => j.Company)
                     .Include(j => j.Title)
                     .Include(j => j.JobSkills).ThenInclude(js => js.Skill)
                     .Where(job => job.Status == true)
                     .Where(j => titleIds.Contains(j.TitleId) && !lpas.Contains(j.Lpa ?? -1))
-                    .Where(j => j.JobSkills.Any(js => userSkills.Contains(js.SkillId)))
-                    .ToListAsync();
+                              .ToListAsync();
 
-                recommendedJobs.AddRange(titleAndSkillJobs);
+
+                titleOnlyJobs = titleOnlyJobs
+                            .OrderByDescending(j => j.DatePosted)
+                            .ToList();
+          
+
+                recommendedJobs.AddRange(titleOnlyJobs);
+
+                if (recommendedJobs.Count < pageSize)
+                {
+
+                    var skillMatchJobs = await _context.Jobs
+                        .Include(j => j.Company)
+                        .Include(j => j.Title)
+                        .Include(j => j.JobSkills).ThenInclude(js => js.Skill)
+                        .Where(job => job.Status == true)
+                        .Where(j => j.JobSkills.Any(js => userSkills.Contains(js.SkillId)))
+
+                        .ToListAsync();
+
+
+                    skillMatchJobs= skillMatchJobs
+                            .OrderByDescending(j => j.DatePosted)
+                            .ToList();
+
+                    recommendedJobs.AddRange(skillMatchJobs);
+
+             
+                    if (recommendedJobs.Count < pageSize)
+                    {
+               
+                        var recentJobs = await _context.Jobs
+                            .Include(j => j.Company)
+                            .Include(j => j.Title)
+                            .Include(j => j.JobSkills).ThenInclude(js => js.Skill)
+                            .Where(job => job.Status == true)
+
+                            .ToListAsync();
+
+
+                        recentJobs = recentJobs
+                                            .OrderByDescending(j => j.DatePosted)
+                                .Take(pageSize - recommendedJobs.Count)
+                                .ToList();
+
+                        recommendedJobs.AddRange(recentJobs);
+                    }
+                }
             }
 
-            if (recommendedJobs.Count < pageSize)
-            {
-                remainingJobsNeeded = pageSize - recommendedJobs.Count;
-
-                var recentJobs = await _context.Jobs
-                    .Include(j => j.Company)
-                    .Include(j => j.Title)
-                    .Include(j => j.JobSkills).ThenInclude(js => js.Skill)
-                    .Where(job => job.Status == true)
-                    .OrderBy(j => j.DatePosted)
-                    .Take(remainingJobsNeeded)
-                    .ToListAsync();
-
-                recommendedJobs.AddRange(recentJobs);
-            }
-
+ 
             var distinctRecommendedJobs = recommendedJobs
                 .Distinct()
-                .OrderBy(j => j.DatePosted) // Order the jobs
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
                 .ToList();
 
             return distinctRecommendedJobs;
         }
+
 
 
 

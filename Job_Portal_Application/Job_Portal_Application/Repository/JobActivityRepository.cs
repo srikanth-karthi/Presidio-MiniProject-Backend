@@ -73,14 +73,14 @@ namespace Job_Portal_Application.Repository
         }
 
         public async Task<IEnumerable<JobActivity>> GetFilteredUser(
-      Guid companyId,
-      Guid jobId,
-      int pageNumber = 1,
-      int pageSize = 25,
-      bool firstApplied = false,
-      bool perfectMatchSkills = false,
-      bool perfectMatchExperience = false,
-      bool hasExperienceInJobTitle = false)
+            Guid companyId,
+            Guid jobId,
+            int pageNumber = 1,
+            int pageSize = 25,
+            bool firstApplied = false,
+            bool perfectMatchSkills = false,
+            bool perfectMatchExperience = false,
+            bool hasExperienceInJobTitle = false)
         {
             var query = _context.JobActivities
                 .Include(ja => ja.User)
@@ -88,7 +88,6 @@ namespace Job_Portal_Application.Repository
                         .ThenInclude(us => us.Skill)
                 .Include(ja => ja.User)
                     .ThenInclude(u => u.Experiences)
-                        .ThenInclude(e => e.Title)
                 .Include(ja => ja.Job)
                     .ThenInclude(j => j.Title)
                 .Include(ja => ja.Job)
@@ -111,12 +110,18 @@ namespace Job_Portal_Application.Repository
             if (perfectMatchExperience)
             {
                 query = query.Where(ja =>
-                    ja.User.Experiences.Any(e => e.TitleId == ja.Job.TitleId && e.ExperienceDuration >= ja.Job.ExperienceRequired));
+                    _context.Experiences.Any(e =>
+                        e.UserId == ja.UserId &&
+                        e.TitleId == ja.Job.TitleId &&
+                        (e.EndYear.Year - e.StartYear.Year) >= ja.Job.ExperienceRequired));
             }
 
             if (hasExperienceInJobTitle)
             {
-                query = query.Where(ja => ja.User.Experiences.Any(e => e.TitleId == ja.Job.TitleId));
+                query = query.Where(ja =>
+                    _context.Experiences.Any(e =>
+                        e.UserId == ja.UserId &&
+                        e.TitleId == ja.Job.TitleId));
             }
 
             var jobActivities = await query
@@ -126,6 +131,7 @@ namespace Job_Portal_Application.Repository
 
             return jobActivities;
         }
+
 
         public async Task<IEnumerable<JobActivity>> GetJobsUserApplied(Guid userid)
         {

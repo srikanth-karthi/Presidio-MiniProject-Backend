@@ -5,6 +5,7 @@ using Job_Portal_Application.Interfaces.IService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 
 namespace Job_Portal_Application.Controllers
@@ -12,6 +13,7 @@ namespace Job_Portal_Application.Controllers
     [ApiController]
     [Route("api/[controller]")]
     [Authorize]
+    [ExcludeFromCodeCoverage]
     public class JobActivityController : ControllerBase
     {
         private readonly IJobActivityService _jobActivityService;
@@ -26,7 +28,7 @@ namespace Job_Portal_Application.Controllers
         {
             try
             {
-                var jobActivityDto = await _jobActivityService.ApplyForJob(jobId);
+                var jobActivityDto = await _jobActivityService.ApplyForJob(jobId, Guid.Parse(User.FindFirst("id").Value));
                 return Ok(jobActivityDto);
             }
             catch (JobNotFoundException ex)
@@ -52,7 +54,7 @@ namespace Job_Portal_Application.Controllers
         {
             try
             {
-                var jobActivities = await _jobActivityService.GetFilteredUser(jobId, pageNumber, pageSize, firstApplied, perfectMatchSkills, perfectMatchExperience, hasExperienceInJobTitle);
+                var jobActivities = await _jobActivityService.GetFilteredUser(Guid.Parse(User.FindFirst("id").Value),jobId, pageNumber, pageSize, firstApplied, perfectMatchSkills, perfectMatchExperience, hasExperienceInJobTitle);
                 return Ok(jobActivities);
             }
             catch (JobNotFoundException ex)
@@ -70,7 +72,7 @@ namespace Job_Portal_Application.Controllers
         {
             try
             {
-                var jobActivities = await _jobActivityService.GetJobsUserApplied();
+                var jobActivities = await _jobActivityService.GetJobsUserApplied(Guid.Parse(User.FindFirst("id").Value));
                 return Ok(jobActivities);
             }
             catch (JobNotFoundException ex)

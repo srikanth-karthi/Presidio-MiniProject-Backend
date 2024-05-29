@@ -7,8 +7,8 @@ namespace Job_Portal_Application.Interfaces.IService
 {
     public interface IUserSkillsService
     {
-        Task<UserSkillsResponseDto> AddUserSkills(UserSkillsRequestDto request);
-        Task<UserSkillsResponseDto> RemoveUserSkill(UserSkillsRequestDto request);
-        Task<IEnumerable<UserSkillDto>> GetAllUserSkills();
+        Task<UserSkillsResponseDto> AddUserSkills(UserSkillsRequestDto request, Guid UserId);
+        Task<UserSkillsResponseDto> RemoveUserSkill(UserSkillsRequestDto request, Guid UserId);
+        Task<IEnumerable<UserSkillDto>> GetAllUserSkills( Guid UserId);
     }
 }

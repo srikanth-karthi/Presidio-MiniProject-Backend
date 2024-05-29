@@ -274,152 +274,152 @@ namespace Job_Portal_Application.Migrations
                     b.HasData(
                         new
                         {
-                            SkillId = new Guid("23b60721-74b9-4209-9a57-386ffeebd57f"),
+                            SkillId = new Guid("34fc10c1-e426-48e2-bdc9-346269933828"),
                             Skill_Name = "HTML"
                         },
                         new
                         {
-                            SkillId = new Guid("6cdbb00b-86c3-47db-b8ec-51dfff2e8cb1"),
+                            SkillId = new Guid("fbc52102-d6c7-49b0-a47e-00f7be40a1b9"),
                             Skill_Name = "CSS"
                         },
                         new
                         {
-                            SkillId = new Guid("699e7a3a-eb03-4191-ae61-26ab54959ee4"),
+                            SkillId = new Guid("8b950496-e8e6-469b-b67e-3f6911a67dde"),
                             Skill_Name = "JavaScript"
                         },
                         new
                         {
-                            SkillId = new Guid("f0817fdc-f342-4509-a8fd-6d360fac73d0"),
+                            SkillId = new Guid("f73d59d8-de3d-4c38-9d7b-3b5fb1d310de"),
                             Skill_Name = "TypeScript"
                         },
                         new
                         {
-                            SkillId = new Guid("6ce122a6-91f9-4e8f-9050-0652ff78ff74"),
+                            SkillId = new Guid("745444cf-4a2e-477c-852a-efd0d257711a"),
                             Skill_Name = "React"
                         },
                         new
                         {
-                            SkillId = new Guid("7dd97511-e415-4f7f-9df6-b98faf5b628d"),
+                            SkillId = new Guid("f514c09e-21b9-44ff-a85b-d0e9fee22194"),
                             Skill_Name = "Angular"
                         },
                         new
                         {
-                            SkillId = new Guid("141e4f69-6f3b-4c34-83f9-b312f627421e"),
+                            SkillId = new Guid("b4669812-a6b8-4d03-9d14-7ad2e200a34e"),
                             Skill_Name = "Vue"
                         },
                         new
                         {
-                            SkillId = new Guid("6181eb1f-21d7-4e47-8817-c4821c5c81af"),
+                            SkillId = new Guid("dc872140-2d08-4960-a485-5361b3ae221e"),
                             Skill_Name = "Node.js"
                         },
                         new
                         {
-                            SkillId = new Guid("ced03da9-accd-4c3a-8bf4-e8200653eab2"),
+                            SkillId = new Guid("4c4a5f4b-9b17-4ed0-884c-fff074c7520d"),
                             Skill_Name = "Express"
                         },
                         new
                         {
-                            SkillId = new Guid("7d44b987-cb75-4383-a496-47570830adea"),
+                            SkillId = new Guid("06e35822-fce4-4211-ae6e-f52393189407"),
                             Skill_Name = "Python"
                         },
                         new
                         {
-                            SkillId = new Guid("c54d9df3-48a7-4f8b-a486-d302f857caa4"),
+                            SkillId = new Guid("a248b731-b010-4ef9-ba89-38eccd0b801e"),
                             Skill_Name = "Django"
                         },
                         new
                         {
-                            SkillId = new Guid("577b76eb-a170-428a-b9f9-3274d985ca3a"),
+                            SkillId = new Guid("9a73a72c-3c8b-4511-8e22-2e21b2ee0ab1"),
                             Skill_Name = "Flask"
                         },
                         new
                         {
-                            SkillId = new Guid("7b632a0b-c4bb-45e7-a7d6-60c38e0a639a"),
+                            SkillId = new Guid("bf5b165c-ea6b-4f91-8074-5c2c562bbc88"),
                             Skill_Name = "Java"
                         },
                         new
                         {
-                            SkillId = new Guid("1835f19e-1b08-4eb9-a053-a7d9e7aa7874"),
+                            SkillId = new Guid("855631f1-63cf-48b8-8fe7-7d3f77e96552"),
                             Skill_Name = "Spring"
                         },
                         new
                         {
-                            SkillId = new Guid("b39270a0-f3c3-401b-bc64-fe948385be51"),
+                            SkillId = new Guid("78ea7caf-e080-43a2-a4c3-0eb301d453c6"),
                             Skill_Name = "Kotlin"
                         },
                         new
                         {
-                            SkillId = new Guid("2880f9a8-c59d-4892-8295-057484923ba0"),
+                            SkillId = new Guid("5a81a14b-1170-4c5c-b4de-47764c6fb57a"),
                             Skill_Name = "Swift"
                         },
                         new
                         {
-                            SkillId = new Guid("4f4ae1b2-532b-472c-9de2-88ae0995c295"),
+                            SkillId = new Guid("117a0a27-5dd3-4381-b764-ac7c6d7f8855"),
                             Skill_Name = "Objective-C"
                         },
                         new
                         {
-                            SkillId = new Guid("4ac34316-88ae-4ba3-8461-ab04b3e3adaa"),
+                            SkillId = new Guid("39b71b6c-82d6-4edd-8581-cf45d7b69d5d"),
                             Skill_Name = "Ruby"
                         },
                         new
                         {
-                            SkillId = new Guid("a591a5b4-94b6-4588-8806-aa1d7da4e040"),
+                            SkillId = new Guid("a7c9c1dc-8aad-4ab8-b1bc-6e03fb118fbc"),
                             Skill_Name = "Rails"
                         },
                         new
                         {
-                            SkillId = new Guid("5b5535e7-f592-4006-b257-35d015c67115"),
+                            SkillId = new Guid("50e36203-c98c-4daa-b83d-418ec77e7fbd"),
                             Skill_Name = "PHP"
                         },
                         new
                         {
-                            SkillId = new Guid("b9e0013e-7dec-40d1-ad8c-d404d66fdd12"),
+                            SkillId = new Guid("e1c57374-5492-4441-80a1-148d6b1bd98f"),
                             Skill_Name = "C#"
                         },
                         new
                         {
-                            SkillId = new Guid("265a67cd-9040-43b4-ac4a-8e76c46d85fd"),
+                            SkillId = new Guid("f12af59b-912b-4c58-95aa-52e79fdf5ef0"),
                             Skill_Name = "ASP.NET"
                         },
                         new
                         {
-                            SkillId = new Guid("ada5ad61-71a4-459a-8494-7bdadba7fed4"),
+                            SkillId = new Guid("f7b9a546-0979-47e7-9cb2-7f5c6a43d7db"),
                             Skill_Name = "Azure"
                         },
                         new
                         {
-                            SkillId = new Guid("8ac2b3ce-f1e4-4d71-ad25-4aee93384e0a"),
+                            SkillId = new Guid("dd2f5d8f-fdd5-44eb-b52c-d2764212f955"),
                             Skill_Name = "AWS"
                         },
                         new
                         {
-                            SkillId = new Guid("5dd912e7-2668-4210-8f18-e1b675199f7c"),
+                            SkillId = new Guid("135c9c80-4c07-44e0-930a-b04d4c852090"),
                             Skill_Name = "GCP"
                         },
                         new
                         {
-                            SkillId = new Guid("ecbb456d-5759-4746-88ab-e6cf9b15ae90"),
+                            SkillId = new Guid("cda91beb-4ca8-4e2d-814c-a64f5eec3514"),
                             Skill_Name = "SQL"
                         },
                         new
                         {
-                            SkillId = new Guid("b9d92cce-f3cc-47f2-9181-c116bf6a09de"),
+                            SkillId = new Guid("1b1478ef-c436-4b12-a62b-6f7f7a5b68ab"),
                             Skill_Name = "NoSQL"
                         },
                         new
                         {
-                            SkillId = new Guid("86eb1e41-e46a-41b7-b249-72d40037e95d"),
+                            SkillId = new Guid("a8485575-7c3d-42f2-b95f-0d2048e97687"),
                             Skill_Name = "Docker"
                         },
                         new
                         {
-                            SkillId = new Guid("6cd69895-b90f-4c91-afc5-9db6f616d482"),
+                            SkillId = new Guid("63ef03b5-9c5a-4a86-873a-50b5a5096d70"),
                             Skill_Name = "Kubernetes"
                         },
                         new
                         {
-                            SkillId = new Guid("98c28ae6-6654-40f0-86f3-98d45deaf017"),
+                            SkillId = new Guid("75bee84d-e780-48f8-8120-67081bd8fb28"),
                             Skill_Name = "GraphQL"
                         });
                 });
@@ -442,127 +442,127 @@ namespace Job_Portal_Application.Migrations
                     b.HasData(
                         new
                         {
-                            TitleId = new Guid("51c7ec5f-3ddb-47ef-9cb8-dba1d4180940"),
+                            TitleId = new Guid("7955f03c-7700-43b9-b791-2695ef8dcede"),
                             TitleName = "Full Stack Developer"
                         },
                         new
                         {
-                            TitleId = new Guid("1ebf82d2-974f-4630-bc0c-3632f8cb4847"),
+                            TitleId = new Guid("cb33b182-80f5-40dd-83b5-400f3c8ed587"),
                             TitleName = "Front End Developer"
                         },
                         new
                         {
-                            TitleId = new Guid("99da2a06-ea51-47f7-adc1-5cf24a70e222"),
+                            TitleId = new Guid("33c0afdc-694c-4c13-b372-3cf0ee26d427"),
                             TitleName = "Back End Developer"
                         },
                         new
                         {
-                            TitleId = new Guid("7bab2fdb-2807-4cd6-8914-efe3120da31a"),
+                            TitleId = new Guid("6bc0a051-825f-40a3-a882-79a6a00cc104"),
                             TitleName = "Software Engineer"
                         },
                         new
                         {
-                            TitleId = new Guid("53deb86e-a904-4760-a824-85cf6ed39f91"),
+                            TitleId = new Guid("5f4d4d1b-db11-44de-b402-5b982169cd6e"),
                             TitleName = "Data Scientist"
                         },
                         new
                         {
-                            TitleId = new Guid("9e59c86a-58d6-4659-a7e1-9fd0c60cc3a6"),
+                            TitleId = new Guid("7e288b69-93f7-450b-b706-6c71d52c5851"),
                             TitleName = "DevOps Engineer"
                         },
                         new
                         {
-                            TitleId = new Guid("cb0559ee-e156-4c4d-985b-13f3fc966725"),
+                            TitleId = new Guid("f14196e1-4191-4859-b349-d2aa820122d5"),
                             TitleName = "Product Manager"
                         },
                         new
                         {
-                            TitleId = new Guid("159d6de8-f85d-441f-a59a-76eab718494f"),
+                            TitleId = new Guid("1e77f0bc-cd29-4bf1-87c4-967d992e8056"),
                             TitleName = "Project Manager"
                         },
                         new
                         {
-                            TitleId = new Guid("3b6d0e62-2b2b-46f2-a108-38dd3d80f3e0"),
+                            TitleId = new Guid("200d443e-6787-4e5d-b96a-5d9ebc3c5bf5"),
                             TitleName = "Business Analyst"
                         },
                         new
                         {
-                            TitleId = new Guid("b2870e60-8c0d-4870-b0c7-45c7f7a5cd80"),
+                            TitleId = new Guid("b1057ccf-5c97-4342-a852-460179db8b55"),
                             TitleName = "QA Engineer"
                         },
                         new
                         {
-                            TitleId = new Guid("e0a958c6-4d2b-41a0-80e5-c24c72e46a07"),
+                            TitleId = new Guid("865d78d3-fe76-41ab-851d-475f23250a0a"),
                             TitleName = "UI/UX Designer"
                         },
                         new
                         {
-                            TitleId = new Guid("1ce78d42-c795-4cca-9b58-b2a9b6cb2ebd"),
+                            TitleId = new Guid("6df53d9d-4ea5-4080-94b4-be33e793798b"),
                             TitleName = "Mobile Developer"
                         },
                         new
                         {
-                            TitleId = new Guid("97a2b333-55a5-4357-9fd5-276c2ffbce6e"),
+                            TitleId = new Guid("9a41095b-7a83-4de3-9e30-00ffce59bd56"),
                             TitleName = "Security Analyst"
                         },
                         new
                         {
-                            TitleId = new Guid("60a4e3ff-de49-47d4-8b5c-a69d4b6511d4"),
+                            TitleId = new Guid("ce390c5d-5b8a-4f89-911c-58d320dfa47a"),
                             TitleName = "Network Engineer"
                         },
                         new
                         {
-                            TitleId = new Guid("4e8d8d9d-5a51-4f37-8404-9ed18f82135a"),
+                            TitleId = new Guid("02ec8dd6-bfc1-4b8c-b95c-e168d97fe645"),
                             TitleName = "Systems Administrator"
                         },
                         new
                         {
-                            TitleId = new Guid("d45e60de-f0b3-4891-8723-1ae53c58eaf4"),
+                            TitleId = new Guid("6206235b-4228-4c72-9f35-50e9bceb7f89"),
                             TitleName = "Database Administrator"
                         },
                         new
                         {
-                            TitleId = new Guid("a022d1a9-fc89-422b-a928-586678dbfac9"),
+                            TitleId = new Guid("c02c55e9-1b82-4d1d-8953-684c4336e6a1"),
                             TitleName = "Cloud Architect"
                         },
                         new
                         {
-                            TitleId = new Guid("49b1c0ba-4466-4850-89b3-ab798eda2c4d"),
+                            TitleId = new Guid("42661970-2ab3-4636-884c-b49aec4e4912"),
                             TitleName = "Machine Learning Engineer"
                         },
                         new
                         {
-                            TitleId = new Guid("e78def9d-f7b2-47a1-8d24-5f83f6c78ff3"),
+                            TitleId = new Guid("4788eaef-1467-4570-bd6e-ed2e542d558b"),
                             TitleName = "Artificial Intelligence Engineer"
                         },
                         new
                         {
-                            TitleId = new Guid("8bcd2b71-58dc-422c-808a-c77345cc6ea7"),
+                            TitleId = new Guid("4c307494-2b76-4271-ba98-41559ce4bbe6"),
                             TitleName = "Technical Support Engineer"
                         },
                         new
                         {
-                            TitleId = new Guid("9243fdd6-a706-4187-ae8a-2e7de171278e"),
+                            TitleId = new Guid("55d43346-ca04-46a3-8671-65f7044002eb"),
                             TitleName = "Cloud Engineer"
                         },
                         new
                         {
-                            TitleId = new Guid("e91031c0-1d21-49ab-85d3-0b356077792f"),
+                            TitleId = new Guid("467af571-0141-4f4d-8aba-5b9778da34e5"),
                             TitleName = "Database Developer"
                         },
                         new
                         {
-                            TitleId = new Guid("ff51502d-acad-4f4b-ad2a-c1e53c89ca98"),
+                            TitleId = new Guid("e8f45d90-c0d3-41f0-93bc-d3aa4670cae1"),
                             TitleName = "Blockchain Developer"
                         },
                         new
                         {
-                            TitleId = new Guid("5f6798b5-d070-4f6c-b5e2-781e63f7f3b9"),
+                            TitleId = new Guid("7a808ae3-e104-4e46-a849-0e9eb1c3ff7b"),
                             TitleName = "Game Developer"
                         },
                         new
                         {
-                            TitleId = new Guid("dd1ddeb2-299c-42c7-b517-24edb0333ecf"),
+                            TitleId = new Guid("16c5d006-2ad3-495e-a28a-a848531448d9"),
                             TitleName = "VR/AR Developer"
                         });
                 });
@@ -615,6 +615,17 @@ namespace Job_Portal_Application.Migrations
                     b.HasKey("UserId");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = new Guid("bae1166a-75fd-4cc7-864c-711a14f33081"),
+                            Dob = new DateOnly(2020, 1, 1),
+                            Email = "Admin@jobportal.com",
+                            HasCode = new byte[] { 64, 168, 173, 35, 170, 162, 26, 101, 7, 116, 28, 110, 21, 189, 47, 159, 68, 180, 31, 32, 151, 188, 134, 48, 250, 148, 182, 103, 6, 41, 88, 179, 179, 9, 207, 158, 175, 89, 19, 123, 160, 134, 36, 20, 227, 239, 201, 128, 80, 155, 101, 59, 228, 94, 62, 38, 61, 196, 154, 26, 163, 197, 206, 176, 201, 234, 46, 44, 172, 145, 93, 141, 137, 155, 215, 253, 69, 36, 29, 151, 44, 216, 23, 40, 143, 80, 16, 21, 84, 207, 173, 130, 250, 119, 2, 212, 27, 193, 86, 63, 29, 175, 146, 243, 191, 52, 216, 201, 239, 227, 195, 36, 146, 96, 80, 205, 57, 14, 28, 10, 188, 171, 64, 214, 123, 104, 31, 65 },
+                            Name = "Admin",
+                            Password = new byte[] { 214, 72, 129, 159, 116, 176, 175, 144, 193, 214, 211, 104, 204, 229, 164, 66, 229, 212, 236, 95, 205, 242, 248, 145, 102, 158, 253, 177, 156, 129, 236, 32, 61, 29, 42, 220, 133, 197, 240, 184, 162, 217, 51, 195, 159, 48, 236, 128, 104, 161, 198, 31, 31, 62, 229, 51, 178, 173, 211, 69, 150, 197, 178, 241 }
+                        });
                 });
 
             modelBuilder.Entity("Job_Portal_Application.Models.UserSkills", b =>

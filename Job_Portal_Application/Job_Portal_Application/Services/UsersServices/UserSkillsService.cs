@@ -14,19 +14,19 @@ namespace Job_Portal_Application.Services
     public class UserSkillsService : IUserSkillsService
     {
         private readonly IUserSkillsRepository _userSkillsRepository;
-        private readonly IAuthorizeService _authorizeService;
+     
         private readonly IRepository<Guid, Skill> _skillRepository;
 
-        public UserSkillsService(IUserSkillsRepository userSkillsRepository, IAuthorizeService authorizeService, IRepository<Guid, Skill> skillRepository)
+        public UserSkillsService(IUserSkillsRepository userSkillsRepository, IRepository<Guid, Skill> skillRepository)
         {
             _userSkillsRepository = userSkillsRepository;
-            _authorizeService = authorizeService;
+        
             _skillRepository = skillRepository;
         }
 
-        public async Task<UserSkillsResponseDto> AddUserSkills(UserSkillsRequestDto request)
+        public async Task<UserSkillsResponseDto> AddUserSkills(UserSkillsRequestDto request, Guid UserId)
         {
-            var userId = _authorizeService.Gettoken();
+            var userId = UserId;
             var response = new UserSkillsResponseDto();
 
             foreach (var skillId in request.SkillIds)
@@ -59,9 +59,9 @@ namespace Job_Portal_Application.Services
             return response;
         }
 
-        public async Task<UserSkillsResponseDto> RemoveUserSkill(UserSkillsRequestDto request)
+        public async Task<UserSkillsResponseDto> RemoveUserSkill(UserSkillsRequestDto request, Guid UserId)
         {
-            var userId = _authorizeService.Gettoken();
+            var userId = UserId;
             var response = new UserSkillsResponseDto();
 
             foreach (var skillId in request.SkillIds)
@@ -80,9 +80,9 @@ namespace Job_Portal_Application.Services
             return response;
         }
 
-        public async Task<IEnumerable<UserSkillDto>> GetAllUserSkills()
+        public async Task<IEnumerable<UserSkillDto>> GetAllUserSkills( Guid UserId)
         {
-            var userId = _authorizeService.Gettoken();
+            var userId = UserId;
             var userSkills = await _userSkillsRepository.GetByUserId(userId);
             if (!userSkills.Any()) throw new UserSkillsNotFoundException("User has no skills");
             return userSkills.Select(MapToDto);

@@ -6,12 +6,14 @@ using Job_Portal_Application.Interfaces.IService;
 using Job_Portal_Application.Models;
 using Job_Portal_Application.Exceptions;
 using Microsoft.AspNetCore.Authorization;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Job_Portal_Application.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
     [Authorize]
+    [ExcludeFromCodeCoverage]
     public class TitleController : ControllerBase
     {
         private readonly ITitleService _titleService;

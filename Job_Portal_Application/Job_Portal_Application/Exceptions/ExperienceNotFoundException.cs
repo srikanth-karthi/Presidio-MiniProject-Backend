@@ -1,9 +1,11 @@
-﻿using System.Runtime.Serialization;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Runtime.Serialization;
 
 namespace Job_Portal_Application.Exceptions
 {
     [Serializable]
-    internal class ExperienceNotFoundException : Exception
+    [ExcludeFromCodeCoverage]
+    public class ExperienceNotFoundException : Exception
     {
         public ExperienceNotFoundException()
         {

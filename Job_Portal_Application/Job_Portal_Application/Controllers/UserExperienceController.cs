@@ -9,11 +9,13 @@ using System.Threading.Tasks;
 
 using Job_Portal_Application.Models;
 using Job_Portal_Application.Dto.UserDto;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Job_Portal_Application.Controllers
 {
     [ApiController]
     [Route("api/UserExperience")]
+    [ExcludeFromCodeCoverage]
     public class UserExperienceController : ControllerBase
     {
         private readonly IExperienceService _experienceService;
@@ -31,9 +33,16 @@ namespace Job_Portal_Application.Controllers
             {
                 if (!ModelState.IsValid)
                 {
-                    return BadRequest(ModelState);
+                    var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage);
+                    var customErrorResponse = new
+                    {
+                        Title = "One or more validation errors occurred.",
+                        Errors = errors
+                    };
+
+                    return BadRequest(customErrorResponse);
                 }
-                var addedExperience = await _experienceService.AddExperience(experienceDto);
+                var addedExperience = await _experienceService.AddExperience(experienceDto, Guid.Parse(User.FindFirst("id").Value));
                 return Ok(addedExperience);
             }
             catch (TitleNotFoundException ex)
@@ -52,7 +61,18 @@ namespace Job_Portal_Application.Controllers
         {
             try
             {
-                var updatedExperience = await _experienceService.UpdateExperience(experienceDto);
+                if (!ModelState.IsValid)
+                {
+                    var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage);
+                    var customErrorResponse = new
+                    {
+                        Title = "One or more validation errors occurred.",
+                        Errors = errors
+                    };
+
+                    return BadRequest(customErrorResponse);
+                }
+                var updatedExperience = await _experienceService.UpdateExperience(experienceDto, Guid.Parse(User.FindFirst("id").Value));
                 return Ok(updatedExperience);
             }
             catch (ExperienceNotFoundException ex)
@@ -75,7 +95,7 @@ namespace Job_Portal_Application.Controllers
         {
             try
             {
-                var result = await _experienceService.DeleteExperience(experienceId);
+                var result = await _experienceService.DeleteExperience(experienceId, Guid.Parse(User.FindFirst("id").Value));
                 if (result)
                     return Ok(new { message = "Successfully deleted the experience" });
 
@@ -98,7 +118,7 @@ namespace Job_Portal_Application.Controllers
         {
             try
             {
-                var experience = await _experienceService.GetExperience(experienceId);
+                var experience = await _experienceService.GetExperience(experienceId, Guid.Parse(User.FindFirst("id").Value));
                 return Ok(experience);
             }
             catch (ExperienceNotFoundException ex)
@@ -117,7 +137,7 @@ namespace Job_Portal_Application.Controllers
         {
             try
             {
-                var experiences = await _experienceService.GetAllExperiences();
+                var experiences = await _experienceService.GetAllExperiences( Guid.Parse(User.FindFirst("id").Value));
                 return Ok(experiences);
             }
             catch (ExperienceNotFoundException ex)

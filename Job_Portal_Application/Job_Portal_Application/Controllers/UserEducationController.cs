@@ -7,11 +7,13 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Job_Portal_Application.Models;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Job_Portal_Application.Controllers
 {
     [ApiController]
     [Route("api/UserEducation")]
+    [ExcludeFromCodeCoverage]
     public class UserEducationController : ControllerBase
     {
         private readonly IEducationService _educationService;
@@ -29,9 +31,16 @@ namespace Job_Portal_Application.Controllers
             {
                 if (!ModelState.IsValid)
                 {
-                    return BadRequest(ModelState);
+                    var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage);
+                    var customErrorResponse = new
+                    {
+                        Title = "One or more validation errors occurred.",
+                        Errors = errors
+                    };
+
+                    return BadRequest(customErrorResponse);
                 }
-                var addedEducation = await _educationService.AddEducation(educationDto);
+                var addedEducation = await _educationService.AddEducation(educationDto, Guid.Parse(User.FindFirst("id").Value));
                 return Ok(addedEducation);
             }
             catch (Exception ex)
@@ -46,7 +55,18 @@ namespace Job_Portal_Application.Controllers
         {
             try
             {
-                var updatedEducation = await _educationService.UpdateEducation(educationDto);
+                if (!ModelState.IsValid)
+                {
+                    var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage);
+                    var customErrorResponse = new
+                    {
+                        Title = "One or more validation errors occurred.",
+                        Errors = errors
+                    };
+
+                    return BadRequest(customErrorResponse);
+                }
+                var updatedEducation = await _educationService.UpdateEducation(educationDto, Guid.Parse(User.FindFirst("id").Value));
                 return Ok(updatedEducation);
             }
             catch (EducationNotFoundException ex)
@@ -65,7 +85,7 @@ namespace Job_Portal_Application.Controllers
         {
             try
             {
-                var result = await _educationService.DeleteEducation(educationId);
+                var result = await _educationService.DeleteEducation(educationId, Guid.Parse(User.FindFirst("id").Value));
                 if (result)
                     return Ok(new { message = "Successfully deleted the education" });
 
@@ -87,7 +107,7 @@ namespace Job_Portal_Application.Controllers
         {
             try
             {
-                var education = await _educationService.GetEducation(educationId);
+                var education = await _educationService.GetEducation(educationId, Guid.Parse(User.FindFirst("id").Value));
                 return Ok(education);
             }
             catch (EducationNotFoundException ex)
@@ -106,7 +126,7 @@ namespace Job_Portal_Application.Controllers
         {
             try
             {
-                var educations = await _educationService.GetAllEducations();
+                var educations = await _educationService.GetAllEducations( Guid.Parse(User.FindFirst("id").Value));
                 return Ok(educations);
             }
             catch (EducationNotFoundException ex)

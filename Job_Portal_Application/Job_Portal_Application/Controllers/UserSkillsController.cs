@@ -10,11 +10,13 @@ using Job_Portal_Application.Dto.UserDto;
 using Job_Portal_Application.Models;
 using Job_Portal_Application.Dto;
 using Job_Portal_Application.Services;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Job_Portal_Application.Controllers
 {
     [ApiController]
     [Route("api/UserSkills")]
+    [ExcludeFromCodeCoverage]
     public class UserSkillsController : ControllerBase
     {
         private readonly IUserSkillsService _userSkillsService;
@@ -30,7 +32,21 @@ namespace Job_Portal_Application.Controllers
         {
             try
             {
-                var response = await _userSkillsService.AddUserSkills(request);
+                if (!ModelState.IsValid)
+                {
+                    var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage);
+                    var customErrorResponse = new
+                    {
+                        Title = "One or more validation errors occurred.",
+                        Errors = errors
+                    };
+
+                    return BadRequest(customErrorResponse);
+                }
+          
+     
+
+                var response = await _userSkillsService.AddUserSkills(request, Guid.Parse(User.FindFirst("id").Value));
                 return Ok(response);
             }
             catch (Exception ex)
@@ -45,7 +61,18 @@ namespace Job_Portal_Application.Controllers
         {
             try
             {
-                var response = await _userSkillsService.RemoveUserSkill(request);
+                if (!ModelState.IsValid)
+                {
+                    var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage);
+                    var customErrorResponse = new
+                    {
+                        Title = "One or more validation errors occurred.",
+                        Errors = errors
+                    };
+
+                    return BadRequest(customErrorResponse);
+                }
+                var response = await _userSkillsService.RemoveUserSkill(request, Guid.Parse(User.FindFirst("id").Value));
                 return Ok(response);
             }
             catch (Exception ex)
@@ -60,7 +87,7 @@ namespace Job_Portal_Application.Controllers
         {
             try
             {
-                var userSkills = await _userSkillsService.GetAllUserSkills();
+                var userSkills = await _userSkillsService.GetAllUserSkills( Guid.Parse(User.FindFirst("id").Value));
                 return Ok(userSkills);
             }
             catch (UserSkillsNotFoundException ex)
