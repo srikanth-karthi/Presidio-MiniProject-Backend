@@ -60,7 +60,7 @@ namespace Job_Portal_Application.Repository.UserRepos
         {
            return await _context.AreasOfInterests
                 .Where(e => e.UserId == UserId)
-          .Include(a => a.Title)
+                 .Include(a => a.Title)
                  .ToListAsync();
 
         }

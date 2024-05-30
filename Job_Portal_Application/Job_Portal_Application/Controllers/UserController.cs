@@ -8,6 +8,9 @@ using Microsoft.AspNetCore.Authorization;
 using Job_Portal_Application.Interfaces.IService;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using Job_Portal_Application.Services.CompanyService;
+using Job_Portal_Application.Dto.SkillDtos;
+using Azure;
 
 namespace Job_Portal_Application.Controllers
 {
@@ -82,7 +85,7 @@ namespace Job_Portal_Application.Controllers
         }
 
         [HttpPut("update")]
-        [Authorize]
+        [Authorize(Roles = "User")]
         public async Task<ActionResult<UserRegisterDto>> UpdateUser(UpdateUserDto userDto)
         {
             if (!ModelState.IsValid)
@@ -98,6 +101,7 @@ namespace Job_Portal_Application.Controllers
             }
             try
             {
+
                 var updatedUser = await _userService.UpdateUser(userDto, Guid.Parse(User.FindFirst("id").Value));
                 return Ok(updatedUser);
             }
@@ -112,14 +116,15 @@ namespace Job_Portal_Application.Controllers
         }
 
         [HttpDelete("delete")]
-        [Authorize]
+        [Authorize(Roles = "User")]
         public async Task<ActionResult<bool>> DeleteUser()
         {
 
             try
             {
-                var result = await _userService.DeleteUser(Guid.Parse(User.FindFirst("id").Value));
-                return Ok(result);
+                if(await _userService.DeleteUser(Guid.Parse(User.FindFirst("id").Value)))
+                      return Ok("User Deleted Sucessfully");
+                return BadRequest();
             }
             catch (UserNotFoundException ex)
             {
@@ -132,7 +137,7 @@ namespace Job_Portal_Application.Controllers
         }
 
         [HttpGet("profile/{userid}")]
-        [Authorize]
+        [Authorize(Roles = "User,Company")]
         public async Task<ActionResult> GetUserProfile(Guid userid)
         {
             try
@@ -151,7 +156,7 @@ namespace Job_Portal_Application.Controllers
         }
 
         [HttpGet("recommended-jobs")]
-        [Authorize]
+        [Authorize(Roles = "User")]
         public async Task<ActionResult<IEnumerable<Job>>> GetRecommendedJobs(int pageNumber, int pageSize)
         {
             try
@@ -173,7 +178,7 @@ namespace Job_Portal_Application.Controllers
             }
         }
         [HttpGet("jobmatch/{jobId}")]
-        [Authorize]
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> GetJobMatchPercentage(Guid jobId)
         {
             try
@@ -201,6 +206,63 @@ namespace Job_Portal_Application.Controllers
             catch (Exception ex)
             {
                 return StatusCode(500, new { message = "An error occurred while calculating job match percentage.", error = ex.Message });
+            }
+        }
+        [HttpPost("skills")]
+        [Authorize(Roles = "User")]
+        public async Task<IActionResult> UpdateJobSkills(SkillsDto SkillsDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage);
+                var customErrorResponse = new
+                {
+                    Title = "One or more validation errors occurred.",
+                    Errors = errors
+                };
+                return BadRequest(customErrorResponse);
+            }
+            try
+            {
+                var userId = Guid.Parse(User.FindFirst("id").Value);
+                var result = await _userService.UserSkills(SkillsDto, userId);
+
+
+                var response = new
+                {
+                    Message = "Job skills updated successfully.",
+                    result
+                };
+
+                return Ok(response);
+            }
+            catch (JobNotFoundException ex)
+            {
+                return NotFound(new { message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"An error occurred: {ex.Message}");
+            }
+        }
+
+        [HttpGet("GetSkills")]
+        [Authorize(Roles = "User")]
+        public async Task<ActionResult> GetSkills()
+        {
+
+            try
+            {
+                var skills = await _userService.GetSkills(Guid.Parse(User.FindFirst("id").Value));
+                return Ok(skills);
+            }
+            catch (UserNotFoundException ex)
+            {
+                return NotFound(new { message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"An error occurred: {ex.Message}");
             }
         }
 

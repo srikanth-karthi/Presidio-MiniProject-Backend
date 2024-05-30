@@ -28,27 +28,19 @@ namespace Job_Portal_Application
             var builder = WebApplication.CreateBuilder(args);
 
 
-                builder.Services.AddControllers(options =>
-
-                {
-
-                   
-
-                })
-
-                    .ConfigureApiBehaviorOptions(options =>
-
-                        options.SuppressModelStateInvalidFilter = true
-
-                    )
-
-                    .AddJsonOptions(options =>
-
+                builder.Services.AddControllers(options => { })
+                .ConfigureApiBehaviorOptions(options =>
+                      options.SuppressModelStateInvalidFilter = true)
+                .AddJsonOptions(options =>
                     {
-
                         options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
-
+                              
+                    }).AddJsonOptions(options =>
+                    {
+                        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
                     });
+
+
 
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen(option =>
@@ -94,9 +86,9 @@ namespace Job_Portal_Application
             builder.Services.AddDbContext<JobportalContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("defaultConnection")));
 
-            #endregion
+       
 
-            builder.Services.AddDbContext<JobportalContext>();
+            #endregion
 
             builder.Services.AddScoped<ITokenService, TokenServices>();
             builder.Services.AddScoped<IUserService, UserService>();
@@ -108,25 +100,24 @@ namespace Job_Portal_Application
             builder.Services.AddScoped<ISkillService,SkillService > ();
             builder.Services.AddScoped<IJobActivityService, JobActivityService>();
             builder.Services.AddScoped<ITitleService, TitleService>();
-            builder.Services.AddScoped<IUserSkillsService, UserSkillsService>();
             builder.Services.AddScoped<IAdminService, AdminService>();
 
 
 
-            builder.Services.AddScoped<IRepository<Guid, Title>, TitleRepository>();
+
             builder.Services.AddScoped<IJobSkillsRepository, JobSkillsRepository>();
             builder.Services.AddScoped<IUserRepository, UserRepository>();
             builder.Services.AddScoped<IEducationRepository, EducationRepository>();
             builder.Services.AddScoped<IExperienceRepository, ExperienceRepository>();
             builder.Services.AddScoped<IAreasOfInterestRepository, AreasOfInterestRepository>();
-            builder.Services.AddScoped <IJobSkillsRepository, JobSkillsRepository>();
+            builder.Services.AddScoped<IJobSkillsRepository, JobSkillsRepository>();
             builder.Services.AddScoped<ICompanyRepository, CompanyRepository>();
             builder.Services.AddScoped<IJobRepository, JobRepository>();
             builder.Services.AddScoped<IJobActivityRepository, JobActivityRepository>();
             builder.Services.AddScoped<IUserSkillsRepository, UserSkillsRepository>();
 
 
-
+            builder.Services.AddScoped<IRepository<Guid, Credential>, CredentialRepository>();
             builder.Services.AddScoped<IRepository<Guid, Title>, TitleRepository>();
             builder.Services.AddScoped<IRepository<Guid, UserSkills>, UserSkillsRepository>();
             builder.Services.AddScoped<IRepository<Guid, Skill>, SkillRepository>();

@@ -13,6 +13,7 @@ namespace Job_Portal_Application.Controllers
 {
     [ApiController]
     [Route("api/UserEducation")]
+    [Authorize(Roles = "User")]
     [ExcludeFromCodeCoverage]
     public class UserEducationController : ControllerBase
     {
@@ -24,7 +25,7 @@ namespace Job_Portal_Application.Controllers
         }
 
         [HttpPost]
-        [Authorize]
+
         public async Task<ActionResult<EducationDto>> AddEducation(AddEducationDto educationDto)
         {
             try
@@ -50,7 +51,7 @@ namespace Job_Portal_Application.Controllers
         }
 
         [HttpPut]
-        [Authorize]
+
         public async Task<ActionResult<EducationDto>> UpdateEducation(EducationDto educationDto)
         {
             try
@@ -80,7 +81,7 @@ namespace Job_Portal_Application.Controllers
         }
 
         [HttpDelete("{educationId}")]
-        [Authorize]
+
         public async Task<ActionResult<bool>> DeleteEducation(Guid educationId)
         {
             try
@@ -102,7 +103,7 @@ namespace Job_Portal_Application.Controllers
         }
 
         [HttpGet("{educationId}")]
-        [Authorize]
+
         public async Task<ActionResult<EducationDto>> GetEducation(Guid educationId)
         {
             try
@@ -121,7 +122,7 @@ namespace Job_Portal_Application.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+
         public async Task<ActionResult<IEnumerable<EducationDto>>> GetAllEducations()
         {
             try

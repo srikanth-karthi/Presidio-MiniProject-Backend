@@ -6,7 +6,7 @@ namespace Job_Portal_Application.Interfaces.IService
     {
 
 
-        public string GenerateToken(Guid id);
+        public string GenerateToken(Guid id, Dto.Enums.Roles role);
         public bool VerifyPassword(byte[] encrypterPass, byte[] password);
     }
 }

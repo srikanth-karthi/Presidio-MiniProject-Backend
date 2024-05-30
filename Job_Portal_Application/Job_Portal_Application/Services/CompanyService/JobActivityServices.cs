@@ -43,7 +43,7 @@ namespace Job_Portal_Application.Services
             return MapToDto(jobActivity);
         }
 
-        public async Task<IEnumerable<UserDto>> GetFilteredUser(Guid jobId,Guid companyId, int pageNumber = 1, int pageSize = 25, bool firstApplied = false, bool perfectMatchSkills = false, bool perfectMatchExperience = false, bool hasExperienceInJobTitle = false)
+        public async Task<IEnumerable<UserDto>> GetFilteredUser(Guid companyId, Guid jobId, int pageNumber = 1, int pageSize = 25, bool firstApplied = false, bool perfectMatchSkills = false, bool perfectMatchExperience = false, bool hasExperienceInJobTitle = false)
         {
 
             var jobActivities = await _jobActivityRepository.GetFilteredUser(companyId, jobId, pageNumber, pageSize, firstApplied, perfectMatchSkills, perfectMatchExperience, hasExperienceInJobTitle);
@@ -59,12 +59,12 @@ namespace Job_Portal_Application.Services
         }
 
 
-        public async Task<IEnumerable<JobDto>> GetJobsUserApplied(Guid UserId)
+        public async Task<IEnumerable<UserAppliedJobsDto>> GetJobsUserApplied(Guid UserId)
         {
             var jobActivities = await _jobActivityRepository.GetJobsUserApplied(UserId);
             if (!jobActivities.Any())
                 throw new JobNotFoundException("JobActivity does not exist.");
-            return jobActivities.Select(j => MapToJobDto(j.Job));
+            return jobActivities.Select(j => MapToUserAppliedJobsDto(j));
         }
 
         public async Task<JobActivityDto> UpdateJobActivityStatus(UpdateJobactivityDto jobactivity)
@@ -72,7 +72,8 @@ namespace Job_Portal_Application.Services
             var jobActivity = await _jobActivityRepository.Get(jobactivity.JobactivityId) ?? throw new JobActivityNotFoundException("Job activity not found.");
             jobActivity.Status = jobactivity.status;
             jobActivity.UpdatedDate = DateTime.UtcNow;
-            jobActivity.ResumeViewed = true;
+            jobActivity.ResumeViewed = jobactivity.ResumeViewed;
+            jobActivity.Comments = jobactivity.Comments;
 
             return MapToDto(await _jobActivityRepository.Update(jobActivity));
         }
@@ -97,7 +98,7 @@ namespace Job_Portal_Application.Services
         {
             return new JobActivityDto
             {
-                UserJobId = jobActivity.UserJobId,
+                JobactivityId = jobActivity.JobApplicationId,
                 UserId = jobActivity.UserId,
                 JobId = jobActivity.JobId,
                 Status = Enum.GetName(typeof(JobStatus), jobActivity.Status),  
@@ -125,24 +126,23 @@ namespace Job_Portal_Application.Services
             };
         }
 
-
-        private JobDto MapToJobDto(Job job)
+        private static UserAppliedJobsDto MapToUserAppliedJobsDto(JobActivity jobActivity)
         {
-            return new JobDto
+            return new UserAppliedJobsDto
             {
-                JobId = job.JobId,
-                JobType = Enum.GetName(typeof(JobType), job.JobType),
-    
-                TitleId = job.TitleId,
-                CompanyName = job.Company.CompanyName,
-                DatePosted = job.DatePosted.ToDateTime(TimeOnly.MinValue),
-                TitleName = job.Title?.TitleName,
-                Status = job.Status,
-                ExperienceRequired = job.ExperienceRequired,
-                Lpa = job.Lpa,
-                JobDescription = job.JobDescription,
-                Skills = job.JobSkills.Select(js => js.Skill.Skill_Name).ToList()
+                JobactivityId = jobActivity.JobApplicationId,
+                JobId = jobActivity.JobId,
+                JobType = jobActivity.Job.JobType.ToString(),
+                TitleName = jobActivity.Job.Title.TitleName,
+                CompanyName = jobActivity.Job.Company.CompanyName,
+                JobStatus = jobActivity.Status.ToString(),
+                ResumeViewed = jobActivity.ResumeViewed,
+                Applicationstatus = jobActivity.Status.ToString(),
+                Comments = jobActivity.Comments,
+                AppliedDate = jobActivity.AppliedDate
             };
         }
+
+
     }
 }

@@ -151,7 +151,7 @@ namespace Job_Portal_Application_Test.UserTest
         {
             var areasOfInterestDto = new AddAreasOfInterestDTO
             {
-                TitleId = Guid.NewGuid(), // An invalid TitleId
+                TitleId = Guid.NewGuid(), 
                 Lpa = 5
             };
 
@@ -166,7 +166,7 @@ namespace Job_Portal_Application_Test.UserTest
         {
             var updateAreasOfInterestDto = new AreasOfInterestDto
             {
-                AreasOfInterestId = Guid.NewGuid(), // An invalid AreasOfInterestId
+                AreasOfInterestId = Guid.NewGuid(),
                 TitleId = TestJobportalContext.TitleId2,
                 Lpa = 10
             };

@@ -5,11 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Job_Portal_Application.Dto.CompanyDto;
 using Job_Portal_Application.Dto.CompanyDtos;
+using Job_Portal_Application.Dto.Enums;
 using Job_Portal_Application.Dto.UserDto;
 using Job_Portal_Application.Exceptions;
 using Job_Portal_Application.Interfaces.IRepository;
 using Job_Portal_Application.Interfaces.IService;
 using Job_Portal_Application.Models;
+using Job_Portal_Application.Repository;
 
 namespace Job_Portal_Application.Services.CompanyService
 {
@@ -18,13 +20,14 @@ namespace Job_Portal_Application.Services.CompanyService
         private readonly ICompanyRepository _companyRepository;
         private readonly IUserRepository _userRepository;
         private readonly ITokenService _tokenService;
+        private readonly IRepository<Guid, Credential> _credentialRepository;
 
-
-        public CompanyService( ICompanyRepository companyRepository, IUserRepository userRepository, ITokenService tokenService)
+        public CompanyService(IRepository<Guid, Credential> CredentialRepository, ICompanyRepository companyRepository, IUserRepository userRepository, ITokenService tokenService)
         {
             _companyRepository = companyRepository;
             _userRepository = userRepository;
             _tokenService = tokenService;
+            _credentialRepository = CredentialRepository;
         }
 
         public async Task<CompanyDto> Register(CompanyRegisterDto companyDto)
@@ -35,13 +38,24 @@ namespace Job_Portal_Application.Services.CompanyService
                 throw new UserAlreadyExistsException("User is already registered as a user and cannot register as a Company.");
             }
 
-            var existingCompany = await _companyRepository.GetByEmail(companyDto.Email);
-            if (existingCompany != null)
-            {
-                throw new UserAlreadyExistsException($"{companyDto.Email} already used, please try with another email.");
-            }
 
+            if (await _companyRepository.GetByEmail(companyDto.Email) != null)
+            {
+                throw new UserAlreadyExistsException("User is already registered");
+            }
             HMACSHA512 hmacSha = new HMACSHA512();
+
+
+            var creadentials = await _credentialRepository.Add(new Credential()
+            {
+
+                Password = hmacSha.ComputeHash(Encoding.UTF8.GetBytes(companyDto.Password)),
+                HasCode = hmacSha.Key,
+                Role = Roles.Company,
+
+            });
+
+   
 
             var newCompany = new Company
             {
@@ -51,8 +65,8 @@ namespace Job_Portal_Application.Services.CompanyService
                 City = companyDto.City,
                 CompanySize = companyDto.CompanySize,
                 CompanyWebsite = companyDto.CompanyWebsite,
-                Password = hmacSha.ComputeHash(Encoding.UTF8.GetBytes(companyDto.Password)),
-                HasCode = hmacSha.Key
+                CredentialId=creadentials.CredentialId,
+                CompanyDescription= companyDto.CompanyDescription,
             };
 
             var addedCompany = await _companyRepository.Add(newCompany);
@@ -68,12 +82,14 @@ namespace Job_Portal_Application.Services.CompanyService
                 throw new InvalidCredentialsException("Email not found.");
             }
 
-            using (HMACSHA512 hmacSha = new HMACSHA512(company.HasCode))
+
+            var credential = await _credentialRepository.Get(company.CredentialId);
+            using (HMACSHA512 hmacSha = new HMACSHA512(credential.HasCode))
             {
                 var encryptedPass = hmacSha.ComputeHash(Encoding.UTF8.GetBytes(companyDto.Password));
-                if (_tokenService.VerifyPassword(company.Password, encryptedPass))
+                if (_tokenService.VerifyPassword(credential.Password, encryptedPass))
                 {
-                    var token = _tokenService.GenerateToken(company.CompanyId);
+                    var token = _tokenService.GenerateToken(company.CompanyId, credential.Role);
                     return token;
                 }
             }
@@ -137,7 +153,8 @@ namespace Job_Portal_Application.Services.CompanyService
                 CompanyAddress = company.CompanyAddress,
                 City = company.City,
                 CompanySize = company.CompanySize,
-                CompanyWebsite = company.CompanyWebsite
+                CompanyWebsite = company.CompanyWebsite,
+                CompanyDescription = company.CompanyDescription,
             };
         }
     }

@@ -11,7 +11,11 @@ public class TestJobportalContext : JobportalContext
         : base(options)
     {
     }
-    public static readonly Guid UserSkillId1 = Guid.Parse("bf0e4d0f-f8d4-4bb5-839e-2f34d9f6c6a4");
+
+    public static readonly Guid UserSkillId1 = Guid.Parse("9fa07a27-a0c3-4158-a6c2-36d56e9982a3");
+    public static readonly Guid Credential1 = Guid.Parse("0cd2f7f3-0517-45b4-a6fa-2c9d76074ec1");
+    public static readonly Guid Credential2 = Guid.Parse("77f4bba6-63cc-437b-9d0f-15130f857e6a");
+    public static readonly Guid Credential3 = Guid.Parse("13d44e5e-fb16-4082-8ee6-0f14644ad351");
     public static readonly Guid UserSkillId2 = Guid.Parse("aef452ff-01ae-4c7d-8b91-4c27c72a7c1d");
     public static readonly Guid UserId = Guid.Parse("c20b7faa-890d-4908-a57a-a9ea75b82b5f");
     public static readonly Guid EducationId1 = Guid.Parse("5b5535e7-f592-4006-b257-35d015c67115");
@@ -45,6 +49,31 @@ public class TestJobportalContext : JobportalContext
 
         using (var hmacSha = new HMACSHA512())
         {
+
+                        modelBuilder.Entity<Credential>().HasData(
+                new Credential()
+                {
+                    CredentialId= Credential1,
+                    Password = hmacSha.ComputeHash(Encoding.UTF8.GetBytes("123")),
+                    HasCode = hmacSha.Key,
+                    Role = Roles.User,
+                });
+            modelBuilder.Entity<Credential>().HasData(
+                new Credential()
+                {
+                CredentialId = Credential2,
+                Password = hmacSha.ComputeHash(Encoding.UTF8.GetBytes("123")),
+                HasCode = hmacSha.Key,
+                Role = Roles.User,
+                });
+                            modelBuilder.Entity<Credential>().HasData(
+                new Credential()
+                {
+                CredentialId = Credential3,
+                Password = hmacSha.ComputeHash(Encoding.UTF8.GetBytes("123")),
+                HasCode = hmacSha.Key,
+                Role = Roles.User,
+                });
             modelBuilder.Entity<User>().HasData(
                 new User
                 {
@@ -52,23 +81,23 @@ public class TestJobportalContext : JobportalContext
                     Name = "Test",
                     Email = "test.user@example.com",
                     Dob = new DateOnly(2021, 1, 1),
-                    Password = hmacSha.ComputeHash(Encoding.UTF8.GetBytes("123")),
-                    HasCode = hmacSha.Key
+                    CredentialId = Credential1,
+                  
                 }
             );
             modelBuilder.Entity<UserSkills>().HasData(
-    new UserSkills
-    {
-        UserSkillsId = UserSkillId1,
-        UserId = UserId,
-        SkillId = SkillId1
-    },
-    new UserSkills
-    {
-        UserSkillsId = UserSkillId2,
-        UserId = UserId,
-        SkillId = SkillId2
-    }
+                new UserSkills
+                {
+                    UserSkillsId = UserSkillId1,
+                    UserId = UserId,
+                    SkillId = SkillId1
+                },
+                new UserSkills
+                {
+                    UserSkillsId = UserSkillId2,
+                    UserId = UserId,
+                    SkillId = SkillId2
+                }
 );
             modelBuilder.Entity<Education>().HasData(
                 new Education
@@ -104,6 +133,7 @@ public class TestJobportalContext : JobportalContext
                     CompanyName = "Test Company 1",
                     StartYear = new DateOnly(2019, 2, 1),
                     EndYear = new DateOnly(2021, 1, 1)
+                    
                 },
                 new Experience
                 {
@@ -170,24 +200,24 @@ public class TestJobportalContext : JobportalContext
                     CompanyId = CompanyId1,
                     CompanyName = "Tech Corp",
                     Email = "contact@techcorp.com",
-                    Password = hmacSha.ComputeHash(Encoding.UTF8.GetBytes("password")),
-                    HasCode = hmacSha.Key,
+                    CredentialId=Credential2,
                     CompanyAddress = "123 Tech Street",
                     City = "Tech City",
                     CompanySize = 1000,
-                    CompanyWebsite = "https://www.techcorp.com"
+                    CompanyWebsite = "https://www.techcorp.com",
+                    CompanyDescription=""
                 },
                 new Company
                 {
                     CompanyId = CompanyId2,
                     CompanyName = "Innovate LLC",
                     Email = "contact@innovate.com",
-                    Password = hmacSha.ComputeHash(Encoding.UTF8.GetBytes("password")),
-                    HasCode = hmacSha.Key,
+                    CredentialId = Credential3,
                     CompanyAddress = "456 Innovation Way",
                     City = "Innovation City",
                     CompanySize = 500,
-                    CompanyWebsite = "https://www.innovate.com"
+                    CompanyWebsite = "https://www.innovate.com",
+                          CompanyDescription = ""
                 }
             );
 
@@ -256,26 +286,26 @@ public class TestJobportalContext : JobportalContext
 
             modelBuilder.Entity<JobActivity>().HasData(
 
-         new JobActivity
-         {
-             UserJobId = JobActivityId2,
-             UserId = UserId,
-             JobId = JobId2,
-             Status = JobStatus.Applied,
-             ResumeViewed = false,
-             Comments = "Interested in part-time work.",
-             AppliedDate = DateOnly.FromDateTime(DateTime.Now)
-         },
-         new JobActivity
-         {
-             UserJobId = JobActivityId1,
-             UserId = UserId,
-             JobId = JobId2,
-             Status = JobStatus.Applied,
-             ResumeViewed = false,
-             Comments = "Seeking an internship to gain experience.",
-             AppliedDate = DateOnly.FromDateTime(DateTime.Now)
-         }
+             new JobActivity
+             {
+                 JobApplicationId = JobActivityId2,
+                 UserId = UserId,
+                 JobId = JobId2,
+                 Status = JobStatus.Applied,
+                 ResumeViewed = false,
+                 Comments = "Interested in part-time work.",
+                 AppliedDate = DateOnly.FromDateTime(DateTime.Now)
+             },
+             new JobActivity
+             {
+                 JobApplicationId = JobActivityId1,
+                 UserId = UserId,
+                 JobId = JobId2,
+                 Status = JobStatus.Applied,
+                 ResumeViewed = false,
+                 Comments = "Seeking an internship to gain experience.",
+                 AppliedDate = DateOnly.FromDateTime(DateTime.Now)
+             }
      );
             base.OnModelCreating(modelBuilder);
         }

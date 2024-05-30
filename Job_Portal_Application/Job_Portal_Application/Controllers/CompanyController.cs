@@ -16,6 +16,7 @@ namespace Job_Portal_Application.Controllers
     [ApiController]
     [Route("api/[controller]")]
     [ExcludeFromCodeCoverage]
+   
     public class CompanyController : ControllerBase
     {
         private readonly ICompanyService _companyService;
@@ -87,7 +88,7 @@ namespace Job_Portal_Application.Controllers
         }
 
         [HttpPut]
-        [Authorize]
+        [Authorize(Roles = "Company")]
         public async Task<IActionResult> UpdateCompany([FromBody] CompanyUpdateDto company)
         {
             if (!ModelState.IsValid)
@@ -118,7 +119,7 @@ namespace Job_Portal_Application.Controllers
         }
 
         [HttpDelete]
-        [Authorize]
+        [Authorize(Roles = "Company")]
         public async Task<IActionResult> DeleteCompany()
         {
 
@@ -142,7 +143,7 @@ namespace Job_Portal_Application.Controllers
         }
 
         [HttpGet("{id}")]
-        [Authorize]
+        [Authorize(Roles = "Company")]
         public async Task<IActionResult> GetCompany(Guid id)
         {
             try
@@ -161,7 +162,7 @@ namespace Job_Portal_Application.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+        [Authorize(Roles = "Company")]
         public async Task<IActionResult> GetAllCompanies()
         {
             try

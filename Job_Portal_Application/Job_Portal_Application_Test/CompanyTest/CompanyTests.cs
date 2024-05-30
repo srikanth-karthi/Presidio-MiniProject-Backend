@@ -5,6 +5,8 @@ using Job_Portal_Application.Dto.UserDto;
 using Job_Portal_Application.Exceptions;
 using Job_Portal_Application.Interfaces.IRepository;
 using Job_Portal_Application.Interfaces.IService;
+using Job_Portal_Application.Models;
+using Job_Portal_Application.Repository;
 using Job_Portal_Application.Repository.CompanyRepos;
 using Job_Portal_Application.Repository.UserRepos;
 using Job_Portal_Application.Services;
@@ -42,12 +44,14 @@ namespace Job_Portal_Application_Test.CompanyTest
             IConfiguration configuration = new ConfigurationBuilder()
                .AddInMemoryCollection(new Dictionary<string, string>
                {
-                            { "TokenKey:JWT", "y_J82VYvg5Jh8-DT89E1kz_FzHNN3tB_Sy4b_yLhoZ8Y6q-jVOWU3-xPFlPS6cYYicWlb0XhREXAf3OWTbnN3w==" }
+                   { "TokenKey:JWT", "y_J82VYvg5Jh8-DT89E1kz_FzHNN3tB_Sy4b_yLhoZ8Y6q-jVOWU3-xPFlPS6cYYicWlb0XhREXAf3OWTbnN3w==" }
                })
-       .Build();
+                .Build();
+
             ITokenService tokenService = new TokenServices(configuration);
 
-            _companyService = new CompanyService(companyRepo, userRepo, tokenService);
+            IRepository<Guid, Credential> _credentialRepository = new CredentialRepository(_context);
+            _companyService = new CompanyService(_credentialRepository,companyRepo, userRepo, tokenService);
         }
 
         [TearDown]
@@ -68,7 +72,8 @@ namespace Job_Portal_Application_Test.CompanyTest
                 City = "Tech City",
                 CompanySize = 1000,
                 CompanyWebsite = "https://www.techcorp.com",
-                Password = "password"
+                Password = "password",
+                        CompanyDescription = ""
             };
 
             var result = await _companyService.Register(companyDto);
@@ -104,9 +109,6 @@ namespace Job_Portal_Application_Test.CompanyTest
                 Password = "AdminPassword"
             };
 
-
-            
-
             Assert.ThrowsAsync<InvalidCredentialsException>(() =>  _companyService.Login(loginDto));
         }
         [Test]
@@ -115,7 +117,7 @@ namespace Job_Portal_Application_Test.CompanyTest
             var loginDto = new LoginDto
             {
                 Email = "contact@innovate.com",
-                Password = "password"
+                Password = "123"
             };
 
             var result = await _companyService.Login(loginDto);
@@ -130,7 +132,6 @@ namespace Job_Portal_Application_Test.CompanyTest
             { 
               
                 CompanyName = "Updated Tech Corp",
-  
                 CompanyAddress = "456 Updated Tech Street",
                 City = "Updated Tech City",
                 CompanySize = 1200,
@@ -146,7 +147,6 @@ namespace Job_Portal_Application_Test.CompanyTest
         public async Task DeleteCompany_Success()
         {
   
-
             var result = await _companyService.DeleteCompany( TestJobportalContext.CompanyId1);
 
             Assert.That(result, Is.True);
@@ -157,23 +157,18 @@ namespace Job_Portal_Application_Test.CompanyTest
         public async Task GetCompany_Success()
         {
 
-
             var result = await _companyService.GetCompany(TestJobportalContext.CompanyId1);
             Assert.IsNotNull(result);
             Assert.AreEqual(result.CompanyId, TestJobportalContext.CompanyId1);
-
 
         }
 
         [Test]
         public async Task GetAllCompany_Success()
         {
-
-
             var result = await _companyService.GetAllCompanies();
             Assert.IsNotNull(result);
             Assert.IsNotEmpty(result);
-
         }
 
 

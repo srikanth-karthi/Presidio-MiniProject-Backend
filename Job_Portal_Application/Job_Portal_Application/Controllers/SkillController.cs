@@ -11,7 +11,7 @@ namespace Job_Portal_Application.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize]
+    [Authorize(Roles = "User,Company,Admin")]
     [ExcludeFromCodeCoverage]
     public class SkillController : ControllerBase
     {

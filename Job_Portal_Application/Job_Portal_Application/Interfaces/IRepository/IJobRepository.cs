@@ -19,7 +19,7 @@ namespace Job_Portal_Application.Interfaces.IRepository
         Task<IEnumerable<Job>> GetJobs(
   int pageNumber ,
   int pageSize ,
-  string title = null,
+     Guid ?JobTitle=null,
   float? lpa = null,
   bool recentlyPosted = false,
   IEnumerable<Guid> skillIds = null,

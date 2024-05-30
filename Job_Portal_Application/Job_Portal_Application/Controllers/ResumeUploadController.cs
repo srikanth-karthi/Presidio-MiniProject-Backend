@@ -28,7 +28,7 @@ namespace Job_Portal_Application.Controllers
         }
         [HttpPost("upload")]
         [DisableRequestSizeLimit]
-        [Authorize]
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> Upload(IFormFile file)
         {
             if (file == null || file.Length == 0)
@@ -60,7 +60,7 @@ namespace Job_Portal_Application.Controllers
         }
 
         [HttpGet("download/{userId}")]
-        [Authorize]
+        [Authorize(Roles = "User,Company")]
         public async Task<IActionResult> Download(Guid userId)
         {
             string originalFileName = $"{userId}.pdf";
@@ -69,7 +69,7 @@ namespace Job_Portal_Application.Controllers
 
             if (!System.IO.File.Exists(originalFilePath))
             {
-                return NotFound($"The file '{originalFileName}' was not found.");
+                return NotFound($"The file  not found.");
             }
 
             var user = await _userService.GetUserProfile(userId);
@@ -87,7 +87,7 @@ namespace Job_Portal_Application.Controllers
         }
 
         [HttpGet("view/{userId}/{jobactivityId}")]
-        [Authorize]
+        [Authorize(Roles = "Company")]
         public async Task<IActionResult> View(Guid userId, Guid jobactivityId)
         {
             string originalFileName = $"{userId}.pdf";
@@ -96,7 +96,7 @@ namespace Job_Portal_Application.Controllers
 
             if (!System.IO.File.Exists(originalFilePath))
             {
-                return NotFound($"The file '{originalFileName}' was not found.");
+                return NotFound($"The file not found.");
             }
 
             byte[] fileBytes = await System.IO.File.ReadAllBytesAsync(originalFilePath);
@@ -111,7 +111,7 @@ namespace Job_Portal_Application.Controllers
         }
 
         [HttpGet("view/{userId}")]
-        [Authorize]
+        [Authorize(Roles = "Company,User")]
         public async Task<IActionResult> View(Guid userId)
         {
             string originalFileName = $"{userId}.pdf";
@@ -120,7 +120,7 @@ namespace Job_Portal_Application.Controllers
 
             if (!System.IO.File.Exists(originalFilePath))
             {
-                return NotFound($"The file '{originalFileName}' was not found.");
+                return NotFound($"The file  not found.");
             }
 
             byte[] fileBytes = await System.IO.File.ReadAllBytesAsync(originalFilePath);

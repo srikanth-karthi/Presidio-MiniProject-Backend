@@ -7,18 +7,17 @@ namespace Job_Portal_Application.Models
         [Key]
         public Guid CompanyId { get; set; } = Guid.NewGuid();
 
+        [MaxLength(100)]
+        [EmailAddress]
+        public string Email { get; set; }
 
         [StringLength(100)]
         public string CompanyName { get; set; }
 
+        public string CompanyDescription { get; set; }
 
-        [EmailAddress]
-        public string Email { get; set; }
-
-
-        public byte[] Password { get; set; }
-
-        public byte[] HasCode { get; set; }
+        public Guid CredentialId { get; set; }
+        public Credential Credential { get; set; }
 
         [StringLength(200)]
         public string CompanyAddress { get; set; }

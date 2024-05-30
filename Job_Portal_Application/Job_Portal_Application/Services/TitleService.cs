@@ -5,6 +5,7 @@ using Job_Portal_Application.Models;
 using Job_Portal_Application.Interfaces.IRepository;
 using Job_Portal_Application.Exceptions;
 using Job_Portal_Application.Interfaces.IService;
+using Job_Portal_Application.Repository.SkillRepos;
 
 namespace Job_Portal_Application.Services
 {
@@ -27,6 +28,16 @@ namespace Job_Portal_Application.Services
             var titles= await _titleRepository.GetAll();
             if(!titles.Any()) throw new TitleNotFoundException("Title not found");
             return titles;  
+        }
+
+        public async Task<Title> AddSkills(Title title)
+        {
+            return await _titleRepository.Add(title);
+        }
+
+        public async Task<bool> DeleteSkills(Title title)
+        {
+            return await _titleRepository.Delete(title);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Job_Portal_Application.Context;
 using Job_Portal_Application.Exceptions;
 using Job_Portal_Application.Interfaces.IRepository;
+using Job_Portal_Application.Interfaces.IService;
 using Job_Portal_Application.Models;
 using Job_Portal_Application.Repository.SkillRepos;
 using Job_Portal_Application.Repository.UserRepos;
@@ -35,7 +36,10 @@ namespace Job_Portal_Application_Test.UserTest
             _skillRepository = new SkillRepository(_context);
             _titleRepository = new TitleRepository(_context);
 
-            _adminService = new AdminService(_skillRepository, _titleRepository);
+           ISkillService skillservice = new SkillService(_skillRepository);
+            ITitleService titleservice = new TitleService(_titleRepository);
+
+            _adminService = new AdminService(skillservice, titleservice);
         }
 
         [TearDown]

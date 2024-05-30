@@ -9,5 +9,7 @@ namespace Job_Portal_Application.Interfaces.IService
     {
         Task<Title> GetTitle(Guid id);
         Task<IEnumerable<Title>> GetAllTitles();
+        Task<bool> DeleteSkills(Title title);
+        Task<Title> AddSkills(Title title);
     }
 }

@@ -81,12 +81,11 @@ namespace Job_Portal_Application_Test.CompanyTest
                 Lpa = 100000,
                 JobType = JobType.FullTime,
                 ExperienceRequired = 2.0f,
-                SkillsRequired = new List<Guid> { Guid.NewGuid(), Guid.NewGuid() }, // Assuming one of these IDs is invalid
+                SkillsRequired = new List<Guid> { Guid.NewGuid(), Guid.NewGuid() }, 
                 TitleId = TestJobportalContext.TitleId2
 
             };
             var result = await _jobService.AddJob(jobDto, TestJobportalContext.CompanyId1);
-
 
             Assert.IsNotNull(result.notFoundSkills);
             Assert.AreEqual(2, result.notFoundSkills.Count); 
@@ -116,7 +115,6 @@ namespace Job_Portal_Application_Test.CompanyTest
         public async Task DeleteJob_Success()
         {
 
- 
             var result = await _jobService.DeleteJob(TestJobportalContext.JobId1, TestJobportalContext.CompanyId1);
 
             Assert.IsTrue(result);
@@ -125,8 +123,6 @@ namespace Job_Portal_Application_Test.CompanyTest
         [Test]
         public async Task GetJob_Success()
         {
-
-
 
             var job = await _jobService.GetJob(TestJobportalContext.JobId1, TestJobportalContext.CompanyId1);
 
@@ -152,8 +148,8 @@ namespace Job_Portal_Application_Test.CompanyTest
         [Test]
         public async Task UpdateJobSkills_Success()
         {
-            // Arrange
-            var jobSkillsDto = new JobSkillsDto
+          
+            var jobSkillsDto = new JobSkillsdto
             {
                 JobId = TestJobportalContext.JobId1,
                 SkillsToAdd = new List<Guid> { TestJobportalContext .SkillId3 },
@@ -169,9 +165,7 @@ namespace Job_Portal_Application_Test.CompanyTest
         [Test]
         public async Task Getjobs_Success()
         {
-
             var result = await _jobService.GetJobs(1,12);
-
             Assert.AreEqual(3,result.Count());
         }
 

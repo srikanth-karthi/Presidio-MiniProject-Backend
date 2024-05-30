@@ -40,7 +40,7 @@ namespace Job_Portal_Application.Repository
            return  await _context.JobActivities
                 .Include(ja => ja.User)
                 .Include(ja => ja.Job)
-                .FirstOrDefaultAsync(ja => ja.UserJobId == id);
+                .FirstOrDefaultAsync(ja => ja.JobApplicationId == id);
 
 
         }
@@ -73,7 +73,7 @@ namespace Job_Portal_Application.Repository
         }
 
         public async Task<IEnumerable<JobActivity>> GetFilteredUser(
-            Guid companyId,
+              Guid companyId,
             Guid jobId,
             int pageNumber = 1,
             int pageSize = 25,
@@ -133,14 +133,21 @@ namespace Job_Portal_Application.Repository
         }
 
 
-        public async Task<IEnumerable<JobActivity>> GetJobsUserApplied(Guid userid)
+        public async Task<IEnumerable<JobActivity>> GetJobsUserApplied(Guid userId)
         {
             return await _context.JobActivities
                 .Include(ja => ja.Job)
                     .ThenInclude(j => j.Company)
-                .Where(ja => ja.UserId == userid)
+                .Include(ja => ja.Job)
+                    .ThenInclude(j => j.Title)
+                .Include(ja => ja.Job)
+                    .ThenInclude(j => j.JobSkills)
+                        .ThenInclude(js => js.Skill)
+                .Where(ja => ja.UserId == userId)
                 .ToListAsync();
         }
+
+
         public async Task<IEnumerable<JobActivity>> GetJobActivitiesByJobId(Guid jobId)
         {
             return await _context.JobActivities

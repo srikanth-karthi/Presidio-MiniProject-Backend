@@ -7,12 +7,13 @@ namespace Job_Portal_Application.Models
     public class JobActivity
     {
 
-            [Key]
-            public Guid UserJobId { get; set; }= Guid.NewGuid();
-            public Guid UserId { get; set; }
-            public User User { get; set; }
-            public Guid JobId { get; set; }
-            public Job Job { get; set; }
+                [Key]
+                public Guid JobApplicationId { get; set; }= Guid.NewGuid();
+                public Guid UserId { get; set; }
+                public User User { get; set; }
+                public Guid JobId { get; set; }
+                public Job Job { get; set; }
+
         public JobStatus Status { get; set; } = JobStatus.Applied;
         public bool ResumeViewed { get; set; }=false;
 

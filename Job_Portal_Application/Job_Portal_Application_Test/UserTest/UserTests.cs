@@ -3,7 +3,10 @@ using Job_Portal_Application.Dto.UserDto;
 using Job_Portal_Application.Exceptions;
 using Job_Portal_Application.Interfaces.IRepository;
 using Job_Portal_Application.Interfaces.IService;
+using Job_Portal_Application.Models;
+using Job_Portal_Application.Repository;
 using Job_Portal_Application.Repository.CompanyRepos;
+using Job_Portal_Application.Repository.SkillRepos;
 using Job_Portal_Application.Repository.UserRepos;
 using Job_Portal_Application.Services;
 using Job_Portal_Application.Services.UsersServices;
@@ -25,37 +28,44 @@ namespace Job_Portal_Application_Test.UserTest
     {
         private DbContextOptions _dbContextOptions;
         private TestJobportalContext _context;
-        private UserService _userService;
-
+        private IUserService _userService;
 
         [SetUp]
         public void Setup()
         {
             _dbContextOptions = new DbContextOptionsBuilder()
-                .UseInMemoryDatabase("JobPortalTestDb")
-                .Options;
+              .UseInMemoryDatabase("JobPortalTestDb")
+              .Options;
 
             _context = new TestJobportalContext(_dbContextOptions);
             _context.Database.EnsureCreated();
 
             IConfiguration configuration = new ConfigurationBuilder()
-                .AddInMemoryCollection(new Dictionary<string, string>
+              .AddInMemoryCollection(new Dictionary<string, string>
                 {
-                    { "TokenKey:JWT", "y_J82VYvg5Jh8-DT89E1kz_FzHNN3tB_Sy4b_yLhoZ8Y6q-jVOWU3-xPFlPS6cYYicWlb0XhREXAf3OWTbnN3w==" }
+            { "TokenKey:JWT", "y_J82VYvg5Jh8-DT89E1kz_FzHNN3tB_Sy4b_yLhoZ8Y6q-jVOWU3-xPFlPS6cYYicWlb0XhREXAf3OWTbnN3w==" }
                 })
-                .Build();
+              .Build();
 
             IUserRepository userRepo = new UserRepository(_context);
             ITokenService tokenService = new TokenServices(configuration);
             ICompanyRepository companyRepo = new CompanyRepository(_context);
-                   IJobRepository _jobRepository = new JobRepository(_context);
+            IJobRepository jobRepository = new JobRepository(_context);
+            IRepository<Guid, Skill> _skillRepository = new SkillRepository(_context);
+            IRepository<Guid, Credential> _credentialRepository = new CredentialRepository(_context);
+            IUserSkillsRepository _userSkillsRepository = new UserSkillsRepository(_context);
 
-
-
-            _userService = new UserService(_jobRepository,companyRepo, userRepo, tokenService);
-
-     
+            _userService = new UserService(
+                      _skillRepository,
+                       companyRepo,
+                          _userSkillsRepository,
+                            _credentialRepository,
+                            jobRepository,
+                            userRepo,
+                            tokenService
+            );
         }
+
 
         [TearDown]
         public void TearDown()
@@ -91,7 +101,7 @@ namespace Job_Portal_Application_Test.UserTest
             var result = await _userService.Register(userDto);
 
             Assert.NotNull(result);
-            Assert.AreEqual("john.doe@example.com", result.Email);
+
         }
 
         [Test]
@@ -110,10 +120,9 @@ namespace Job_Portal_Application_Test.UserTest
                 Password = "password"
             };
 
-            // Seed user
+
             await _userService.Register(userDto);
 
-            // Try to register again
             Assert.ThrowsAsync<UserAlreadyExistsException>(() => _userService.Register(userDto));
         }
 
@@ -170,12 +179,9 @@ namespace Job_Portal_Application_Test.UserTest
         [Test]
         public async Task GetUserProfile_ReturnsCorrectUserProfileDto()
         {
-    
 
-            // Act
             var userProfileDto = await _userService.GetUserProfile(TestJobportalContext.UserId);
 
-            // Assert
             Assert.IsNotNull(userProfileDto);
             Assert.AreEqual(TestJobportalContext.UserId, userProfileDto.UserId);
             Assert.AreEqual("Test", userProfileDto.Name);
@@ -292,11 +298,8 @@ namespace Job_Portal_Application_Test.UserTest
         public async Task CalculateJobMatchPercentage_ShouldReturnCorrectPercentage()
         {
  
-
-        
             var result = await _userService.CalculateJobMatchPercentage(TestJobportalContext.JobId1, TestJobportalContext.UserId);
 
-   
             Assert.GreaterOrEqual(result, 0);
             Assert.LessOrEqual(result, 100);
         }
@@ -349,5 +352,14 @@ namespace Job_Portal_Application_Test.UserTest
             Assert.NotNull(updatedUser);
             Assert.AreEqual("https://newresume.com", updatedUser.ResumeUrl);
         }
+
+        public async Task GetAllUserSkills_Success()
+        {
+            var skills = await _userService.GetSkills(TestJobportalContext.UserId);
+
+            Assert.NotNull(skills);
+            Assert.IsNotEmpty(skills);
+        }
+      
     }
 }

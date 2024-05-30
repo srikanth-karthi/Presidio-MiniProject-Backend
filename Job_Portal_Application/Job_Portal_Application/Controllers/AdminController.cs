@@ -13,7 +13,7 @@ namespace Job_Portal_Application.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    [Authorize(Roles ="Admin")]
     [ExcludeFromCodeCoverage]
     public class AdminController : ControllerBase
     {
@@ -26,23 +26,11 @@ namespace Job_Portal_Application.Controllers
             _userRepository = userRepository;
         }
 
-        private async Task<bool> AuthorizeAdmin()
-        {
-            var userId = Guid.Parse(User.FindFirst("id").Value);
-            var user = await _userRepository.Get(userId);
-            if (user == null || user.Email != "Admin@jobportal.com")
-            {
-                return false;
-            }
-            return true;
-        }
 
-        // Skill Endpoints
         [HttpPost("skills")]
         public async Task<IActionResult> CreateSkill([FromBody] string SkillName)
         {
-            if (!await AuthorizeAdmin())
-                return Unauthorized(new { message = "Not authorized as admin." });
+  
 
             try
             {
@@ -62,17 +50,16 @@ namespace Job_Portal_Application.Controllers
         [HttpDelete("skills/{id}")]
         public async Task<IActionResult> DeleteSkill(Guid id)
         {
-            if (!await AuthorizeAdmin())
-                return Unauthorized(new { message = "Not authorized as admin." });
+   
 
             try
             {
                 var result = await _adminService.DeleteSkill(id);
                 if (result)
                 {
-                    return NoContent();
+                    return Ok("Skill deleted Sucessfully");
                 }
-                return NotFound();
+                return NotFound("Skill not found");
             }
             catch (SkillNotFoundException ex)
             {
@@ -84,12 +71,10 @@ namespace Job_Portal_Application.Controllers
             }
         }
 
-        // Title Endpoints
         [HttpPost("titles")]
         public async Task<IActionResult> CreateTitle([FromBody] string titleName)
         {
-            if (!await AuthorizeAdmin())
-                return Unauthorized(new { message = "Not authorized as admin." });
+   
 
             try
             {
@@ -109,17 +94,16 @@ namespace Job_Portal_Application.Controllers
         [HttpDelete("titles/{id}")]
         public async Task<IActionResult> DeleteTitle(Guid id)
         {
-            if (!await AuthorizeAdmin())
-                return Unauthorized(new { message = "Not authorized as admin." });
+
 
             try
             {
                 var result = await _adminService.DeleteTitle(id);
                 if (result)
                 {
-                    return NoContent();
+                    return Ok("Task deleted Sucessfully");
                 }
-                return NotFound();
+                return NotFound("Title not found");
             }
             catch (TitleNotFoundException ex)
             {

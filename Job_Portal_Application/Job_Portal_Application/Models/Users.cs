@@ -13,15 +13,14 @@ namespace Job_Portal_Application.Models
         [MaxLength(100)]
         public string Name { get; set; }
 
+
+        public Guid CredentialId { get; set; }
+        public Credential Credential { get; set; }
+
+
         [MaxLength(100)]
         [EmailAddress]
         public string Email { get; set; }
-
-        public byte[] Password { get; set; }
-
-        public byte[] HasCode { get; set; }
-
-
         public DateOnly Dob { get; set; }
 
         [MaxLength(200)]

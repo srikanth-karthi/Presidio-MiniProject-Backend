@@ -12,7 +12,7 @@ namespace Job_Portal_Application.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize]
+
     [ExcludeFromCodeCoverage]
     public class JobActivityController : ControllerBase
     {
@@ -24,6 +24,7 @@ namespace Job_Portal_Application.Controllers
         }
 
         [HttpPost("apply")]
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> ApplyForJob(Guid jobId)
         {
             try
@@ -50,6 +51,7 @@ namespace Job_Portal_Application.Controllers
         }
 
         [HttpGet("filtered")]
+        [Authorize(Roles = "Company")]
         public async Task<IActionResult> GetFilteredJobActivities(Guid jobId, int pageNumber = 1, int pageSize = 25, bool firstApplied = false, bool perfectMatchSkills = false, bool perfectMatchExperience = false, bool hasExperienceInJobTitle = false)
         {
             try
@@ -68,6 +70,7 @@ namespace Job_Portal_Application.Controllers
         }
 
         [HttpGet("user/appliedjobs")]
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> GetJobsUserApplied()
         {
             try
@@ -86,6 +89,7 @@ namespace Job_Portal_Application.Controllers
         }
 
         [HttpPut("Update")]
+        [Authorize(Roles = "Company")]
         public async Task<IActionResult> UpdateJobActivityStatus(UpdateJobactivityDto updateJobactivityDto)
         {
             if (!ModelState.IsValid)
@@ -116,6 +120,7 @@ namespace Job_Portal_Application.Controllers
         }
 
         [HttpGet("{jobActivityId}")]
+        [Authorize(Roles = "Company,User")]
         public async Task<IActionResult> GetJobActivityById(Guid jobActivityId)
         {
             try
@@ -135,6 +140,7 @@ namespace Job_Portal_Application.Controllers
 
 
         [HttpGet("job/{jobId}")]
+        [Authorize(Roles = "Company")]
         public async Task<IActionResult> GetJobActivitiesByJobId(Guid jobId)
         {
             try

@@ -14,22 +14,17 @@ namespace Job_Portal_Application.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Companies",
+                name: "Credential",
                 columns: table => new
                 {
-                    CompanyId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CompanyName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CredentialId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Password = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
                     HasCode = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
-                    CompanyAddress = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    City = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CompanySize = table.Column<int>(type: "int", nullable: false),
-                    CompanyWebsite = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Role = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Companies", x => x.CompanyId);
+                    table.PrimaryKey("PK_Credential", x => x.CredentialId);
                 });
 
             migrationBuilder.CreateTable(
@@ -57,14 +52,38 @@ namespace Job_Portal_Application.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Companies",
+                columns: table => new
+                {
+                    CompanyId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    CompanyName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    CompanyDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CredentialId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CompanyAddress = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    City = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CompanySize = table.Column<int>(type: "int", nullable: false),
+                    CompanyWebsite = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Companies", x => x.CompanyId);
+                    table.ForeignKey(
+                        name: "FK_Companies_Credential_CredentialId",
+                        column: x => x.CredentialId,
+                        principalTable: "Credential",
+                        principalColumn: "CredentialId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    CredentialId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Password = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
-                    HasCode = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
                     Dob = table.Column<DateOnly>(type: "date", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
                     City = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -75,6 +94,12 @@ namespace Job_Portal_Application.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.UserId);
+                    table.ForeignKey(
+                        name: "FK_Users_Credential_CredentialId",
+                        column: x => x.CredentialId,
+                        principalTable: "Credential",
+                        principalColumn: "CredentialId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -83,7 +108,7 @@ namespace Job_Portal_Application.Migrations
                 {
                     JobId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CompanyId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    JobType = table.Column<int>(type: "int", nullable: false),
+                    JobType = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TitleId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ExperienceRequired = table.Column<float>(type: "real", nullable: true),
                     Lpa = table.Column<float>(type: "real", nullable: true),
@@ -215,10 +240,10 @@ namespace Job_Portal_Application.Migrations
                 name: "JobActivities",
                 columns: table => new
                 {
-                    UserJobId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    JobApplicationId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     JobId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Status = table.Column<int>(type: "int", nullable: false),
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ResumeViewed = table.Column<bool>(type: "bit", nullable: false),
                     Comments = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     AppliedDate = table.Column<DateOnly>(type: "date", nullable: false),
@@ -226,7 +251,7 @@ namespace Job_Portal_Application.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_JobActivities", x => x.UserJobId);
+                    table.PrimaryKey("PK_JobActivities", x => x.JobApplicationId);
                     table.ForeignKey(
                         name: "FK_JobActivities_Jobs_JobId",
                         column: x => x.JobId,
@@ -267,40 +292,45 @@ namespace Job_Portal_Application.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "Credential",
+                columns: new[] { "CredentialId", "HasCode", "Password", "Role" },
+                values: new object[] { new Guid("bf0e4d0f-f8d4-4bb5-839e-2f34d9f6c6a4"), new byte[] { 175, 190, 82, 206, 212, 81, 147, 103, 88, 133, 20, 39, 116, 242, 32, 37, 170, 74, 129, 155, 240, 246, 132, 222, 19, 225, 149, 8, 30, 114, 94, 140, 61, 131, 5, 95, 80, 1, 181, 248, 249, 67, 153, 16, 94, 231, 213, 241, 185, 235, 182, 152, 65, 200, 111, 168, 104, 143, 39, 120, 207, 236, 177, 65, 205, 165, 57, 225, 30, 163, 105, 199, 211, 153, 61, 186, 81, 95, 254, 155, 10, 70, 103, 172, 90, 130, 81, 216, 58, 28, 195, 130, 245, 159, 35, 48, 37, 114, 67, 148, 75, 209, 40, 119, 82, 76, 144, 179, 203, 85, 162, 245, 175, 64, 95, 148, 127, 85, 210, 208, 65, 87, 175, 73, 183, 159, 150, 115 }, new byte[] { 235, 223, 233, 148, 68, 3, 186, 239, 233, 35, 249, 7, 131, 190, 72, 211, 88, 35, 50, 61, 43, 128, 14, 58, 121, 31, 171, 146, 157, 63, 94, 27, 86, 4, 134, 63, 242, 139, 2, 152, 132, 1, 200, 84, 234, 64, 194, 47, 223, 243, 213, 205, 164, 162, 233, 77, 131, 65, 67, 144, 15, 12, 31, 50 }, "Admin" });
+
+            migrationBuilder.InsertData(
                 table: "Skills",
                 columns: new[] { "SkillId", "Skill_Name" },
                 values: new object[,]
                 {
-                    { new Guid("06e35822-fce4-4211-ae6e-f52393189407"), "Python" },
-                    { new Guid("117a0a27-5dd3-4381-b764-ac7c6d7f8855"), "Objective-C" },
-                    { new Guid("135c9c80-4c07-44e0-930a-b04d4c852090"), "GCP" },
-                    { new Guid("1b1478ef-c436-4b12-a62b-6f7f7a5b68ab"), "NoSQL" },
-                    { new Guid("34fc10c1-e426-48e2-bdc9-346269933828"), "HTML" },
-                    { new Guid("39b71b6c-82d6-4edd-8581-cf45d7b69d5d"), "Ruby" },
-                    { new Guid("4c4a5f4b-9b17-4ed0-884c-fff074c7520d"), "Express" },
-                    { new Guid("50e36203-c98c-4daa-b83d-418ec77e7fbd"), "PHP" },
-                    { new Guid("5a81a14b-1170-4c5c-b4de-47764c6fb57a"), "Swift" },
-                    { new Guid("63ef03b5-9c5a-4a86-873a-50b5a5096d70"), "Kubernetes" },
-                    { new Guid("745444cf-4a2e-477c-852a-efd0d257711a"), "React" },
-                    { new Guid("75bee84d-e780-48f8-8120-67081bd8fb28"), "GraphQL" },
-                    { new Guid("78ea7caf-e080-43a2-a4c3-0eb301d453c6"), "Kotlin" },
-                    { new Guid("855631f1-63cf-48b8-8fe7-7d3f77e96552"), "Spring" },
-                    { new Guid("8b950496-e8e6-469b-b67e-3f6911a67dde"), "JavaScript" },
-                    { new Guid("9a73a72c-3c8b-4511-8e22-2e21b2ee0ab1"), "Flask" },
-                    { new Guid("a248b731-b010-4ef9-ba89-38eccd0b801e"), "Django" },
-                    { new Guid("a7c9c1dc-8aad-4ab8-b1bc-6e03fb118fbc"), "Rails" },
-                    { new Guid("a8485575-7c3d-42f2-b95f-0d2048e97687"), "Docker" },
-                    { new Guid("b4669812-a6b8-4d03-9d14-7ad2e200a34e"), "Vue" },
-                    { new Guid("bf5b165c-ea6b-4f91-8074-5c2c562bbc88"), "Java" },
-                    { new Guid("cda91beb-4ca8-4e2d-814c-a64f5eec3514"), "SQL" },
-                    { new Guid("dc872140-2d08-4960-a485-5361b3ae221e"), "Node.js" },
-                    { new Guid("dd2f5d8f-fdd5-44eb-b52c-d2764212f955"), "AWS" },
-                    { new Guid("e1c57374-5492-4441-80a1-148d6b1bd98f"), "C#" },
-                    { new Guid("f12af59b-912b-4c58-95aa-52e79fdf5ef0"), "ASP.NET" },
-                    { new Guid("f514c09e-21b9-44ff-a85b-d0e9fee22194"), "Angular" },
-                    { new Guid("f73d59d8-de3d-4c38-9d7b-3b5fb1d310de"), "TypeScript" },
-                    { new Guid("f7b9a546-0979-47e7-9cb2-7f5c6a43d7db"), "Azure" },
-                    { new Guid("fbc52102-d6c7-49b0-a47e-00f7be40a1b9"), "CSS" }
+                    { new Guid("0cd2f7f3-0517-45b4-a6fa-2c9d76074ec1"), "JavaScript" },
+                    { new Guid("2a01f190-37f4-450a-85d7-612b21b94741"), "PHP" },
+                    { new Guid("339124dc-5fce-4c69-b210-bf05e7f5f911"), "Django" },
+                    { new Guid("5c6d5d20-c617-4a85-af97-068a8d51bee6"), "C#" },
+                    { new Guid("63e1cada-ae43-440c-9e4d-b7d290102fcf"), "GCP" },
+                    { new Guid("64e264cc-8016-4664-8e9d-e2c9eaa05b06"), "CSS" },
+                    { new Guid("6dbea15b-4d00-4903-a393-1e357087bc88"), "Kotlin" },
+                    { new Guid("6ef9e759-afbb-4db1-b981-c2f9d0f09628"), "Azure" },
+                    { new Guid("6f5c05b7-3190-400d-a186-ab9652e42272"), "React" },
+                    { new Guid("7056dbd6-4c81-47ea-b713-e899455a9004"), "Python" },
+                    { new Guid("7188bf2f-7510-4007-9ebb-b75a4a2f5e87"), "SQL" },
+                    { new Guid("7830b613-ce28-4069-be79-98358adf7383"), "Swift" },
+                    { new Guid("7ace8f9d-20c5-4351-9693-f3f993ef9c1a"), "NoSQL" },
+                    { new Guid("8a99acb2-9790-42c2-be31-54046fcb9460"), "Vue" },
+                    { new Guid("94d7866d-10be-4ffe-91ee-5226ad334718"), "Angular" },
+                    { new Guid("9638c0eb-92a5-4d56-8e5d-2b7af35eb151"), "Spring" },
+                    { new Guid("96f32405-41e3-4902-a6d0-1e5f25c3556e"), "ASP.NET" },
+                    { new Guid("a0b6b1c1-0d10-4812-b273-11e6dbeb4563"), "Express" },
+                    { new Guid("a9ebd29d-7bbe-4ab5-a6f4-98aaa3a4dc1c"), "AWS" },
+                    { new Guid("aae52f4c-f9c2-410f-98c2-033f2175290c"), "Node.js" },
+                    { new Guid("af533f0f-ecc5-4f7d-8bc5-ff79171d3f3f"), "Flask" },
+                    { new Guid("afaa26f2-3aee-47b0-b0ea-4c330e32f946"), "Java" },
+                    { new Guid("b2e0a690-7970-4aef-96d4-e0aec6d83db0"), "Objective-C" },
+                    { new Guid("b7882aa1-76f3-40b1-9d61-79078c44c3fb"), "TypeScript" },
+                    { new Guid("bdd2f762-9087-40d7-b78a-0127b1089024"), "Ruby" },
+                    { new Guid("be1fdbf5-9a8d-4952-9847-460283851002"), "Kubernetes" },
+                    { new Guid("c1ee1fe1-adbf-47dd-b9a7-0cc2bcd1ddde"), "Docker" },
+                    { new Guid("eebe1e66-ef0d-4553-bdab-8e1e43e13654"), "HTML" },
+                    { new Guid("f09467df-beff-426d-9bc3-18b7fbade7be"), "Rails" },
+                    { new Guid("fbabc07e-3d81-4fc8-a845-1d2ed7f0e3ac"), "GraphQL" }
                 });
 
             migrationBuilder.InsertData(
@@ -308,37 +338,37 @@ namespace Job_Portal_Application.Migrations
                 columns: new[] { "TitleId", "TitleName" },
                 values: new object[,]
                 {
-                    { new Guid("02ec8dd6-bfc1-4b8c-b95c-e168d97fe645"), "Systems Administrator" },
-                    { new Guid("16c5d006-2ad3-495e-a28a-a848531448d9"), "VR/AR Developer" },
-                    { new Guid("1e77f0bc-cd29-4bf1-87c4-967d992e8056"), "Project Manager" },
-                    { new Guid("200d443e-6787-4e5d-b96a-5d9ebc3c5bf5"), "Business Analyst" },
-                    { new Guid("33c0afdc-694c-4c13-b372-3cf0ee26d427"), "Back End Developer" },
-                    { new Guid("42661970-2ab3-4636-884c-b49aec4e4912"), "Machine Learning Engineer" },
-                    { new Guid("467af571-0141-4f4d-8aba-5b9778da34e5"), "Database Developer" },
-                    { new Guid("4788eaef-1467-4570-bd6e-ed2e542d558b"), "Artificial Intelligence Engineer" },
-                    { new Guid("4c307494-2b76-4271-ba98-41559ce4bbe6"), "Technical Support Engineer" },
-                    { new Guid("55d43346-ca04-46a3-8671-65f7044002eb"), "Cloud Engineer" },
-                    { new Guid("5f4d4d1b-db11-44de-b402-5b982169cd6e"), "Data Scientist" },
-                    { new Guid("6206235b-4228-4c72-9f35-50e9bceb7f89"), "Database Administrator" },
-                    { new Guid("6bc0a051-825f-40a3-a882-79a6a00cc104"), "Software Engineer" },
-                    { new Guid("6df53d9d-4ea5-4080-94b4-be33e793798b"), "Mobile Developer" },
-                    { new Guid("7955f03c-7700-43b9-b791-2695ef8dcede"), "Full Stack Developer" },
-                    { new Guid("7a808ae3-e104-4e46-a849-0e9eb1c3ff7b"), "Game Developer" },
-                    { new Guid("7e288b69-93f7-450b-b706-6c71d52c5851"), "DevOps Engineer" },
-                    { new Guid("865d78d3-fe76-41ab-851d-475f23250a0a"), "UI/UX Designer" },
-                    { new Guid("9a41095b-7a83-4de3-9e30-00ffce59bd56"), "Security Analyst" },
-                    { new Guid("b1057ccf-5c97-4342-a852-460179db8b55"), "QA Engineer" },
-                    { new Guid("c02c55e9-1b82-4d1d-8953-684c4336e6a1"), "Cloud Architect" },
-                    { new Guid("cb33b182-80f5-40dd-83b5-400f3c8ed587"), "Front End Developer" },
-                    { new Guid("ce390c5d-5b8a-4f89-911c-58d320dfa47a"), "Network Engineer" },
-                    { new Guid("e8f45d90-c0d3-41f0-93bc-d3aa4670cae1"), "Blockchain Developer" },
-                    { new Guid("f14196e1-4191-4859-b349-d2aa820122d5"), "Product Manager" }
+                    { new Guid("13d44e5e-fb16-4082-8ee6-0f14644ad351"), "Back End Developer" },
+                    { new Guid("1a28a1ff-6104-494a-a40a-dbd07d0f9bf1"), "Mobile Developer" },
+                    { new Guid("2daa4567-9097-47ce-a58a-9fff4e819da2"), "Network Engineer" },
+                    { new Guid("3d383f12-ac3e-48f5-bee1-f8bed2be225f"), "Security Analyst" },
+                    { new Guid("42898179-9b26-4672-86b0-b6ce3861a5f1"), "Technical Support Engineer" },
+                    { new Guid("5fa9ea7f-5efc-4f67-9bfa-b0bf5b605ffb"), "VR/AR Developer" },
+                    { new Guid("66ea45c7-940f-4be7-8839-b2c596f0c453"), "Front End Developer" },
+                    { new Guid("67ac4dac-224f-4203-8b3e-389d7f71cd35"), "QA Engineer" },
+                    { new Guid("69318531-1e75-4a65-b577-2e1dab59c618"), "Database Administrator" },
+                    { new Guid("77f4bba6-63cc-437b-9d0f-15130f857e6a"), "Systems Administrator" },
+                    { new Guid("85b38a56-8a33-48d2-aa27-02569392a714"), "Blockchain Developer" },
+                    { new Guid("8f9a3186-dff7-4021-a734-4d9a6558b58e"), "DevOps Engineer" },
+                    { new Guid("a118d173-bd94-4b0b-ba33-53583f61dd42"), "Business Analyst" },
+                    { new Guid("a7d53d1e-3216-491e-acf5-bd6ff1edae17"), "Software Engineer" },
+                    { new Guid("a85f6f91-74de-41a7-bfe3-e3d6cfccb6da"), "Product Manager" },
+                    { new Guid("ac8c829b-5fe8-47c1-bf8c-ca8846b1635c"), "Database Developer" },
+                    { new Guid("af7f51e1-674b-4213-8197-f2cb0295106b"), "Cloud Architect" },
+                    { new Guid("b81b4844-7b5f-4487-934b-bd54f9709390"), "Game Developer" },
+                    { new Guid("b9400096-5e2c-465c-a3ad-a03f7180cd27"), "Cloud Engineer" },
+                    { new Guid("c3abb7e8-7f9c-44e5-a0f8-49303c3dc0f6"), "Machine Learning Engineer" },
+                    { new Guid("e99192b0-d290-44af-8055-8d957e559a95"), "Project Manager" },
+                    { new Guid("eef31387-03b9-4c22-9b65-ac3a2fb567fb"), "UI/UX Designer" },
+                    { new Guid("f4e4cc47-887e-4307-b791-d1ba394302c1"), "Data Scientist" },
+                    { new Guid("fb5bda27-edeb-4975-8073-b6789d28e1e3"), "Full Stack Developer" },
+                    { new Guid("fcb3e80e-42a4-400c-967e-29e838af9f24"), "Artificial Intelligence Engineer" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "UserId", "Address", "City", "Dob", "Email", "HasCode", "Name", "Password", "Phonenumber", "PortfolioLink", "ResumeUrl" },
-                values: new object[] { new Guid("bae1166a-75fd-4cc7-864c-711a14f33081"), null, null, new DateOnly(2020, 1, 1), "Admin@jobportal.com", new byte[] { 64, 168, 173, 35, 170, 162, 26, 101, 7, 116, 28, 110, 21, 189, 47, 159, 68, 180, 31, 32, 151, 188, 134, 48, 250, 148, 182, 103, 6, 41, 88, 179, 179, 9, 207, 158, 175, 89, 19, 123, 160, 134, 36, 20, 227, 239, 201, 128, 80, 155, 101, 59, 228, 94, 62, 38, 61, 196, 154, 26, 163, 197, 206, 176, 201, 234, 46, 44, 172, 145, 93, 141, 137, 155, 215, 253, 69, 36, 29, 151, 44, 216, 23, 40, 143, 80, 16, 21, 84, 207, 173, 130, 250, 119, 2, 212, 27, 193, 86, 63, 29, 175, 146, 243, 191, 52, 216, 201, 239, 227, 195, 36, 146, 96, 80, 205, 57, 14, 28, 10, 188, 171, 64, 214, 123, 104, 31, 65 }, "Admin", new byte[] { 214, 72, 129, 159, 116, 176, 175, 144, 193, 214, 211, 104, 204, 229, 164, 66, 229, 212, 236, 95, 205, 242, 248, 145, 102, 158, 253, 177, 156, 129, 236, 32, 61, 29, 42, 220, 133, 197, 240, 184, 162, 217, 51, 195, 159, 48, 236, 128, 104, 161, 198, 31, 31, 62, 229, 51, 178, 173, 211, 69, 150, 197, 178, 241 }, null, null, null });
+                columns: new[] { "UserId", "Address", "City", "CredentialId", "Dob", "Email", "Name", "Phonenumber", "PortfolioLink", "ResumeUrl" },
+                values: new object[] { new Guid("904f7da1-79a2-45a8-b727-fbf4662609cb"), null, null, new Guid("bf0e4d0f-f8d4-4bb5-839e-2f34d9f6c6a4"), new DateOnly(1, 1, 1), "Admin@jobportal.com", "Admin", null, null, null });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AreasOfInterests_TitleId",
@@ -349,6 +379,12 @@ namespace Job_Portal_Application.Migrations
                 name: "IX_AreasOfInterests_UserId",
                 table: "AreasOfInterests",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Companies_CredentialId",
+                table: "Companies",
+                column: "CredentialId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Educations_UserId",
@@ -396,6 +432,12 @@ namespace Job_Portal_Application.Migrations
                 column: "SkillId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Users_CredentialId",
+                table: "Users",
+                column: "CredentialId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_UserSkills_SkillId",
                 table: "UserSkills",
                 column: "SkillId");
@@ -441,6 +483,9 @@ namespace Job_Portal_Application.Migrations
 
             migrationBuilder.DropTable(
                 name: "Titles");
+
+            migrationBuilder.DropTable(
+                name: "Credential");
         }
     }
 }

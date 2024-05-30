@@ -4,7 +4,7 @@ namespace Job_Portal_Application.Dto.JobActivityDto
 {
     public class JobActivityDto
     {
-        public Guid UserJobId { get; set; }
+        public Guid JobactivityId { get; set; }
         public Guid UserId { get; set; }
         public Guid JobId { get; set; }
         public string Status { get; set; }  

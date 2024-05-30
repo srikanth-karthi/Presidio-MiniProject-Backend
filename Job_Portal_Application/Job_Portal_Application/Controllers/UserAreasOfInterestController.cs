@@ -13,6 +13,7 @@ namespace Job_Portal_Application.Controllers
 {
     [ApiController]
     [Route("api/UserAreasOfInterest")]
+    [Authorize(Roles = "User")]
     [ExcludeFromCodeCoverage]
     public class UserAreasOfInterestController : ControllerBase
     {
@@ -24,7 +25,7 @@ namespace Job_Portal_Application.Controllers
         }
 
         [HttpPost]
-        [Authorize]
+ 
         public async Task<ActionResult<AreasOfInterest>> AddAreaOfInterest([FromBody] AddAreasOfInterestDTO areasOfInterestDto)
         {
             try
@@ -51,7 +52,7 @@ namespace Job_Portal_Application.Controllers
         }
 
         [HttpPut]
-        [Authorize]
+
         public async Task<ActionResult<AreasOfInterest>> UpdateAreaOfInterest(AreasOfInterestDto areasOfInterestDto)
         {
             if (!ModelState.IsValid)
@@ -82,7 +83,7 @@ namespace Job_Portal_Application.Controllers
         }
 
         [HttpDelete("{areasOfInterestId}")]
-        [Authorize]
+
         public async Task<ActionResult<bool>> DeleteAreaOfInterest(Guid areasOfInterestId)
         {
 
@@ -105,7 +106,7 @@ namespace Job_Portal_Application.Controllers
         }
 
         [HttpGet("{areasOfInterestId}")]
-        [Authorize]
+
         public async Task<ActionResult<AreasOfInterestDto>> GetAreaOfInterest(Guid areasOfInterestId)
         {
 
@@ -125,7 +126,7 @@ namespace Job_Portal_Application.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+
         public async Task<ActionResult<IEnumerable<AreasOfInterestDto>>> GetAllAreasOfInterest()
         {
             try

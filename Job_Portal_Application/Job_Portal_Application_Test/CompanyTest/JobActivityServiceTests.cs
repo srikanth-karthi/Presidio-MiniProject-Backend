@@ -69,13 +69,13 @@ namespace Job_Portal_Application_Test.JobActivityTest
 
 
         [Test]
-        public async Task GetFilteredUser_Success()
+        public async Task GetFilteredUser_failed()
         {
 
 
 
 
-            var users = await _jobActivityService.GetFilteredUser(TestJobportalContext.JobId2, TestJobportalContext.CompanyId1);
+            var users = await _jobActivityService.GetFilteredUser(TestJobportalContext.CompanyId1, TestJobportalContext.JobId2);
 
             Assert.IsTrue(users.Any(u => u.UserId == TestJobportalContext.UserId));
         }
@@ -85,7 +85,7 @@ namespace Job_Portal_Application_Test.JobActivityTest
         public async Task UpdateJobActivityStatus_Success()
         {
 
-            var updateResult = await _jobActivityService.UpdateJobActivityStatus(new UpdateJobactivityDto { JobactivityId = TestJobportalContext.JobActivityId1, status = JobStatus.Interviewed,ResumeViewed=true});
+            var updateResult = await _jobActivityService.UpdateJobActivityStatus(new UpdateJobactivityDto { JobactivityId = TestJobportalContext.JobActivityId1, status = JobStatus.Interviewed, ResumeViewed = true });
 
             Assert.IsTrue(updateResult.ResumeViewed);
             Assert.AreEqual(JobStatus.Interviewed.ToString(), updateResult.Status);
@@ -103,7 +103,7 @@ namespace Job_Portal_Application_Test.JobActivityTest
         public async Task GetJobActivityById_Success()
         {
 
-      
+
             var jobActivity = await _jobActivityService.GetJobActivityById(TestJobportalContext.JobActivityId1);
 
             Assert.IsNotNull(jobActivity);
@@ -114,7 +114,7 @@ namespace Job_Portal_Application_Test.JobActivityTest
         [Test]
         public async Task GetJobActivitiesByJobId_Success()
         {
-            
+
 
             // Retrieve job activities by job ID
             var activities = await _jobActivityService.GetJobActivitiesByJobId(TestJobportalContext.JobId2);

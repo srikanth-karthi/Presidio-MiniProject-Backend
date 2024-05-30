@@ -43,9 +43,7 @@ namespace Job_Portal_Application.Repository.CompanyRepos
         public async Task<JobSkills> GetbyjobIdandSkillId(Guid jobId, Guid skillId)
         {
             return await _context.JobSkills
-                .Include(js => js.Job)
-                .Include(js => js.Skill)
-          .FirstOrDefaultAsync(js => js.JobId == jobId && js.SkillId == skillId);
+                .FirstOrDefaultAsync(js => js.JobId == jobId && js.SkillId == skillId);
         }
 
 
@@ -64,33 +62,6 @@ namespace Job_Portal_Application.Repository.CompanyRepos
             return entity;
         }
 
-        public async Task UpdateJobSkills(Guid jobId, List<Guid> skillsToAdd, List<Guid> skillsToRemove)
-        {
-            foreach (var skillId in skillsToAdd)
-            {
-                var existingJobSkill = await _context.JobSkills
-                    .FirstOrDefaultAsync(js => js.JobId == jobId && js.SkillId == skillId);
-
-                if (existingJobSkill == null)
-                {
-                    var skill = await _context.Skills.FirstOrDefaultAsync(s => s.SkillId == skillId);
-                    if (skill != null)
-                    {
-                        await Add(new JobSkills { JobId = jobId, SkillId = skillId });
-                    }
-                }
-            }
-
-            foreach (var skillId in skillsToRemove)
-            {
-                var jobSkill = await _context.JobSkills.FirstOrDefaultAsync(js => js.JobId == jobId && js.SkillId == skillId);
-                if (jobSkill != null)
-                {
-                    await Delete(jobSkill);
-                }
-            }
-
-            await _context.SaveChangesAsync();
-        }
+       
     }
 }

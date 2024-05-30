@@ -10,12 +10,13 @@ using Job_Portal_Application.Dto.JobDto;
 using Job_Portal_Application.Dto.JobDtos;
 using Job_Portal_Application.Services.CompanyService;
 using System.Diagnostics.CodeAnalysis;
+using Job_Portal_Application.Dto.SkillDtos;
 
 namespace Job_Portal_Application.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize]
+    [Authorize(Roles = "Company")]
     [ExcludeFromCodeCoverage]
     public class JobController : ControllerBase
     {
@@ -175,7 +176,7 @@ namespace Job_Portal_Application.Controllers
                 var jobs = await _jobService.GetJobs(
                     request.PageNumber,
                     request.PageSize,
-                    request.Title,
+                    request.jobtitleId,
                     request.Lpa,
                     request.RecentlyPosted,
                     request.SkillIds,
@@ -196,7 +197,7 @@ namespace Job_Portal_Application.Controllers
         }
 
         [HttpPut("jobskills")]
-        public async Task<IActionResult> UpdateJobSkills(JobSkillsDto jobSkillsDto)
+        public async Task<IActionResult> UpdateJobSkills(JobSkillsdto jobSkillsDto)
         {
             if (!ModelState.IsValid)
             {

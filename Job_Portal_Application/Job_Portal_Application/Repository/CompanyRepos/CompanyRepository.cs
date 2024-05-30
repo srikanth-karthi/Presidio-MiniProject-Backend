@@ -11,7 +11,9 @@ namespace Job_Portal_Application.Repository.CompanyRepos
 {
     public class CompanyRepository : ICompanyRepository
     {
-        private readonly JobportalContext _context;
+      
+
+    private readonly JobportalContext _context;
 
         public CompanyRepository(JobportalContext context)
         {

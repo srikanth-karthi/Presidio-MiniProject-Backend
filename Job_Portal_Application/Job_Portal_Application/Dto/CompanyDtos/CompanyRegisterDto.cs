@@ -18,7 +18,9 @@ namespace Job_Portal_Application.Dto.CompanyDtos
         [MinLength(8, ErrorMessage = "Password must be at least 8 characters long")]
         public string Password { get; set; }
 
-
+        [StringLength(200, ErrorMessage = "Company address must be at most 200 characters")]
+        [Required(ErrorMessage = "CompanyDescription is required")]
+        public string CompanyDescription { get; set; }
 
         [StringLength(200, ErrorMessage = "Company address must be at most 200 characters")]
         public string CompanyAddress { get; set; }

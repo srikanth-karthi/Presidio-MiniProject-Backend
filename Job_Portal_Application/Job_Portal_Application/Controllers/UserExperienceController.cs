@@ -15,6 +15,7 @@ namespace Job_Portal_Application.Controllers
 {
     [ApiController]
     [Route("api/UserExperience")]
+    [Authorize(Roles = "User")]
     [ExcludeFromCodeCoverage]
     public class UserExperienceController : ControllerBase
     {
@@ -26,7 +27,7 @@ namespace Job_Portal_Application.Controllers
         }
 
         [HttpPost]
-        [Authorize]
+
         public async Task<ActionResult<Experience>> AddExperience([FromBody] AddExperienceDto experienceDto)
         {
             try
@@ -56,7 +57,7 @@ namespace Job_Portal_Application.Controllers
         }
 
         [HttpPut]
-        [Authorize]
+
         public async Task<ActionResult<Experience>> UpdateExperience(GetExperienceDto experienceDto)
         {
             try
@@ -90,7 +91,7 @@ namespace Job_Portal_Application.Controllers
         }
 
         [HttpDelete("{experienceId}")]
-        [Authorize]
+
         public async Task<ActionResult<bool>> DeleteExperience(Guid experienceId)
         {
             try
@@ -113,7 +114,7 @@ namespace Job_Portal_Application.Controllers
         }
 
         [HttpGet("{experienceId}")]
-        [Authorize]
+
         public async Task<ActionResult<GetExperienceDto>> GetExperience(Guid experienceId)
         {
             try
@@ -132,7 +133,7 @@ namespace Job_Portal_Application.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+
         public async Task<ActionResult<IEnumerable<GetExperienceDto>>> GetAllExperiences()
         {
             try

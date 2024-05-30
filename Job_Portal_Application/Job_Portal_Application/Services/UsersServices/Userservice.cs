@@ -15,8 +15,11 @@ using Job_Portal_Application.Interfaces.IService;
 using Job_Portal_Application.Models;
 using Job_Portal_Application.Repository.CompanyRepos;
 using Job_Portal_Application.Repository.UserRepos;
-using UserSkillDto = Job_Portal_Application.Dto.UserSkillDto;
+
 using System.Linq;
+using Job_Portal_Application.Repository;
+using Job_Portal_Application.Repository.SkillRepos;
+using Job_Portal_Application.Dto.SkillDtos;
 
 
 namespace Job_Portal_Application.Services.UsersServices
@@ -25,47 +28,65 @@ namespace Job_Portal_Application.Services.UsersServices
     {
         private readonly IUserRepository _userRepository;
         private readonly ITokenService _tokenService;
-        private readonly ICompanyRepository _companyRepository;
-        private readonly IJobRepository _jobRepository;
 
-        public UserService(IJobRepository jobRepository, ICompanyRepository companyRepository, IUserRepository userRepository, ITokenService tokenService)
+        private readonly IJobRepository _jobRepository;
+        private readonly IRepository<Guid, Credential> _credentialRepository;
+        private readonly IUserSkillsRepository _userSkillsRepository;
+        private readonly ICompanyRepository _companyRepository;
+        private readonly IRepository<Guid, Skill> _skillRepository;
+
+        public UserService(IRepository<Guid, Skill> skillRepository, ICompanyRepository companyRepository, IUserSkillsRepository UserSkillsRepository,IRepository<Guid, Credential> CredentialRepository, IJobRepository jobRepository, IUserRepository userRepository, ITokenService tokenService)
         {
             _userRepository = userRepository;
             _tokenService = tokenService;
-            _companyRepository = companyRepository;
             _jobRepository = jobRepository;
-
-
+            _credentialRepository= CredentialRepository;
+            _userSkillsRepository = UserSkillsRepository;
+            _companyRepository = companyRepository;
+            _skillRepository = skillRepository;
         }
 
         public async Task<UserDto> Register(UserRegisterDto userDto)
         {
+
             var existingUser = await _companyRepository.GetByEmail(userDto.Email);
             if (existingUser != null)
             {
                 throw new UserAlreadyExistsException("User is already registered as a Company and cannot register as a User.");
             }
 
-            var user = await _userRepository.GetByEmail(userDto.Email);
-            if (user != null)
-            {
-                throw new UserAlreadyExistsException($"{userDto.Email} already used, please try with another email.");
-            }
+       
 
+            if (await _userRepository.GetByEmail(userDto.Email) != null)
+            {
+                throw new UserAlreadyExistsException("User is already registered");
+            }
             HMACSHA512 hmacSha = new HMACSHA512();
+
+
+              var creadentials=    await  _credentialRepository.Add(new Credential()
+                    {
+                        
+                        Password = hmacSha.ComputeHash(Encoding.UTF8.GetBytes(userDto.Password)),
+                        HasCode = hmacSha.Key,
+                        Role=Roles.User,
+
+                    });
+
+     
             
                 var newUser = new User
                 {
                     Name = userDto.Name,
                     Email = userDto.Email,
+                    CredentialId = creadentials.CredentialId,
                     Dob = DateOnly.FromDateTime(userDto.Dob),
                     Address = userDto.Address,
                     City = userDto.City,
                     PortfolioLink = userDto.PortfolioLink,
                     Phonenumber = userDto.Phonenumber,
                     ResumeUrl = userDto.ResumeUrl,
-                    Password = hmacSha.ComputeHash(Encoding.UTF8.GetBytes(userDto.Password)),
-                    HasCode = hmacSha.Key
+           
                 };
 
            return  ToUserDto(await _userRepository.Add(newUser));
@@ -75,18 +96,18 @@ namespace Job_Portal_Application.Services.UsersServices
 
         public async Task<string> Login(LoginDto userDto)
         {
-            var user = await _userRepository.GetByEmail(userDto.Email);
-            if (user == null)
-            {
-                throw new InvalidCredentialsException("Email not found.");
-            }
 
-            using (HMACSHA512 hmacSha = new HMACSHA512(user.HasCode))
+            var user = await _userRepository.GetByEmail(userDto.Email) ?? throw new InvalidCredentialsException("Invalid Credentials");
+
+          var credential= await  _credentialRepository.Get(user.CredentialId);
+
+
+            using (HMACSHA512 hmacSha = new HMACSHA512(credential.HasCode))
             {
                 var encryptedPass = hmacSha.ComputeHash(Encoding.UTF8.GetBytes(userDto.Password));
-                if (_tokenService.VerifyPassword(user.Password, encryptedPass))
+                if (_tokenService.VerifyPassword(credential.Password, encryptedPass))
                 {
-                    var token = _tokenService.GenerateToken(user.UserId);
+                    var token = _tokenService.GenerateToken(user.UserId, credential.Role);
                     return token;
                 }
             }
@@ -180,7 +201,7 @@ namespace Job_Portal_Application.Services.UsersServices
         public  async Task<double> CalculateJobMatchPercentage(Guid jobId, Guid userId)
         {
             UserProfileDto userProfile = await GetUserProfile(userId);
-            Job job= await _jobRepository.Get(jobId);
+            Job job = await _jobRepository.Get(jobId) ?? throw new JobNotFoundException("Job not found");
 
             var jobSkills = job.JobSkills.Select(js => js.SkillId);
             var userSkills = userProfile.UserSkills.Select(us => us.SkillId);
@@ -191,11 +212,11 @@ namespace Job_Portal_Application.Services.UsersServices
             var requiredExperience = job.ExperienceRequired ?? 0;
             var jobTitle = job.Title.TitleName;
             var userExperienceWithTitle = userProfile.Experiences
-                .Where(e => e.TitleName.Equals(jobTitle, StringComparison.OrdinalIgnoreCase))
+                .Where(e => e.TitleName==job.Title.TitleName)
                 .Sum(e => e.ExperienceDuration);
             var experienceMatchPercentage = requiredExperience == 0 ? 0 : Math.Min(1, userExperienceWithTitle / requiredExperience);
 
-            var jobAreaOfInterestId = job.TitleId.ToString();
+            var jobAreaOfInterestId = job.Title.TitleName;
             var userAreaOfInterestIds = userProfile.AreasOfInterests.Select(aoi => aoi.TitleName);
             var areaOfInterestMatchPercentage = userAreaOfInterestIds.Contains(jobAreaOfInterestId) ? 1 : 0;
 
@@ -216,13 +237,83 @@ namespace Job_Portal_Application.Services.UsersServices
         }
 
 
+
+        public async Task<List<UserSkillDto>> GetSkills(Guid userId)
+        {
+            var user = await _userSkillsRepository.GetByUserId(userId) ?? throw new UserSkillsNotFoundException("User SKills not found.");
+
+            return user.Select(skill => ToUserSkillDto(skill.Skill)).ToList();
+        }
+
+        private UserSkillDto ToUserSkillDto(Skill value)
+        {
+            return new UserSkillDto()
+            {
+                SkillId = value.SkillId,
+                SkillName = value.Skill_Name
+            };
+        }
+
+        public async Task<SkillsresponseDto> UserSkills(SkillsDto SkillsDto, Guid UserId)
+        {
+            SkillsresponseDto response = new();
+
+            var job = await _userRepository.Get(UserId) ?? throw new JobNotFoundException("Invalid JobId. Job does not exist.");
+
+            foreach (var skillId in SkillsDto.SkillsToAdd)
+            {
+                var existingJobSkill = await _userSkillsRepository.GetByUserIdAndSkillId(UserId, skillId);
+
+
+                if (existingJobSkill == null)
+                {
+                    var skill = await _skillRepository.Get(skillId);
+                    if (skill != null)
+                    {
+
+                        await _userSkillsRepository.Add(new UserSkills { UserId = UserId, SkillId = skillId });
+                        response.AddedSkills.Add(skillId);
+                    }
+                    else
+                    {
+                        response.InvalidSkills.Add(skillId);
+                    }
+                }
+
+            }
+
+
+            foreach (var skillId in SkillsDto.SkillsToRemove)
+            {
+                var existingJobSkill = await _userSkillsRepository.GetByUserIdAndSkillId(UserId, skillId);
+
+
+         
+                    var skill = await _skillRepository.Get(skillId);
+                if (skill != null && existingJobSkill != null)
+                {
+
+                        await _userSkillsRepository.Delete(existingJobSkill);
+                        response.RemovedSkills.Add(skillId);
+                    }
+                    else
+                    {
+                        response.InvalidSkills.Add(skillId);
+                    }
+                
+
+            }
+            return response;
+
+        }
+
+
         private JobDto MapToJobDto(Job job)
         {
             return new JobDto
             {
                 JobId = job.JobId,
-
-                JobType = Enum.GetName(typeof(JobType), job.JobType),
+            JobType = job.JobType.ToString(),
                 TitleId = job.TitleId,
                 CompanyName = job.Company.CompanyName,
                 DatePosted = job.DatePosted.ToDateTime(TimeOnly.MinValue),
@@ -232,6 +323,7 @@ namespace Job_Portal_Application.Services.UsersServices
                 Lpa = job.Lpa,
                 JobDescription = job.JobDescription,
                 Skills = job.JobSkills.Select(js => js.Skill.Skill_Name).ToList()
+
             };
         }
 

@@ -28,5 +28,15 @@ namespace Job_Portal_Application.Services
             if(!skills.Any()) throw new SkillNotFoundException("Skill not found");
             return skills;
         }
+
+        public async Task<Skill> AddSkills(Skill skill)
+        { 
+            return await _skillRepository.Add(skill);
+        }
+
+        public async Task<bool> DeleteSkills(Skill skill)
+        {
+            return await _skillRepository.Delete(skill);
+        }
     }
 }

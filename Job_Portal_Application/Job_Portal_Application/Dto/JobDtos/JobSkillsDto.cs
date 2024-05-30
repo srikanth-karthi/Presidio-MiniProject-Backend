@@ -1,10 +1,9 @@
-﻿namespace Job_Portal_Application.Dto.JobDto
+﻿using Job_Portal_Application.Dto.SkillDtos;
+
+namespace Job_Portal_Application.Dto.JobDtos
 {
-    public class JobSkillsDto
+    public class JobSkillsdto: SkillsDto
     {
         public Guid JobId { get; set; }
-        public List<Guid> SkillsToAdd { get; set; }
-        public List<Guid> SkillsToRemove { get; set; }
     }
-
 }

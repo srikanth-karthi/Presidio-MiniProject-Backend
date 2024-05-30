@@ -6,6 +6,7 @@ using Job_Portal_Application.Exceptions;
 using Microsoft.EntityFrameworkCore;
 using Job_Portal_Application.Models;
 using Job_Portal_Application.Interfaces.IRepository;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Job_Portal_Application.Repository.CompanyRepos
 {
@@ -90,32 +91,31 @@ namespace Job_Portal_Application.Repository.CompanyRepos
                 .FirstOrDefaultAsync(ja => ja.UserId == userId && ja.JobId == jobId);
         }
         public async Task<IEnumerable<Job>> GetJobs(
-    int pageNumber = 1,
-    int pageSize = 25,
-    string title = null,
-    float? lpa = null,
-    bool recentlyPosted = false,
-    IEnumerable<Guid> skillIds = null,
-    float? experienceRequired = null,
-    string location = null,
-    Guid? companyId = null)
+               int pageNumber = 1,
+               int pageSize = 25,
+               Guid? JobTitle = null,
+               float? lpa = null,
+               bool recentlyPosted = false,
+               IEnumerable<Guid> skillIds = null,
+               float? experienceRequired = null,
+               string location = null,
+               Guid? companyId = null)
         {
             var query = _context.Jobs
-             .Include(j => j.Company)
-        .Include(job => job.Title)
-        .Include(j => j.JobSkills).ThenInclude(js => js.Skill)
-        .Where(job => job.Status== true) 
-        .AsQueryable();
-
+                .Include(j => j.Company)
+                .Include(job => job.Title)
+                .Include(j => j.JobSkills).ThenInclude(js => js.Skill)
+                .Where(job => job.Status == true)
+                .AsQueryable();
 
             if (companyId.HasValue)
             {
                 query = query.Where(j => j.CompanyId == companyId.Value);
             }
 
-            if (!string.IsNullOrEmpty(title))
+            if (JobTitle.HasValue)
             {
-                query = query.Where(job => job.Title.TitleName.Contains(title));
+                query = query.Where(job => job.TitleId == JobTitle.Value);
             }
 
             if (lpa.HasValue)
@@ -148,10 +148,9 @@ namespace Job_Portal_Application.Repository.CompanyRepos
                 .Take(pageSize)
                 .ToListAsync();
 
-        
-
             return jobs;
         }
+
 
     }
 }

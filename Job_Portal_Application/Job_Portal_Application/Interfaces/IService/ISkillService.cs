@@ -9,5 +9,8 @@ namespace Job_Portal_Application.Interfaces.IService
     {
         Task<Skill> GetSkill(Guid id);
         Task<IEnumerable<Skill>> GetAllSkills();
+        Task<Skill> AddSkills(Skill skill);
+        Task<bool> DeleteSkills(Skill skill);
+
     }
 }

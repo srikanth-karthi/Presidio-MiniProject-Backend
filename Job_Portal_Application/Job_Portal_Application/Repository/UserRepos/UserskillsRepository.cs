@@ -46,6 +46,7 @@ namespace Job_Portal_Application.Repository.UserRepos
                 .ToListAsync();
         }
 
+
         public async Task<IEnumerable<UserSkills>> GetByUserId(Guid userId)
         {
             return await _context.UserSkills

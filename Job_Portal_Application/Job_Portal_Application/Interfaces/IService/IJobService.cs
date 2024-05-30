@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Job_Portal_Application.Dto;
 using Job_Portal_Application.Dto.JobDto;
 using Job_Portal_Application.Dto.JobDtos;
+using Job_Portal_Application.Dto.SkillDtos;
 
 namespace Job_Portal_Application.Interfaces.IService
 {
@@ -15,11 +16,11 @@ namespace Job_Portal_Application.Interfaces.IService
         Task<JobDto> GetJob(Guid jobId, Guid companyId);
         Task<IEnumerable<JobDto>> GetAllJobs();
         Task<IEnumerable<JobDto>> GetAllJobsPosted(Guid companyId);
-        Task<JobskillresponseDto> UpdateJobSkills(JobSkillsDto jobSkillsDto, Guid companyId);
+        Task<SkillsresponseDto> UpdateJobSkills(JobSkillsdto jobSkillsDto, Guid companyId);
         Task<IEnumerable<JobDto>> GetJobs(
             int pageNumber ,
             int pageSize ,
-            string title = null,
+            Guid ? JobTitle=null,
             float? lpa = null,
             bool recentlyPosted = false,
             IEnumerable<Guid> skillIds = null,
