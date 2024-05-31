@@ -1,0 +1,4510 @@
+{
+	"info": {
+		"_postman_id": "a38e405f-8115-4fa8-8d4b-29277941f5ee",
+		"name": "Job_Portal_Application",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25042106",
+		"_collection_link": "https://bold-rocket-27347.postman.co/workspace/Team-Workspace~e2cdcb39-4934-4cd5-8693-beb179dbc75e/collection/25042106-a38e405f-8115-4fa8-8d4b-29277941f5ee?action=share&source=collection_link&creator=25042106"
+	},
+	"item": [
+		{
+			"name": "api",
+			"item": [
+				{
+					"name": "Company",
+					"item": [
+						{
+							"name": "Update companies",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"companyName\": \"Genspark Company\",\n  \"companyAddress\": \"123 Example St,  City, EX 12345\",\n  \"city\": \"Example City\",\n  \"CompanyDescription\":\"Good for Training Me\",\n  \"companySize\": 500,\n  \"companyWebsite\": \"https://www.example.com\"\n}\n",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/Company",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Company"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"companyId\": \"<uuid>\",\n  \"email\": \"<email>\",\n  \"password\": \"<string>\",\n  \"companyName\": \"<string>\",\n  \"companyAddress\": \"<string>\",\n  \"city\": \"<string>\",\n  \"companySize\": \"<integer>\",\n  \"companyWebsite\": \"<uri>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Company",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Company"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "Delete Companies",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/Company",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Company"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/Company",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Company"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "Get All compinies",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/Company",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Company"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/Company",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Company"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "Register Companies",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"companyName\": \"Genspark Company\",\n  \"email\": \"Presidio@example.com\",\n  \"password\": \"securepassword\",\n  \"companyAddress\": \"123 Example Street\",\n  \"city\": \"Example City\",\n  \"companySize\": 1000,\n  \"companyWebsite\": \"http://www.example.com\",\n  \"CompanyDescription\":\"Good Company\"\n}\n",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/Company/register",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Company",
+										"register"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"email\": \"<email>\",\n  \"password\": \"<string>\",\n  \"companyName\": \"<string>\",\n  \"companyAddress\": \"<string>\",\n  \"city\": \"<string>\",\n  \"companySize\": \"<integer>\",\n  \"companyWebsite\": \"<uri>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Company/register",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Company",
+												"register"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "company Login",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"email\": \"Genspark@example.com\",\n  \"password\": \"securepassword\"\n}\n",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/Company/login",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Company",
+										"login"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"email\": \"<email>\",\n  \"password\": \"<string>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Company/login",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Company",
+												"login"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "Get company BY ID",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/Company/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Company",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "91b8d14a-f78e-44ec-bb11-d5226dfcbcf8"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/Company/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Company",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Job",
+					"item": [
+						{
+							"name": "/api/Job",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/Job",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Job"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/Job",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Job"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/Job/add",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"jobType\": \"FullTime\",\n    \"titleId\": \"67ac4dac-224f-4203-8b3e-389d7f71cd35\",\n    \"experienceRequired\": \"3\",\n    \"lpa\": 10,\n    \"jobDescription\": \"Ensure quality and performance of software products through rigorous testing.\",\n    \"skillsRequired\": [\n      \"96f32405-41e3-4902-a6d0-1e5f25c3556e\",\n      \"0cd2f7f3-0517-45b4-a6fa-2c9d76074ec1\"\n    ]\n  }",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/Job/add",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Job",
+										"add"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"jobType\": 4,\n  \"titleId\": \"<uuid>\",\n  \"experienceRequired\": \"<float>\",\n  \"lpa\": \"<float>\",\n  \"jobDescription\": \"<string>\",\n  \"skillsRequired\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Job/add",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Job",
+												"add"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "Update job",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"jobId\": \"03a81873-dee0-49c3-a204-a4608019c792\",\n  \"titleId\": \"13d44e5e-fb16-4082-8ee6-0f14644ad351\",\n  \"jobDescription\": \"update jobDescription\",\n  \"lpa\": 0,\n  \"experienceRequired\": 0,\n  \"jobType\": 0,\n  \"status\": true\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/Job/update",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Job",
+										"update"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"jobType\": \"<string>\",\n  \"titleId\": \"<uuid>\",\n  \"experienceRequired\": \"<float>\",\n  \"lpa\": \"<float>\",\n  \"jobDescription\": \"<string>\",\n  \"skillsRequired\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"status\": \"<boolean>\",\n  \"jobId\": \"<uuid>\",\n  \"datePosted\": \"<dateTime>\",\n  \"companyName\": \"<string>\",\n  \"titleName\": \"<string>\",\n  \"skills\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Job/update",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Job",
+												"update"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "Delete Job",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/Job/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Job",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "fc4c808a-5121-44ea-bad9-5726ee0d830e",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/Job/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Job",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "Get job By ID",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/Job/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Job",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "8402571d-9cc3-426a-a3ea-80f5f62ad7a9",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Search job",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"pageNumber\": 1,\r\n  \"pageSize\": 3,\r\n  \"jobtitleId\": \"67ac4dac-224f-4203-8b3e-389d7f71cd35\",\r\n//   \"lpa\": 9,\r\n \"recentlyPosted\": true,\r\n//   \"skillIds\": [\r\n//     \"6ce122a6-91f9-4e8f-9050-0652ff78ff74\"\r\n//   ],\r\n//   \"experienceRequired\": 4\r\n//   \"location\": \"Example City\"\r\n  \"companyId\": \"91b8d14a-f78e-44ec-bb11-d5226dfcbcf8\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/Job/search",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Job",
+										"search"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/Job/search?pageNumber=<integer>&pageSize=<integer>&title=<string>&lpa=<float>&recentlyPosted=false&skillIds=<uuid>&experienceRequired=<float>&location=<string>&companyId=<uuid>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Job",
+												"search"
+											],
+											"query": [
+												{
+													"key": "pageNumber",
+													"value": "<integer>"
+												},
+												{
+													"key": "pageSize",
+													"value": "<integer>"
+												},
+												{
+													"key": "title",
+													"value": "<string>"
+												},
+												{
+													"key": "lpa",
+													"value": "<float>"
+												},
+												{
+													"key": "recentlyPosted",
+													"value": "false"
+												},
+												{
+													"key": "skillIds",
+													"value": "<uuid>"
+												},
+												{
+													"key": "experienceRequired",
+													"value": "<float>"
+												},
+												{
+													"key": "location",
+													"value": "<string>"
+												},
+												{
+													"key": "companyId",
+													"value": "<uuid>"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "Job skill update",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"jobId\": \"03a81873-dee0-49c3-a204-a4608019c792\",\r\n  \"skillsToAdd\": [\r\n\r\n  ],\r\n  \"skillsToRemove\": [\r\n\"dc872140-2d08-4960-a485-5361b3ae221e\"\r\n\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/Job/jobskills",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Job",
+										"jobskills"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "JobActivity",
+					"item": [
+						{
+							"name": "Company Activity",
+							"item": [
+								{
+									"name": "Update job activity",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"jobactivityId\": \"71b606dd-d6b9-47da-9927-e201c22e2cb2\",\n  \"resumeViewed\": false,\n  \"status\": \"Hired\",\n  \"Comments\":\"good\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/JobActivity/Update",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"JobActivity",
+												"Update"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"jobactivityId\": \"<uuid>\",\n  \"resumeViewed\": \"<boolean>\",\n  \"status\": 1\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/JobActivity/Update",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"JobActivity",
+														"Update"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								},
+								{
+									"name": "Get All user particular job",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/JobActivity/job/:jobId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"JobActivity",
+												"job",
+												":jobId"
+											],
+											"variable": [
+												{
+													"key": "jobId",
+													"value": "8402571d-9cc3-426a-a3ea-80f5f62ad7a9",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/JobActivity/job/activities/:jobId",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"JobActivity",
+														"job",
+														"activities",
+														":jobId"
+													],
+													"variable": [
+														{
+															"key": "jobId"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								},
+								{
+									"name": "Filter User",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"jobId\": \"<uuid>\",\n  \"pageNumber\": \"<integer>\",\n  \"pageSize\": \"<integer>\",\n  \"firstApplied\": \"<boolean>\",\n  \"perfectMatchSkills\": \"<boolean>\",\n  \"perfectMatchExperience\": \"<boolean>\",\n  \"hasExperienceInJobTitle\": \"<boolean>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/JobActivity/filtered",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"JobActivity",
+												"filtered"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"jobId\": \"<uuid>\",\n  \"pageNumber\": \"<integer>\",\n  \"pageSize\": \"<integer>\",\n  \"firstApplied\": \"<boolean>\",\n  \"perfectMatchSkills\": \"<boolean>\",\n  \"perfectMatchExperience\": \"<boolean>\",\n  \"hasExperienceInJobTitle\": \"<boolean>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/JobActivity/filtered",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"JobActivity",
+														"filtered"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "UserActivity",
+							"item": [
+								{
+									"name": "User Applied Jobs",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/JobActivity/user/appliedjobs",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"JobActivity",
+												"user",
+												"appliedjobs"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/JobActivity/user/appliedjobs",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"JobActivity",
+														"user",
+														"appliedjobs"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								},
+								{
+									"name": "Get  by jobActivityId",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/JobActivity/:jobActivityId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"JobActivity",
+												":jobActivityId"
+											],
+											"variable": [
+												{
+													"key": "jobActivityId",
+													"value": "71b606dd-d6b9-47da-9927-e201c22e2cb2",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/JobActivity/:jobActivityId",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"JobActivity",
+														":jobActivityId"
+													],
+													"variable": [
+														{
+															"key": "jobActivityId"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								},
+								{
+									"name": "Apply jobs",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/JobActivity/apply?jobId=8402571d-9cc3-426a-a3ea-80f5f62ad7a9",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"JobActivity",
+												"apply"
+											],
+											"query": [
+												{
+													"key": "jobId",
+													"value": "8402571d-9cc3-426a-a3ea-80f5f62ad7a9"
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/JobActivity/apply?jobId=<uuid>",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"JobActivity",
+														"apply"
+													],
+													"query": [
+														{
+															"key": "jobId",
+															"value": "<uuid>"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Skill",
+					"item": [
+						{
+							"name": "Get All Skill",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "text/plain"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/Skill",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Skill"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/Skill",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Skill"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "[\n  {\n    \"skillId\": \"<uuid>\",\n    \"skill_Name\": \"<string>\"\n  },\n  {\n    \"skillId\": \"<uuid>\",\n    \"skill_Name\": \"<string>\"\n  }\n]"
+								}
+							]
+						},
+						{
+							"name": "Get skill by Id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/Skill/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Skill",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "745444cf-4a2e-477c-852a-efd0d257711a",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/Skill/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Skill",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Title",
+					"item": [
+						{
+							"name": "Get All title",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "text/plain"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/Title",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Title"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/Title",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Title"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "[\n  {\n    \"titleId\": \"<uuid>\",\n    \"titleName\": \"<string>\"\n  },\n  {\n    \"titleId\": \"<uuid>\",\n    \"titleName\": \"<string>\"\n  }\n]"
+								}
+							]
+						},
+						{
+							"name": "Get  title by Id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "text/plain"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/Title/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Title",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "<uuid>",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/Title/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Title",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"titleId\": \"<uuid>\",\n  \"titleName\": \"<string>\"\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "User",
+					"item": [
+						{
+							"name": "education",
+							"item": [
+								{
+									"name": "Post User Education",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"institutionName\": \"Example University\",\n  \"level\": \"Bachelor's Degree\",\n  \"startYear\": \"2018-09-01\",\n\"EndYear\" : \"2019-09-01\",\n  \"percentage\": 75.5,\n  \"isCurrentlyStudying\": false\n}\n",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/UserEducation",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"UserEducation"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "text/plain"
+													},
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"institutionName\": \"<string>\",\n  \"level\": \"<string>\",\n  \"startYear\": \"<date>\",\n  \"endYear\": \"<date>\",\n  \"percentage\": \"<float>\",\n  \"isCurrentlyStudying\": \"<boolean>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/User/education",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"User",
+														"education"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"institutionName\": \"<string>\",\n  \"educationId\": \"<uuid>\",\n  \"userId\": \"<uuid>\",\n  \"level\": \"<string>\",\n  \"startYear\": {\n    \"year\": \"<integer>\",\n    \"month\": \"<integer>\",\n    \"day\": \"<integer>\",\n    \"dayOfWeek\": 1,\n    \"dayOfYear\": \"<integer>\",\n    \"dayNumber\": \"<integer>\"\n  },\n  \"endYear\": {\n    \"year\": \"<integer>\",\n    \"month\": \"<integer>\",\n    \"day\": \"<integer>\",\n    \"dayOfWeek\": 2,\n    \"dayOfYear\": \"<integer>\",\n    \"dayNumber\": \"<integer>\"\n  },\n  \"percentage\": \"<float>\",\n  \"isCurrentlyStudying\": \"<boolean>\"\n}"
+										}
+									]
+								},
+								{
+									"name": "update Education",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "\n{\n      \"educationId\": \"55fa5fc5-94ec-4829-a819-67114f030350\",\n  \"institutionName\": \"Tech Innovations University\",\n  \"level\": \"Master's Degree\",\n  \"startYear\": \"2016-08-15\",\n  \"endYear\": \"2018-06-30\",\n  \"percentage\": 88.5,\n  \"isCurrentlyStudying\": false\n}\n",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/UserEducation",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"UserEducation"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "text/plain"
+													},
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"educationId\": \"<uuid>\",\n  \"institutionName\": \"<string>\",\n  \"level\": \"<string>\",\n  \"startYear\": \"<date>\",\n  \"endYear\": \"<date>\",\n  \"percentage\": \"<float>\",\n  \"isCurrentlyStudying\": \"<boolean>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/User/education",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"User",
+														"education"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"institutionName\": \"<string>\",\n  \"educationId\": \"<uuid>\",\n  \"userId\": \"<uuid>\",\n  \"level\": \"<string>\",\n  \"startYear\": {\n    \"year\": \"<integer>\",\n    \"month\": \"<integer>\",\n    \"day\": \"<integer>\",\n    \"dayOfWeek\": 1,\n    \"dayOfYear\": \"<integer>\",\n    \"dayNumber\": \"<integer>\"\n  },\n  \"endYear\": {\n    \"year\": \"<integer>\",\n    \"month\": \"<integer>\",\n    \"day\": \"<integer>\",\n    \"dayOfWeek\": 2,\n    \"dayOfYear\": \"<integer>\",\n    \"dayNumber\": \"<integer>\"\n  },\n  \"percentage\": \"<float>\",\n  \"isCurrentlyStudying\": \"<boolean>\"\n}"
+										}
+									]
+								},
+								{
+									"name": "Get User Education",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/UserEducation",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"UserEducation"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete Education",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/UserEducation/:educationId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"UserEducation",
+												":educationId"
+											],
+											"variable": [
+												{
+													"key": "educationId",
+													"value": "55fa5fc5-94ec-4829-a819-67114f030350",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "text/plain"
+													},
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/User/education/:educationId",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"User",
+														"education",
+														":educationId"
+													],
+													"variable": [
+														{
+															"key": "educationId"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "<boolean>"
+										}
+									]
+								},
+								{
+									"name": "Get Education By ID",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/Usereducation/:educationId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Usereducation",
+												":educationId"
+											],
+											"variable": [
+												{
+													"key": "educationId",
+													"value": "55fa5fc5-94ec-4829-a819-67114f030350",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "text/plain"
+													},
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/User/education/:educationId",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"User",
+														"education",
+														":educationId"
+													],
+													"variable": [
+														{
+															"key": "educationId"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"educationId\": \"<uuid>\",\n  \"institutionName\": \"<string>\",\n  \"level\": \"<string>\",\n  \"startYear\": \"<date>\",\n  \"endYear\": \"<date>\",\n  \"percentage\": \"<float>\",\n  \"isCurrentlyStudying\": \"<boolean>\"\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "experience",
+							"item": [
+								{
+									"name": "Post Experience",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"companyName\": \"XYZ Tech Solutions\",\n  \"endYear\": \"2023-12-31\",\n  \"startYear\": \"2022-01-01\",\n  \"titleId\": \"a7d53d1e-3216-491e-acf5-bd6ff1edae17\"\n\n}\n",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/UserExperience",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"UserExperience"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "text/plain"
+													},
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"companyName\": \"<string>\",\n  \"endYear\": \"<date>\",\n  \"startYear\": \"<date>\",\n  \"titleId\": \"<uuid>\",\n  \"experienceDuration\": \"<integer>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/User/experience",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"User",
+														"experience"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"experienceId\": \"<uuid>\",\n  \"userId\": \"<uuid>\",\n  \"companyName\": \"<string>\",\n  \"titleId\": \"<uuid>\",\n  \"title\": {\n    \"titleId\": \"<uuid>\",\n    \"titleName\": \"<string>\"\n  },\n  \"startYear\": {\n    \"year\": \"<integer>\",\n    \"month\": \"<integer>\",\n    \"day\": \"<integer>\",\n    \"dayOfWeek\": 5,\n    \"dayOfYear\": \"<integer>\",\n    \"dayNumber\": \"<integer>\"\n  },\n  \"endYear\": {\n    \"year\": \"<integer>\",\n    \"month\": \"<integer>\",\n    \"day\": \"<integer>\",\n    \"dayOfWeek\": 2,\n    \"dayOfYear\": \"<integer>\",\n    \"dayNumber\": \"<integer>\"\n  },\n  \"experienceDuration\": \"<integer>\"\n}"
+										}
+									]
+								},
+								{
+									"name": "Update Experience",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{   \"experienceId\": \"6fe220eb-773f-4d5d-9ba8-96851e8c7e8e\",\n        \"companyName\": \"Genspark Tech Solutions\",\n        \"titleName\": \"Product Manager\",\n        \"startYear\": \"2018-01-01\",\n        \"endYear\": \"2023-12-31\",\n    \n  \"titleId\": \"a7d53d1e-3216-491e-acf5-bd6ff1edae17\"\n\n  \n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/UserExperience",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"UserExperience"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "text/plain"
+													},
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"companyName\": \"<string>\",\n  \"endYear\": \"<date>\",\n  \"experienceId\": \"<uuid>\",\n  \"startYear\": \"<date>\",\n  \"titleId\": \"<uuid>\",\n  \"experienceDuration\": \"<integer>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/User/experience",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"User",
+														"experience"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"experienceId\": \"<uuid>\",\n  \"userId\": \"<uuid>\",\n  \"companyName\": \"<string>\",\n  \"titleId\": \"<uuid>\",\n  \"title\": {\n    \"titleId\": \"<uuid>\",\n    \"titleName\": \"<string>\"\n  },\n  \"startYear\": {\n    \"year\": \"<integer>\",\n    \"month\": \"<integer>\",\n    \"day\": \"<integer>\",\n    \"dayOfWeek\": 5,\n    \"dayOfYear\": \"<integer>\",\n    \"dayNumber\": \"<integer>\"\n  },\n  \"endYear\": {\n    \"year\": \"<integer>\",\n    \"month\": \"<integer>\",\n    \"day\": \"<integer>\",\n    \"dayOfWeek\": 2,\n    \"dayOfYear\": \"<integer>\",\n    \"dayNumber\": \"<integer>\"\n  },\n  \"experienceDuration\": \"<integer>\"\n}"
+										}
+									]
+								},
+								{
+									"name": "Get experience",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/Userexperience",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Userexperience"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "text/plain"
+													},
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/User/experience",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"User",
+														"experience"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "[\n  {\n    \"companyName\": \"<string>\",\n    \"endYear\": \"<date>\",\n    \"experienceId\": \"<uuid>\",\n    \"startYear\": \"<date>\",\n    \"titleId\": \"<uuid>\",\n    \"experienceDuration\": \"<integer>\"\n  },\n  {\n    \"companyName\": \"<string>\",\n    \"endYear\": \"<date>\",\n    \"experienceId\": \"<uuid>\",\n    \"startYear\": \"<date>\",\n    \"titleId\": \"<uuid>\",\n    \"experienceDuration\": \"<integer>\"\n  }\n]"
+										}
+									]
+								},
+								{
+									"name": "Delete Experience",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/UserExperience/:experienceId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"UserExperience",
+												":experienceId"
+											],
+											"variable": [
+												{
+													"key": "experienceId",
+													"value": "<uuid>",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "text/plain"
+													},
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/User/experience/:experienceId",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"User",
+														"experience",
+														":experienceId"
+													],
+													"variable": [
+														{
+															"key": "experienceId"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "<boolean>"
+										}
+									]
+								},
+								{
+									"name": "Get experience by id",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/UserExperience/:experienceId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"UserExperience",
+												":experienceId"
+											],
+											"variable": [
+												{
+													"key": "experienceId",
+													"value": "6fe220eb-773f-4d5d-9ba8-96851e8c7e8e",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "text/plain"
+													},
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/User/experience/:experienceId",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"User",
+														"experience",
+														":experienceId"
+													],
+													"variable": [
+														{
+															"key": "experienceId"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"companyName\": \"<string>\",\n  \"endYear\": \"<date>\",\n  \"experienceId\": \"<uuid>\",\n  \"startYear\": \"<date>\",\n  \"titleId\": \"<uuid>\",\n  \"experienceDuration\": \"<integer>\"\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "areasofinterest",
+							"item": [
+								{
+									"name": "Update AOI",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"areasOfInterestId\": \"3e43570f-e473-4efc-a3d2-dd7fbaadd093\",\n  \"lpa\": \"4.6\",\n  \"titleId\": \"c10e5444-3258-4c0e-ab87-24a0709b6419\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/UserAreasOfInterest",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"UserAreasOfInterest"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "text/plain"
+													},
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"areasOfInterestId\": \"<uuid>\",\n  \"lpa\": \"<float>\",\n  \"titleId\": \"<uuid>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/User/areasofinterest",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"User",
+														"areasofinterest"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"areasOfInterestId\": \"<uuid>\",\n  \"userId\": \"<uuid>\",\n  \"titleId\": \"<uuid>\",\n  \"title\": {\n    \"titleId\": \"<uuid>\",\n    \"titleName\": \"<string>\"\n  },\n  \"lpa\": \"<float>\"\n}"
+										}
+									]
+								},
+								{
+									"name": "Get AOI",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/UserAreasOfInterest",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"UserAreasOfInterest"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "text/plain"
+													},
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/User/areasofinterest",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"User",
+														"areasofinterest"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "[\n  {\n    \"areasOfInterestId\": \"<uuid>\",\n    \"lpa\": \"<float>\",\n    \"titleId\": \"<uuid>\"\n  },\n  {\n    \"areasOfInterestId\": \"<uuid>\",\n    \"lpa\": \"<float>\",\n    \"titleId\": \"<uuid>\"\n  }\n]"
+										}
+									]
+								},
+								{
+									"name": "Add AOI",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"lpa\": 8,\n  \"titleId\": \"85b38a56-8a33-48d2-aa27-02569392a714\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/UserAreasOfInterest",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"UserAreasOfInterest"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "text/plain"
+													},
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"lpa\": \"<float>\",\n  \"titleId\": \"<uuid>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/User/areasofinterest",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"User",
+														"areasofinterest"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"areasOfInterestId\": \"<uuid>\",\n  \"userId\": \"<uuid>\",\n  \"titleId\": \"<uuid>\",\n  \"title\": {\n    \"titleId\": \"<uuid>\",\n    \"titleName\": \"<string>\"\n  },\n  \"lpa\": \"<float>\"\n}"
+										}
+									]
+								},
+								{
+									"name": "Delete AOI",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/UserAreasOfInterest/:areasOfInterestId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"UserAreasOfInterest",
+												":areasOfInterestId"
+											],
+											"variable": [
+												{
+													"key": "areasOfInterestId",
+													"value": "a4a43b63-5233-4826-b611-58b0bc1f25ae",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "text/plain"
+													},
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/User/areasofinterest/:areasOfInterestId",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"User",
+														"areasofinterest",
+														":areasOfInterestId"
+													],
+													"variable": [
+														{
+															"key": "areasOfInterestId"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "<boolean>"
+										}
+									]
+								},
+								{
+									"name": "Get AOI  by id",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/UserAreasOfInterest/:areasOfInterestId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"UserAreasOfInterest",
+												":areasOfInterestId"
+											],
+											"variable": [
+												{
+													"key": "areasOfInterestId",
+													"value": "2db8ce47-f521-49d7-93a5-0509b0d105ff",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "text/plain"
+													},
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/User/areasofinterest/:areasOfInterestId",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"User",
+														"areasofinterest",
+														":areasOfInterestId"
+													],
+													"variable": [
+														{
+															"key": "areasOfInterestId"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"areasOfInterestId\": \"<uuid>\",\n  \"lpa\": \"<float>\",\n  \"titleId\": \"<uuid>\"\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "User/register",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "text/plain"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"dob\": \"1990-01-01\",\n  \"email\": \"g3@example.com\",\n  \"name\": \"John Doe\",\n  \"password\": \"securePassword123!\",\n  \"address\": \"123 Main St\",\n  \"city\": \"Springfield\",\n  \"portfolioLink\": \"http://www.exampleresume.com/resume.pdf\",\n  \"phonenumber\": \"999555551\",\n  \"resumeUrl\": \"http://www.exampleresume.com/resume.pdf\"\n}\n",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/User/register",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"User",
+										"register"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"dob\": \"<date>\",\n  \"email\": \"<email>\",\n  \"name\": \"<string>\",\n  \"password\": \"<string>\",\n  \"address\": \"<string>\",\n  \"city\": \"<string>\",\n  \"portfolioLink\": \"<uri>\",\n  \"phonenumber\": \"<string>\",\n  \"resumeUrl\": \"<uri>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/User/register",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"User",
+												"register"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"dob\": \"<date>\",\n  \"email\": \"<email>\",\n  \"name\": \"<string>\",\n  \"password\": \"<string>\",\n  \"address\": \"<string>\",\n  \"city\": \"<string>\",\n  \"portfolioLink\": \"<uri>\",\n  \"phonenumber\": \"<string>\",\n  \"resumeUrl\": \"<uri>\"\n}"
+								}
+							]
+						},
+						{
+							"name": "User/login",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "text/plain"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "\n{\n  \"email\": \"g3@example.com\",\n  \"password\": \"securePassword123!\"\n}\n\n// {\n//   \"email\": \"Admin@jobportal.com\",\n//   \"password\": \"Admin@jobportal\"\n// }\n\n\n",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/User/login",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"User",
+										"login"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"email\": \"<email>\",\n  \"password\": \"<string>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/User/login",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"User",
+												"login"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "<string>"
+								}
+							]
+						},
+						{
+							"name": "User/update",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "text/plain"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"dob\": \"1985-04-12\",\n  \"name\": \"Gayathri\",\n  \"address\": \"123 New Street\",\n  \"city\": \"New City\",\n  \"portfolioLink\": \"http://www.newportfolio.com\",\n  \"phoneNumber\": \"1234567890\",\n  \"resumeUrl\": \"http://www.newresume.com/resume.pdf\"\n}\n",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/User/update",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"User",
+										"update"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"dob\": \"<date>\",\n  \"email\": \"<email>\",\n  \"name\": \"<string>\",\n  \"password\": \"<string>\",\n  \"address\": \"<string>\",\n  \"city\": \"<string>\",\n  \"portfolioLink\": \"<uri>\",\n  \"phonenumber\": \"<string>\",\n  \"resumeUrl\": \"<uri>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/User/update",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"User",
+												"update"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"dob\": \"<date>\",\n  \"email\": \"<email>\",\n  \"name\": \"<string>\",\n  \"password\": \"<string>\",\n  \"address\": \"<string>\",\n  \"city\": \"<string>\",\n  \"portfolioLink\": \"<uri>\",\n  \"phonenumber\": \"<string>\",\n  \"resumeUrl\": \"<uri>\"\n}"
+								}
+							]
+						},
+						{
+							"name": "/api/User/delete",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "text/plain"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/User/delete",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"User",
+										"delete"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/User/delete",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"User",
+												"delete"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "<boolean>"
+								}
+							]
+						},
+						{
+							"name": "recommended-jobs",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "text/plain"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/User/recommended-jobs?pageNumber=2&pageSize=5",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"User",
+										"recommended-jobs"
+									],
+									"query": [
+										{
+											"key": "pageNumber",
+											"value": "2"
+										},
+										{
+											"key": "pageSize",
+											"value": "5"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/User/recommended-jobs?pageNumber=<integer>&pageSize=<integer>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"User",
+												"recommended-jobs"
+											],
+											"query": [
+												{
+													"key": "pageNumber",
+													"value": "<integer>"
+												},
+												{
+													"key": "pageSize",
+													"value": "<integer>"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "[\n  {\n    \"jobId\": \"<uuid>\",\n    \"companyId\": \"<uuid>\",\n    \"company\": {\n      \"companyId\": \"<uuid>\",\n      \"companyName\": \"<string>\",\n      \"email\": \"<email>\",\n      \"password\": \"<string>\",\n      \"hasCode\": \"<string>\",\n      \"companyAddress\": \"<string>\",\n      \"city\": \"<string>\",\n      \"companySize\": \"<integer>\",\n      \"companyWebsite\": \"<uri>\",\n      \"jobs\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Job detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Job detected>\"\n        }\n      ]\n    },\n    \"jobType\": 0,\n    \"titleId\": \"<uuid>\",\n    \"title\": {\n      \"titleId\": \"<uuid>\",\n      \"titleName\": \"<string>\"\n    },\n    \"experienceRequired\": \"<float>\",\n    \"lpa\": \"<float>\",\n    \"datePosted\": {\n      \"year\": \"<integer>\",\n      \"month\": \"<integer>\",\n      \"day\": \"<integer>\",\n      \"dayOfWeek\": 5,\n      \"dayOfYear\": \"<integer>\",\n      \"dayNumber\": \"<integer>\"\n    },\n    \"jobDescription\": \"<string>\",\n    \"status\": \"<boolean>\",\n    \"jobSkills\": [\n      {\n        \"jobSkillsId\": \"<uuid>\",\n        \"jobId\": \"<uuid>\",\n        \"job\": {\n          \"value\": \"<Circular reference to #/components/schemas/Job detected>\"\n        },\n        \"skillId\": \"<uuid>\",\n        \"skill\": {\n          \"skillId\": \"<uuid>\",\n          \"skill_Name\": \"<string>\"\n        }\n      },\n      {\n        \"jobSkillsId\": \"<uuid>\",\n        \"jobId\": \"<uuid>\",\n        \"job\": {\n          \"value\": \"<Circular reference to #/components/schemas/Job detected>\"\n        },\n        \"skillId\": \"<uuid>\",\n        \"skill\": {\n          \"skillId\": \"<uuid>\",\n          \"skill_Name\": \"<string>\"\n        }\n      }\n    ],\n    \"jobActivities\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/JobActivity detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/JobActivity detected>\"\n      }\n    ]\n  },\n  {\n    \"jobId\": \"<uuid>\",\n    \"companyId\": \"<uuid>\",\n    \"company\": {\n      \"companyId\": \"<uuid>\",\n      \"companyName\": \"<string>\",\n      \"email\": \"<email>\",\n      \"password\": \"<string>\",\n      \"hasCode\": \"<string>\",\n      \"companyAddress\": \"<string>\",\n      \"city\": \"<string>\",\n      \"companySize\": \"<integer>\",\n      \"companyWebsite\": \"<uri>\",\n      \"jobs\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Job detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Job detected>\"\n        }\n      ]\n    },\n    \"jobType\": 2,\n    \"titleId\": \"<uuid>\",\n    \"title\": {\n      \"titleId\": \"<uuid>\",\n      \"titleName\": \"<string>\"\n    },\n    \"experienceRequired\": \"<float>\",\n    \"lpa\": \"<float>\",\n    \"datePosted\": {\n      \"year\": \"<integer>\",\n      \"month\": \"<integer>\",\n      \"day\": \"<integer>\",\n      \"dayOfWeek\": 3,\n      \"dayOfYear\": \"<integer>\",\n      \"dayNumber\": \"<integer>\"\n    },\n    \"jobDescription\": \"<string>\",\n    \"status\": \"<boolean>\",\n    \"jobSkills\": [\n      {\n        \"jobSkillsId\": \"<uuid>\",\n        \"jobId\": \"<uuid>\",\n        \"job\": {\n          \"value\": \"<Circular reference to #/components/schemas/Job detected>\"\n        },\n        \"skillId\": \"<uuid>\",\n        \"skill\": {\n          \"skillId\": \"<uuid>\",\n          \"skill_Name\": \"<string>\"\n        }\n      },\n      {\n        \"jobSkillsId\": \"<uuid>\",\n        \"jobId\": \"<uuid>\",\n        \"job\": {\n          \"value\": \"<Circular reference to #/components/schemas/Job detected>\"\n        },\n        \"skillId\": \"<uuid>\",\n        \"skill\": {\n          \"skillId\": \"<uuid>\",\n          \"skill_Name\": \"<string>\"\n        }\n      }\n    ],\n    \"jobActivities\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/JobActivity detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/JobActivity detected>\"\n      }\n    ]\n  }\n]"
+								}
+							]
+						},
+						{
+							"name": "User full profile",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "text/plain"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/User/profile/46a49fd3-4086-4ce9-b169-af7182864859",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"User",
+										"profile",
+										"46a49fd3-4086-4ce9-b169-af7182864859"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/User/profile/:userid",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"User",
+												"profile",
+												":userid"
+											],
+											"variable": [
+												{
+													"key": "userid"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"userId\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"email\": \"<email>\",\n  \"password\": \"<string>\",\n  \"hasCode\": \"<string>\",\n  \"dob\": {\n    \"year\": \"<integer>\",\n    \"month\": \"<integer>\",\n    \"day\": \"<integer>\",\n    \"dayOfWeek\": 4,\n    \"dayOfYear\": \"<integer>\",\n    \"dayNumber\": \"<integer>\"\n  },\n  \"address\": \"<string>\",\n  \"city\": \"<string>\",\n  \"portfolioLink\": \"<uri>\",\n  \"phonenumber\": \"<string>\",\n  \"resumeUrl\": \"<uri>\",\n  \"educations\": [\n    {\n      \"institutionName\": \"<string>\",\n      \"educationId\": \"<uuid>\",\n      \"userId\": \"<uuid>\",\n      \"level\": \"<string>\",\n      \"startYear\": {\n        \"year\": \"<integer>\",\n        \"month\": \"<integer>\",\n        \"day\": \"<integer>\",\n        \"dayOfWeek\": 0,\n        \"dayOfYear\": \"<integer>\",\n        \"dayNumber\": \"<integer>\"\n      },\n      \"endYear\": {\n        \"year\": \"<integer>\",\n        \"month\": \"<integer>\",\n        \"day\": \"<integer>\",\n        \"dayOfWeek\": 1,\n        \"dayOfYear\": \"<integer>\",\n        \"dayNumber\": \"<integer>\"\n      },\n      \"percentage\": \"<float>\",\n      \"isCurrentlyStudying\": \"<boolean>\"\n    },\n    {\n      \"institutionName\": \"<string>\",\n      \"educationId\": \"<uuid>\",\n      \"userId\": \"<uuid>\",\n      \"level\": \"<string>\",\n      \"startYear\": {\n        \"year\": \"<integer>\",\n        \"month\": \"<integer>\",\n        \"day\": \"<integer>\",\n        \"dayOfWeek\": 6,\n        \"dayOfYear\": \"<integer>\",\n        \"dayNumber\": \"<integer>\"\n      },\n      \"endYear\": {\n        \"year\": \"<integer>\",\n        \"month\": \"<integer>\",\n        \"day\": \"<integer>\",\n        \"dayOfWeek\": 1,\n        \"dayOfYear\": \"<integer>\",\n        \"dayNumber\": \"<integer>\"\n      },\n      \"percentage\": \"<float>\",\n      \"isCurrentlyStudying\": \"<boolean>\"\n    }\n  ],\n  \"experiences\": [\n    {\n      \"experienceId\": \"<uuid>\",\n      \"userId\": \"<uuid>\",\n      \"companyName\": \"<string>\",\n      \"titleId\": \"<uuid>\",\n      \"title\": {\n        \"titleId\": \"<uuid>\",\n        \"titleName\": \"<string>\"\n      },\n      \"startYear\": {\n        \"year\": \"<integer>\",\n        \"month\": \"<integer>\",\n        \"day\": \"<integer>\",\n        \"dayOfWeek\": 6,\n        \"dayOfYear\": \"<integer>\",\n        \"dayNumber\": \"<integer>\"\n      },\n      \"endYear\": {\n        \"year\": \"<integer>\",\n        \"month\": \"<integer>\",\n        \"day\": \"<integer>\",\n        \"dayOfWeek\": 6,\n        \"dayOfYear\": \"<integer>\",\n        \"dayNumber\": \"<integer>\"\n      },\n      \"experienceDuration\": \"<integer>\"\n    },\n    {\n      \"experienceId\": \"<uuid>\",\n      \"userId\": \"<uuid>\",\n      \"companyName\": \"<string>\",\n      \"titleId\": \"<uuid>\",\n      \"title\": {\n        \"titleId\": \"<uuid>\",\n        \"titleName\": \"<string>\"\n      },\n      \"startYear\": {\n        \"year\": \"<integer>\",\n        \"month\": \"<integer>\",\n        \"day\": \"<integer>\",\n        \"dayOfWeek\": 5,\n        \"dayOfYear\": \"<integer>\",\n        \"dayNumber\": \"<integer>\"\n      },\n      \"endYear\": {\n        \"year\": \"<integer>\",\n        \"month\": \"<integer>\",\n        \"day\": \"<integer>\",\n        \"dayOfWeek\": 5,\n        \"dayOfYear\": \"<integer>\",\n        \"dayNumber\": \"<integer>\"\n      },\n      \"experienceDuration\": \"<integer>\"\n    }\n  ],\n  \"userSkills\": [\n    {\n      \"userSkillsId\": \"<uuid>\",\n      \"userId\": \"<uuid>\",\n      \"skillId\": \"<uuid>\",\n      \"skill\": {\n        \"skillId\": \"<uuid>\",\n        \"skill_Name\": \"<string>\"\n      },\n      \"user\": {\n        \"value\": \"<Circular reference to #/components/schemas/User detected>\"\n      }\n    },\n    {\n      \"userSkillsId\": \"<uuid>\",\n      \"userId\": \"<uuid>\",\n      \"skillId\": \"<uuid>\",\n      \"skill\": {\n        \"skillId\": \"<uuid>\",\n        \"skill_Name\": \"<string>\"\n      },\n      \"user\": {\n        \"value\": \"<Circular reference to #/components/schemas/User detected>\"\n      }\n    }\n  ],\n  \"jobActivities\": [\n    {\n      \"userJobId\": \"<uuid>\",\n      \"userId\": \"<uuid>\",\n      \"user\": {\n        \"value\": \"<Circular reference to #/components/schemas/User detected>\"\n      },\n      \"jobId\": \"<uuid>\",\n      \"job\": {\n        \"jobId\": \"<uuid>\",\n        \"companyId\": \"<uuid>\",\n        \"company\": {\n          \"companyId\": \"<uuid>\",\n          \"companyName\": \"<string>\",\n          \"email\": \"<email>\",\n          \"password\": \"<string>\",\n          \"hasCode\": \"<string>\",\n          \"companyAddress\": \"<string>\",\n          \"city\": \"<string>\",\n          \"companySize\": \"<integer>\",\n          \"companyWebsite\": \"<uri>\",\n          \"jobs\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Job detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Job detected>\"\n            }\n          ]\n        },\n        \"jobType\": 4,\n        \"titleId\": \"<uuid>\",\n        \"title\": {\n          \"titleId\": \"<uuid>\",\n          \"titleName\": \"<string>\"\n        },\n        \"experienceRequired\": \"<float>\",\n        \"lpa\": \"<float>\",\n        \"datePosted\": {\n          \"year\": \"<integer>\",\n          \"month\": \"<integer>\",\n          \"day\": \"<integer>\",\n          \"dayOfWeek\": 0,\n          \"dayOfYear\": \"<integer>\",\n          \"dayNumber\": \"<integer>\"\n        },\n        \"jobDescription\": \"<string>\",\n        \"status\": \"<boolean>\",\n        \"jobSkills\": [\n          {\n            \"jobSkillsId\": \"<uuid>\",\n            \"jobId\": \"<uuid>\",\n            \"job\": {\n              \"value\": \"<Circular reference to #/components/schemas/Job detected>\"\n            },\n            \"skillId\": \"<uuid>\",\n            \"skill\": {\n              \"skillId\": \"<uuid>\",\n              \"skill_Name\": \"<string>\"\n            }\n          },\n          {\n            \"jobSkillsId\": \"<uuid>\",\n            \"jobId\": \"<uuid>\",\n            \"job\": {\n              \"value\": \"<Circular reference to #/components/schemas/Job detected>\"\n            },\n            \"skillId\": \"<uuid>\",\n            \"skill\": {\n              \"skillId\": \"<uuid>\",\n              \"skill_Name\": \"<string>\"\n            }\n          }\n        ],\n        \"jobActivities\": [\n          {\n            \"value\": \"<Circular reference to #/components/schemas/JobActivity detected>\"\n          },\n          {\n            \"value\": \"<Circular reference to #/components/schemas/JobActivity detected>\"\n          }\n        ]\n      },\n      \"status\": 3,\n      \"resumeViewed\": \"<boolean>\",\n      \"comments\": \"<string>\",\n      \"appliedDate\": {\n        \"year\": \"<integer>\",\n        \"month\": \"<integer>\",\n        \"day\": \"<integer>\",\n        \"dayOfWeek\": 1,\n        \"dayOfYear\": \"<integer>\",\n        \"dayNumber\": \"<integer>\"\n      },\n      \"updatedDate\": \"<dateTime>\"\n    },\n    {\n      \"userJobId\": \"<uuid>\",\n      \"userId\": \"<uuid>\",\n      \"user\": {\n        \"value\": \"<Circular reference to #/components/schemas/User detected>\"\n      },\n      \"jobId\": \"<uuid>\",\n      \"job\": {\n        \"jobId\": \"<uuid>\",\n        \"companyId\": \"<uuid>\",\n        \"company\": {\n          \"companyId\": \"<uuid>\",\n          \"companyName\": \"<string>\",\n          \"email\": \"<email>\",\n          \"password\": \"<string>\",\n          \"hasCode\": \"<string>\",\n          \"companyAddress\": \"<string>\",\n          \"city\": \"<string>\",\n          \"companySize\": \"<integer>\",\n          \"companyWebsite\": \"<uri>\",\n          \"jobs\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Job detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/Job detected>\"\n            }\n          ]\n        },\n        \"jobType\": 1,\n        \"titleId\": \"<uuid>\",\n        \"title\": {\n          \"titleId\": \"<uuid>\",\n          \"titleName\": \"<string>\"\n        },\n        \"experienceRequired\": \"<float>\",\n        \"lpa\": \"<float>\",\n        \"datePosted\": {\n          \"year\": \"<integer>\",\n          \"month\": \"<integer>\",\n          \"day\": \"<integer>\",\n          \"dayOfWeek\": 0,\n          \"dayOfYear\": \"<integer>\",\n          \"dayNumber\": \"<integer>\"\n        },\n        \"jobDescription\": \"<string>\",\n        \"status\": \"<boolean>\",\n        \"jobSkills\": [\n          {\n            \"jobSkillsId\": \"<uuid>\",\n            \"jobId\": \"<uuid>\",\n            \"job\": {\n              \"value\": \"<Circular reference to #/components/schemas/Job detected>\"\n            },\n            \"skillId\": \"<uuid>\",\n            \"skill\": {\n              \"skillId\": \"<uuid>\",\n              \"skill_Name\": \"<string>\"\n            }\n          },\n          {\n            \"jobSkillsId\": \"<uuid>\",\n            \"jobId\": \"<uuid>\",\n            \"job\": {\n              \"value\": \"<Circular reference to #/components/schemas/Job detected>\"\n            },\n            \"skillId\": \"<uuid>\",\n            \"skill\": {\n              \"skillId\": \"<uuid>\",\n              \"skill_Name\": \"<string>\"\n            }\n          }\n        ],\n        \"jobActivities\": [\n          {\n            \"value\": \"<Circular reference to #/components/schemas/JobActivity detected>\"\n          },\n          {\n            \"value\": \"<Circular reference to #/components/schemas/JobActivity detected>\"\n          }\n        ]\n      },\n      \"status\": 3,\n      \"resumeViewed\": \"<boolean>\",\n      \"comments\": \"<string>\",\n      \"appliedDate\": {\n        \"year\": \"<integer>\",\n        \"month\": \"<integer>\",\n        \"day\": \"<integer>\",\n        \"dayOfWeek\": 3,\n        \"dayOfYear\": \"<integer>\",\n        \"dayNumber\": \"<integer>\"\n      },\n      \"updatedDate\": \"<dateTime>\"\n    }\n  ],\n  \"areasOfInterests\": [\n    {\n      \"areasOfInterestId\": \"<uuid>\",\n      \"userId\": \"<uuid>\",\n      \"titleId\": \"<uuid>\",\n      \"title\": {\n        \"titleId\": \"<uuid>\",\n        \"titleName\": \"<string>\"\n      },\n      \"lpa\": \"<float>\"\n    },\n    {\n      \"areasOfInterestId\": \"<uuid>\",\n      \"userId\": \"<uuid>\",\n      \"titleId\": \"<uuid>\",\n      \"title\": {\n        \"titleId\": \"<uuid>\",\n        \"titleName\": \"<string>\"\n      },\n      \"lpa\": \"<float>\"\n    }\n  ]\n}"
+								}
+							]
+						},
+						{
+							"name": "JobMatch",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/User/jobmatch/:jobId",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"User",
+										"jobmatch",
+										":jobId"
+									],
+									"variable": [
+										{
+											"key": "jobId",
+											"value": "1c6c9a90-eb57-4afd-8597-74c360bf2139",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/User/jobmatch/:jobId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"User",
+												"jobmatch",
+												":jobId"
+											],
+											"variable": [
+												{
+													"key": "jobId"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "UserSkills",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n \n  \"skillsToAdd\": [\n\"be1fdbf5-9a8d-4952-9847-460283851002\",\n\"c1ee1fe1-adbf-47dd-b9a7-0cc2bcd1ddde\"\n  ],\n  \"skillsToRemove\": [\n\n  ]\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/User/skills",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"User",
+										"skills"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"jobId\": \"<uuid>\",\n  \"skillsToAdd\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"skillsToRemove\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/User/skills",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"User",
+												"skills"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/User/GetSkills",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/User/GetSkills",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"User",
+										"GetSkills"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/User/GetSkills",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"User",
+												"GetSkills"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "ResumeUpload",
+					"item": [
+						{
+							"name": "ResumeUpload",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "multipart/form-data"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "file",
+											"type": "file",
+											"src": "/C:/Users/SRIKANTH/OneDrive/Desktop/Srikanth's Resume.pdf"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/Resume/upload",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Resume",
+										"upload"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "multipart/form-data"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "file",
+													"value": "<string>",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/ResumeUpload/upload",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"ResumeUpload",
+												"upload"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "Resume/download",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/Resume/download/c2002c28-40bf-486a-b34f-f26447f2ddbd",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Resume",
+										"download",
+										"c2002c28-40bf-486a-b34f-f26447f2ddbd"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/ResumeUpload/download/:userId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"ResumeUpload",
+												"download",
+												":userId"
+											],
+											"variable": [
+												{
+													"key": "userId"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "Resume/view by company",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/Resume/view/:userId/:jobactivityId",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Resume",
+										"view",
+										":userId",
+										":jobactivityId"
+									],
+									"variable": [
+										{
+											"key": "userId",
+											"value": "c2002c28-40bf-486a-b34f-f26447f2ddbd",
+											"description": "(Required) "
+										},
+										{
+											"key": "jobactivityId",
+											"value": "71b606dd-d6b9-47da-9927-e201c22e2cb2",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/ResumeUpload/view/:userId/:jobactivityId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"ResumeUpload",
+												"view",
+												":userId",
+												":jobactivityId"
+											],
+											"variable": [
+												{
+													"key": "userId"
+												},
+												{
+													"key": "jobactivityId"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "Resume/view by user Id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/Resume/view/:UserId",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Resume",
+										"view",
+										":UserId"
+									],
+									"variable": [
+										{
+											"key": "UserId",
+											"value": "675C07BD-3440-433B-B884-BFD06B6BA102",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/ResumeUpload/view/:UserId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"ResumeUpload",
+												"view",
+												":UserId"
+											],
+											"variable": [
+												{
+													"key": "UserId"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "Resume Url",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5117/api/resume/view/675c07bd-3440-433b-b884-bfd06b6ba102",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5117",
+									"path": [
+										"api",
+										"resume",
+										"view",
+										"675c07bd-3440-433b-b884-bfd06b6ba102"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Admin",
+					"item": [
+						{
+							"name": "skills",
+							"item": [
+								{
+									"name": "Delete skill",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/Admin/skills/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Admin",
+												"skills",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "4d082295-f6da-495b-8d99-97d603aceb70",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/Admin/skills/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Admin",
+														"skills",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								},
+								{
+									"name": "Add skill",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "\"K8\"",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Admin/skills",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Admin",
+												"skills"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"skillId\": \"<uuid>\",\n  \"skill_Name\": \"<string>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/Admin/skills",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Admin",
+														"skills"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "titles",
+							"item": [
+								{
+									"name": "/api/Admin/titles",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "\"Rust Developer\"",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Admin/titles",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Admin",
+												"titles"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "<string>",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/Admin/titles",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Admin",
+														"titles"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "key",
+				"value": "Authorization",
+				"type": "string"
+			},
+			{
+				"key": "value",
+				"value": "{{apiKey}}",
+				"type": "string"
+			},
+			{
+				"key": "in",
+				"value": "header",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:5117"
+		},
+		{
+			"key": "ProductManager",
+			"value": "cb0559ee-e156-4c4d-985b-13f3fc966725",
+			"type": "string"
+		},
+		{
+			"key": "Database Developer",
+			"value": "e91031c0-1d21-49ab-85d3-0b356077792f",
+			"type": "string"
+		},
+		{
+			"key": "companyid",
+			"value": "2f092440-40f3-4d9e-9ad9-709d895c806e",
+			"type": "string"
+		}
+	]
+}

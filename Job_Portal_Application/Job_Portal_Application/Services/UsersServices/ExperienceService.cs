@@ -6,11 +6,9 @@ using Job_Portal_Application.Interfaces.IRepository;
 using Job_Portal_Application.Interfaces.IService;
 using Job_Portal_Application.Models;
 using Job_Portal_Application.Repository.UserRepos;
-using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Security.Claims;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Job_Portal_Application.Services.UsersServices
@@ -18,26 +16,26 @@ namespace Job_Portal_Application.Services.UsersServices
     public class ExperienceService : IExperienceService
     {
         private readonly IExperienceRepository _experienceRepository;
-
-      
         private readonly IRepository<Guid, Title> _titleRepository;
+        private readonly IUserRepository _userRepository;
 
-        public ExperienceService(IRepository<Guid, Title> titleRepository,IExperienceRepository experienceRepository)
+        public ExperienceService(IRepository<Guid, Title> titleRepository, IExperienceRepository experienceRepository, IUserRepository userRepository)
         {
             _experienceRepository = experienceRepository;
-
-
             _titleRepository = titleRepository;
+            _userRepository = userRepository;
         }
 
         public async Task<ExperienceDto> AddExperience(AddExperienceDto experienceDto, Guid UserId)
         {
             _ = await _titleRepository.Get(experienceDto.TitleId) ?? throw new TitleNotFoundException("Invalid TitleId. Title does not exist.");
-            
-            
+
+            var user = await _userRepository.Get(UserId);
+            ValidateExperienceDates(user.Dob, DateOnly.FromDateTime(experienceDto.StartYear), DateOnly.FromDateTime(experienceDto.EndYear));
+
             var experience = new Experience
             {
-                UserId =UserId,
+                UserId = UserId,
                 CompanyName = experienceDto.CompanyName,
                 TitleId = experienceDto.TitleId,
                 StartYear = DateOnly.FromDateTime(experienceDto.StartYear),
@@ -52,8 +50,10 @@ namespace Job_Portal_Application.Services.UsersServices
         {
             _ = await _titleRepository.Get(experienceDto.TitleId) ?? throw new TitleNotFoundException("Invalid TitleId. Title does not exist.");
 
-         var experience=   await _experienceRepository.Get(experienceDto.ExperienceId, UserId) ?? throw new ExperienceNotFoundException("Experience not found ");
+            var experience = await _experienceRepository.Get(experienceDto.ExperienceId, UserId) ?? throw new ExperienceNotFoundException("Experience not found");
 
+            var user = await _userRepository.Get(UserId);
+            ValidateExperienceDates(user.Dob, DateOnly.FromDateTime(experienceDto.StartYear), DateOnly.FromDateTime(experienceDto.EndYear));
 
             experience.CompanyName = experienceDto.CompanyName;
             experience.TitleId = experienceDto.TitleId;
@@ -65,7 +65,7 @@ namespace Job_Portal_Application.Services.UsersServices
 
         public async Task<bool> DeleteExperience(Guid experienceId, Guid UserId)
         {
-            return await _experienceRepository.Delete(await _experienceRepository.Get(experienceId, UserId) ?? throw new ExperienceNotFoundException("Experience not found "));
+            return await _experienceRepository.Delete(await _experienceRepository.Get(experienceId, UserId) ?? throw new ExperienceNotFoundException("Experience not found"));
         }
 
         public async Task<ExperienceDto> GetExperience(Guid experienceId, Guid userId)
@@ -74,25 +74,31 @@ namespace Job_Portal_Application.Services.UsersServices
             return ToDto(experience) ?? throw new ExperienceNotFoundException("Experience not found");
         }
 
-
-
-        public async Task<IEnumerable<ExperienceDto>> GetAllExperiences( Guid UserId)
+        public async Task<IEnumerable<ExperienceDto>> GetAllExperiences(Guid UserId)
         {
-            var experiences=  await _experienceRepository.GetAll(UserId);
+            var experiences = await _experienceRepository.GetAll(UserId);
             if (!experiences.Any())
             {
-                 throw new ExperienceNotFoundException("Experience not found ");
+                throw new ExperienceNotFoundException("Experience not found");
             }
-            return experiences.Select(j=> ToDto(j));
+            return experiences.Select(j => ToDto(j));
         }
 
-        public static ExperienceDto ToDto( Experience experience)
+        private void ValidateExperienceDates(DateOnly birthDate, DateOnly startYear, DateOnly endYear)
+        {
+            if (startYear < birthDate || endYear < birthDate)
+            {
+                throw new InvalidExperienceDateException("Experience start or end date cannot be earlier than user's date of birth");
+            }
+        }
+
+        public static ExperienceDto ToDto(Experience experience)
         {
             return new ExperienceDto
             {
                 ExperienceId = experience.ExperienceId,
                 CompanyName = experience.CompanyName,
-                TitleName = experience.Title.TitleName, 
+                TitleName = experience.Title.TitleName,
                 StartYear = experience.StartYear,
                 EndYear = experience.EndYear,
                 ExperienceDuration = (experience.EndYear.Year - experience.StartYear.Year)

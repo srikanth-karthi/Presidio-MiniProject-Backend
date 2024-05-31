@@ -44,6 +44,10 @@ namespace Job_Portal_Application.Controllers
                 var addedEducation = await _educationService.AddEducation(educationDto, Guid.Parse(User.FindFirst("id").Value));
                 return Ok(addedEducation);
             }
+            catch (InvalidEducationDateException ex)
+            {
+                return StatusCode(400, $"An error occurred: {ex.Message}");
+            }
             catch (Exception ex)
             {
                 return StatusCode(500, $"An error occurred: {ex.Message}");
@@ -73,6 +77,10 @@ namespace Job_Portal_Application.Controllers
             catch (EducationNotFoundException ex)
             {
                 return NotFound(new { message = ex.Message });
+            }
+            catch (InvalidEducationDateException ex)
+            {
+                return StatusCode(400, $"An error occurred: {ex.Message}");
             }
             catch (Exception ex)
             {

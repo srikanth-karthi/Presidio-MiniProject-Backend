@@ -106,6 +106,7 @@ namespace Job_Portal_Application.Services.CompanyService
             company.City = companyDto.City;
             company.CompanySize = companyDto.CompanySize;
             company.CompanyWebsite = companyDto.CompanyWebsite;
+            company.CompanyDescription = companyDto.CompanyDescription;
 
             var updatedCompany = await _companyRepository.Update(company);
             return MapToCompanyDto(updatedCompany);

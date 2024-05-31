@@ -86,9 +86,12 @@ namespace Job_Portal_Application
             builder.Services.AddDbContext<JobportalContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("defaultConnection")));
 
-       
+
 
             #endregion
+
+
+            #region Services
 
             builder.Services.AddScoped<ITokenService, TokenServices>();
             builder.Services.AddScoped<IUserService, UserService>();
@@ -103,8 +106,10 @@ namespace Job_Portal_Application
             builder.Services.AddScoped<IAdminService, AdminService>();
 
 
+            #endregion
 
 
+            #region Repository
             builder.Services.AddScoped<IJobSkillsRepository, JobSkillsRepository>();
             builder.Services.AddScoped<IUserRepository, UserRepository>();
             builder.Services.AddScoped<IEducationRepository, EducationRepository>();
@@ -122,9 +127,9 @@ namespace Job_Portal_Application
             builder.Services.AddScoped<IRepository<Guid, UserSkills>, UserSkillsRepository>();
             builder.Services.AddScoped<IRepository<Guid, Skill>, SkillRepository>();
 
+            #endregion
 
 
-    
 
             builder.Services.AddHttpContextAccessor();
 

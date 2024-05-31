@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
 using Job_Portal_Application.Dto.profile;
-using Job_Portal_Application.Dto;
 using Job_Portal_Application.Dto.Enums;
 using Job_Portal_Application.Dto.JobDto;
 using Job_Portal_Application.Dto.UserDto;
@@ -13,12 +9,6 @@ using Job_Portal_Application.Exceptions;
 using Job_Portal_Application.Interfaces.IRepository;
 using Job_Portal_Application.Interfaces.IService;
 using Job_Portal_Application.Models;
-using Job_Portal_Application.Repository.CompanyRepos;
-using Job_Portal_Application.Repository.UserRepos;
-
-using System.Linq;
-using Job_Portal_Application.Repository;
-using Job_Portal_Application.Repository.SkillRepos;
 using Job_Portal_Application.Dto.SkillDtos;
 
 

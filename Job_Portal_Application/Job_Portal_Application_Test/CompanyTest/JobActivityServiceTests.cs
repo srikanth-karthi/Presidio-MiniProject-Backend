@@ -107,7 +107,7 @@ namespace Job_Portal_Application_Test.JobActivityTest
             var jobActivity = await _jobActivityService.GetJobActivityById(TestJobportalContext.JobActivityId1);
 
             Assert.IsNotNull(jobActivity);
-            Assert.AreEqual(jobActivity.UserJobId, TestJobportalContext.JobActivityId1);
+            Assert.AreEqual(jobActivity.JobactivityId, TestJobportalContext.JobActivityId1);
         }
 
 

@@ -34,16 +34,29 @@ namespace Job_Portal_Application_Test.UserTest
             _context = new TestJobportalContext(_dbContextOptions);
             _context.Database.EnsureCreated();
 
-
-            _context.Database.EnsureCreated();
-
-            IEducationRepository educationRepo = new EducationRepository(_context);
-
             _testUserId = Guid.NewGuid();
 
-            _educationService = new EducationService(educationRepo);
+            var testUser = new User
+            {
+                UserId = _testUserId,
+                Name = "Test User",
+                Email = "testuser@example.com",
+                Dob = DateOnly.FromDateTime(new DateTime(1990, 1, 1)),
+                Address = "123 Test St",
+                City = "Test City",
+                PortfolioLink = "http://testuser.com",
+                Phonenumber = "123-456-7890",
+                ResumeUrl = "http://resume.testuser.com"
+            };
+            _context.Users.Add(testUser);
+            _context.SaveChanges();
 
+            IEducationRepository educationRepo = new EducationRepository(_context);
+            IUserRepository userRepo = new UserRepository(_context);
+
+            _educationService = new EducationService(educationRepo, userRepo);
         }
+
 
         [TearDown]
         public void TearDown()
@@ -78,7 +91,7 @@ namespace Job_Portal_Application_Test.UserTest
             {
                 Level = "Bachelors",
                 InstitutionName = "Test University",
-                StartYear = new DateTime(2015, 1, 1),
+                StartYear = new DateTime(2019, 1, 1),
                 EndYear = new DateTime(2019, 1, 1),
                 Percentage = 85.5f,
                 IsCurrentlyStudying = false
@@ -197,7 +210,7 @@ namespace Job_Portal_Application_Test.UserTest
 
             Assert.ThrowsAsync<EducationNotFoundException>(async () =>
             {
-                await _educationService.UpdateEducation(updateEducationDto, invalidUserId);
+                await _educationService.UpdateEducation(updateEducationDto, _testUserId);
             });
         }
 

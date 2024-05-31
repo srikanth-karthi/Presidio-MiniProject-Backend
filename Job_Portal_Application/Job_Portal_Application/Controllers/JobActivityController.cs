@@ -50,13 +50,22 @@ namespace Job_Portal_Application.Controllers
             }
         }
 
-        [HttpGet("filtered")]
+        [HttpPost("filtered")]
         [Authorize(Roles = "Company")]
-        public async Task<IActionResult> GetFilteredJobActivities(Guid jobId, int pageNumber = 1, int pageSize = 25, bool firstApplied = false, bool perfectMatchSkills = false, bool perfectMatchExperience = false, bool hasExperienceInJobTitle = false)
+        public async Task<IActionResult> GetFilteredJobActivities([FromBody] FilteredJobActivitiesDto filterDto)
         {
             try
             {
-                var jobActivities = await _jobActivityService.GetFilteredUser(Guid.Parse(User.FindFirst("id").Value),jobId, pageNumber, pageSize, firstApplied, perfectMatchSkills, perfectMatchExperience, hasExperienceInJobTitle);
+                var jobActivities = await _jobActivityService.GetFilteredUser(
+                    Guid.Parse(User.FindFirst("id").Value),
+                    filterDto.JobId,
+                    filterDto.PageNumber,
+                    filterDto.PageSize,
+                    filterDto.FirstApplied,
+                    filterDto.PerfectMatchSkills,
+                    filterDto.PerfectMatchExperience,
+                    filterDto.HasExperienceInJobTitle
+                );
                 return Ok(jobActivities);
             }
             catch (JobNotFoundException ex)

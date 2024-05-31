@@ -50,6 +50,10 @@ namespace Job_Portal_Application.Controllers
             {
                 return NotFound(ex.Message);
             }
+            catch (InvalidExperienceDateException ex)
+            {
+                return StatusCode(400, $"An error occurred: {ex.Message}");
+            }
             catch (Exception ex)
             {
                 return StatusCode(500, $"An error occurred: {ex.Message}");
@@ -79,6 +83,10 @@ namespace Job_Portal_Application.Controllers
             catch (ExperienceNotFoundException ex)
             {
                 return NotFound(new { message = ex.Message });
+            }
+            catch (InvalidExperienceDateException ex)
+            {
+                return StatusCode(400, $"An error occurred: {ex.Message}");
             }
             catch (TitleNotFoundException ex)
             {

@@ -21,14 +21,13 @@ namespace Job_Portal_Application_Test.UserTest
     public class ExperienceTest
     {
         private DbContextOptions _dbContextOptions;
-        private JobportalContext _context;
+        private TestJobportalContext _context;
         private ExperienceService _experienceService;
         private Guid _testUserId;
 
         [SetUp]
         public void Setup()
         {
-
             _dbContextOptions = new DbContextOptionsBuilder()
                 .UseInMemoryDatabase("JobPortalTestDb")
                 .Options;
@@ -36,18 +35,31 @@ namespace Job_Portal_Application_Test.UserTest
             _context = new TestJobportalContext(_dbContextOptions);
             _context.Database.EnsureCreated();
 
+            _testUserId =Guid.NewGuid();
 
-            _context.Database.EnsureCreated();
+            var testUser = new User
+            {
+                UserId = _testUserId,
+                Name = "Test User",
+                Email = "testuser@example.com",
+                Dob = DateOnly.FromDateTime(new DateTime(1990, 1, 1)),
+                Address = "123 Test St",
+                City = "Test City",
+                PortfolioLink = "http://testuser.com",
+                Phonenumber = "123-456-7890",
+                ResumeUrl = "http://resume.testuser.com"
+            };
+            _context.Users.Add(testUser);
+
+
+
+            _context.SaveChanges();
 
             IExperienceRepository experienceRepo = new ExperienceRepository(_context);
-
-            _testUserId = TestJobportalContext.UserId;
-
             TitleRepository titlerepository = new TitleRepository(_context);
+            IUserRepository userRepo = new UserRepository(_context);
 
-            _experienceService = new ExperienceService(titlerepository, experienceRepo);
-
-
+            _experienceService = new ExperienceService(titlerepository, experienceRepo, userRepo);
         }
 
         [TearDown]
@@ -73,7 +85,6 @@ namespace Job_Portal_Application_Test.UserTest
             Assert.NotNull(result);
             Assert.AreEqual("Test Company", result.CompanyName);
         }
-
 
         [Test]
         public async Task UpdateExperience_Success()
@@ -165,14 +176,13 @@ namespace Job_Portal_Application_Test.UserTest
             var experiences = await _experienceService.GetAllExperiences(_testUserId);
 
             Assert.NotNull(experiences);
-            Assert.AreEqual(4, experiences.Count());
+            Assert.AreEqual(2, experiences.Count());
         }
+
         [Test]
-        public async Task GetAllExperiences_Failed()
+        public void GetAllExperiences_Failed()
         {
-
             Assert.ThrowsAsync<ExperienceNotFoundException>(() => _experienceService.GetAllExperiences(Guid.NewGuid()));
-
         }
     }
 }
