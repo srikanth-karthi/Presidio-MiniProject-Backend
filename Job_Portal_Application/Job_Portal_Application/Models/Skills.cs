@@ -9,6 +9,6 @@ namespace Job_Portal_Application.Models
         public Guid SkillId { get; set; } = Guid.NewGuid();
 
  
-        public string Skill_Name { get; set; }
+        public string SkillName { get; set; }
     }
 }

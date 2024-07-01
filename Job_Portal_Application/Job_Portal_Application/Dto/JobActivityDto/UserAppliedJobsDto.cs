@@ -11,6 +11,8 @@
         public string CompanyName { get; set; }
         public string JobStatus { get; set; }
 
+        public DateTime? UpdatedDate { get; set; }
+        public string? logourl { get; set; }
         public bool ResumeViewed { get; set; }
         public string Applicationstatus  { get; set; }
         public string Comments { get; set; }

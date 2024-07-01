@@ -164,17 +164,17 @@ public class TestJobportalContext : JobportalContext
                 new Skill
                 {
                     SkillId = SkillId1,
-                    Skill_Name = "C#"
+                    SkillName = "C#"
                 },
                 new Skill
                 {
                     SkillId = SkillId2,
-                    Skill_Name = "ASP.NET Core"
+                    SkillName = "ASP.NET Core"
                 },
                   new Skill
                   {
                       SkillId = SkillId3,
-                      Skill_Name = "ASP.NET"
+                      SkillName = "ASP.NET"
                   }
             );
 

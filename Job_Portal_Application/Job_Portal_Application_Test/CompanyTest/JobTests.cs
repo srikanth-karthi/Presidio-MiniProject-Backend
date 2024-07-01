@@ -6,13 +6,18 @@ using Job_Portal_Application.Exceptions;
 using Job_Portal_Application.Interfaces.IRepository;
 using Job_Portal_Application.Interfaces.IService;
 using Job_Portal_Application.Models;
+using Job_Portal_Application.Repository;
 using Job_Portal_Application.Repository.CompanyRepos;
 using Job_Portal_Application.Repository.SkillRepos;
 using Job_Portal_Application.Repository.UserRepos;
+using Job_Portal_Application.Services;
 using Job_Portal_Application.Services.CompanyService;
+using Job_Portal_Application.Services.UsersServices;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using NUnit.Framework;
 using System;
+using System.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -31,7 +36,12 @@ namespace Job_Portal_Application_Test.CompanyTest
             var options = new DbContextOptionsBuilder<TestJobportalContext>()
            .UseInMemoryDatabase("JobPortalTestDb")
            .Options;
-
+            IConfiguration configuration = new ConfigurationBuilder()
+            .AddInMemoryCollection(new Dictionary<string, string>
+              {
+            { "TokenKey:JWT", "y_J82VYvg5Jh8-DT89E1kz_FzHNN3tB_Sy4b_yLhoZ8Y6q-jVOWU3-xPFlPS6cYYicWlb0XhREXAf3OWTbnN3w==" }
+              })
+            .Build();
             _context = new TestJobportalContext(options);
             _context.Database.EnsureCreated();
             IRepository<Guid, Skill> skillRepository = new SkillRepository(_context);
@@ -39,9 +49,27 @@ namespace Job_Portal_Application_Test.CompanyTest
             ICompanyRepository CompanyRepository = new CompanyRepository(_context);
             IJobRepository _jobRepository = new JobRepository(_context);
             IJobSkillsRepository _jobSkillsRepository = new JobSkillsRepository(_context);
+            MinIOService _minioService = new MinIOService(configuration);
+            IUserRepository userRepo = new UserRepository(_context);
+            ITokenService tokenService = new TokenServices(configuration);
+            ICompanyRepository companyRepo = new CompanyRepository(_context);
+            IJobRepository jobRepository = new JobRepository(_context);
+            IRepository<Guid, Skill> _skillRepository = new SkillRepository(_context);
+            IRepository<Guid, Credential> _credentialRepository = new CredentialRepository(_context);
+            IUserSkillsRepository _userSkillsRepository = new UserSkillsRepository(_context);
 
+         IUserService   _userService = new UserService(
+                      _skillRepository,
+                       companyRepo,
+                          _userSkillsRepository,
+                            _credentialRepository,
+                            jobRepository,
+                            userRepo,
+                            tokenService,
+                            _minioService
+            );
 
-             _jobService = new JobService(_jobRepository, titlerepository, CompanyRepository, skillRepository, _jobSkillsRepository);
+            _jobService = new JobService(_userService,_jobRepository, titlerepository, CompanyRepository, skillRepository, _jobSkillsRepository);
 
         }
 
@@ -133,8 +161,8 @@ namespace Job_Portal_Application_Test.CompanyTest
         [Test]
         public async Task GetAllJobs_Success()
         {
- 
-            var jobs = await _jobService.GetAllJobs();
+
+            var jobs = await _jobService.GetAllJobs(TestJobportalContext.CompanyId1);
 
             Assert.That(jobs, Is.Not.Empty);
         }
@@ -165,7 +193,7 @@ namespace Job_Portal_Application_Test.CompanyTest
         [Test]
         public async Task Getjobs_Success()
         {
-            var result = await _jobService.GetJobs(1,12);
+            var result = await _jobService.GetJobs(new Guid(),1,12);
             Assert.AreEqual(3,result.Count());
         }
 

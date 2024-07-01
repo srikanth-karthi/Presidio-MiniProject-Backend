@@ -13,5 +13,7 @@ namespace Job_Portal_Application.Interfaces.IService
         Task<bool> DeleteCompany(Guid guid);
         Task<CompanyDto> GetCompany(Guid companyId);
         Task<IEnumerable<CompanyDto>> GetAllCompanies();
+        Task<string> UploadCompanyLogo(Guid companyId, IFormFile logo);
+   Task<bool> DeleteCompanyLogo(Guid companyId);
     }
 }

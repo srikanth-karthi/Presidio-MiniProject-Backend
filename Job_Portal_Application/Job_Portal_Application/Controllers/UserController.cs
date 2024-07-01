@@ -83,6 +83,43 @@ namespace Job_Portal_Application.Controllers
                 return StatusCode(500, $"An error occurred: {ex.Message}");
             }
         }
+        [HttpPost("upload-User-profilepicture")]
+        [Authorize(Roles = "User")]
+        public async Task<IActionResult> UploadUserProfilePicture( IFormFile logo)
+        {
+            try
+            {
+                var logoUrl = await _userService.UploadUserProfilePicture(Guid.Parse(User.FindFirst("id").Value), logo);
+                return Ok(new { logoUrl });
+            }
+            catch (UserNotFoundException ex)
+            {
+                return NotFound(new { message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        [HttpDelete("delete-User-profilepicture")]
+        [Authorize(Roles = "User")]
+        public async Task<IActionResult> DeleteUserProfilePicture()
+        {
+            try
+            {
+                var result = await _userService.DeleteUserProfilePicture(Guid.Parse(User.FindFirst("id").Value));
+                return Ok(result);
+            }
+            catch (UserNotFoundException ex)
+            {
+                return NotFound(new { message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
 
         [HttpPut("update")]
         [Authorize(Roles = "User")]
@@ -138,7 +175,7 @@ namespace Job_Portal_Application.Controllers
 
         [HttpGet("profile/{userid}")]
         [Authorize(Roles = "User,Company")]
-        public async Task<ActionResult> GetUserProfile(Guid userid)
+        public async Task<ActionResult> GetUserProfilebyid(Guid userid)
         {
             try
             {
@@ -154,7 +191,24 @@ namespace Job_Portal_Application.Controllers
                 return StatusCode(500, $"An error occurred: {ex.Message}");
             }
         }
-
+        [HttpGet("profile")]
+        [Authorize(Roles = "User,Company")]
+        public async Task<ActionResult> GetUserProfile()
+        {
+            try
+            {
+                var user = await _userService.GetUserProfile(Guid.Parse(User.FindFirst("id").Value));
+                return Ok(user);
+            }
+            catch (UserNotFoundException ex)
+            {
+                return NotFound(new { message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"An error occurred: {ex.Message}");
+            }
+        }
         [HttpGet("recommended-jobs")]
         [Authorize(Roles = "User")]
         public async Task<ActionResult<IEnumerable<Job>>> GetRecommendedJobs(int pageNumber, int pageSize)
@@ -210,7 +264,7 @@ namespace Job_Portal_Application.Controllers
         }
         [HttpPost("skills")]
         [Authorize(Roles = "User")]
-        public async Task<IActionResult> UpdateJobSkills(SkillsDto SkillsDto)
+        public async Task<IActionResult> UpdateuserSkills(SkillsDto SkillsDto)
         {
             if (!ModelState.IsValid)
             {

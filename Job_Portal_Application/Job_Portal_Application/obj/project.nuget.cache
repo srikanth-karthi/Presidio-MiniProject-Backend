@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "cOFilzFNWDuis07mXgm+YYzswUNMOFtMZ6qM+jjTj+CZ4pTxwMzppl3AhokoHgt0/5aPlgctniWwg6wEtsq9eQ==",
+  "dgSpecHash": "kYZTUGo0pX+aOTRILOlFnH/W5cTaHrGRpSkLCYKQYYiyI4fW+vGT+028D7dJBzJmsM1HXp7qhO/o7lvkDI9n8g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\SRIKANTH\\OneDrive\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Job_Portal_Application.csproj",
+  "projectFilePath": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Job_Portal_Application.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\SRIKANTH\\.nuget\\packages\\awssdk.core\\3.7.304.16\\awssdk.core.3.7.304.16.nupkg.sha512",
+    "C:\\Users\\SRIKANTH\\.nuget\\packages\\awssdk.s3\\3.7.309.4\\awssdk.s3.3.7.309.4.nupkg.sha512",
     "C:\\Users\\SRIKANTH\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\SRIKANTH\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",
     "C:\\Users\\SRIKANTH\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",

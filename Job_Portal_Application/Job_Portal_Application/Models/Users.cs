@@ -9,11 +9,12 @@ namespace Job_Portal_Application.Models
     {
         [Key]
         public Guid UserId { get; set; } = Guid.NewGuid();
-
+        public string? ProfilePictureUrl { get; set; }
         [MaxLength(100)]
         public string Name { get; set; }
 
-
+        [MaxLength(400)]
+        public string? AboutMe { get; set; }
         public Guid CredentialId { get; set; }
         public Credential Credential { get; set; }
 

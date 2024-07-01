@@ -11,12 +11,12 @@ using Job_Portal_Application.Dto.JobDtos;
 using Job_Portal_Application.Services.CompanyService;
 using System.Diagnostics.CodeAnalysis;
 using Job_Portal_Application.Dto.SkillDtos;
+using Job_Portal_Application.Dto.Enums;
 
 namespace Job_Portal_Application.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize(Roles = "Company")]
     [ExcludeFromCodeCoverage]
     public class JobController : ControllerBase
     {
@@ -26,8 +26,10 @@ namespace Job_Portal_Application.Controllers
         {
             _jobService = jobService;
         }
+        [Authorize(Roles = "Company")]
 
         [HttpPost("add")]
+
         public async Task<IActionResult> AddJob([FromBody] PostJobDto newJob)
         {
             if (!ModelState.IsValid)
@@ -71,6 +73,7 @@ namespace Job_Portal_Application.Controllers
                 return StatusCode(500, new { message = $"An error occurred: {ex.Message}" });
             }
         }
+        [Authorize(Roles = "Company")]
 
         [HttpPut("update")]
         public async Task<IActionResult> UpdateJob([FromBody] UpdateJobDto jobUpdateDto)
@@ -101,6 +104,7 @@ namespace Job_Portal_Application.Controllers
                 return StatusCode(500, new { message = $"An error occurred: {ex.Message}" });
             }
         }
+        [Authorize(Roles = "Company")]
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteJob(Guid id)
@@ -123,6 +127,7 @@ namespace Job_Portal_Application.Controllers
                 return StatusCode(500, new { message = $"An error occurred: {ex.Message}" });
             }
         }
+        [Authorize(Roles = "User,Company")]
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetJob(Guid id)
@@ -143,11 +148,12 @@ namespace Job_Portal_Application.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Company")]
         public async Task<IActionResult> GetAllJobs()
         {
             try
             {
-                var jobs = await _jobService.GetAllJobs();
+                var jobs = await _jobService.GetAllJobs(Guid.Parse(User.FindFirst("id").Value));
                 return Ok(jobs);
             }
             catch (Exception ex)
@@ -156,7 +162,8 @@ namespace Job_Portal_Application.Controllers
             }
         }
 
-        [HttpPost("search")] 
+        [HttpPost("search")]
+        [Authorize(Roles = "User,Company")]
         public async Task<IActionResult> GetJobs([FromBody] JobsSearchRequest request)
         {
             if (!ModelState.IsValid)
@@ -174,15 +181,19 @@ namespace Job_Portal_Application.Controllers
             try
             {
                 var jobs = await _jobService.GetJobs(
-                    request.PageNumber,
-                    request.PageSize,
-                    request.jobtitleId,
-                    request.Lpa,
-                    request.RecentlyPosted,
-                    request.SkillIds,
-                    request.ExperienceRequired,
-                    request.Location,
-                    request.CompanyId);
+     Guid.Parse(User.FindFirst("id").Value),
+     request.PageNumber,
+     request.PageSize,
+     request.JobTitleId,
+     request.MinLpa,
+     request.MaxLpa,
+     request.RecentlyPosted ?? true,
+     request.SkillIds,
+     request.MinExperience,
+     request.MaxExperience,
+     request.Location,
+     request.CompanyId,
+     request.JobType);
 
                 return Ok(jobs);
             }
@@ -197,6 +208,8 @@ namespace Job_Portal_Application.Controllers
         }
 
         [HttpPut("jobskills")]
+        [Authorize(Roles = "Company")]
+
         public async Task<IActionResult> UpdateJobSkills(JobSkillsdto jobSkillsDto)
         {
             if (!ModelState.IsValid)

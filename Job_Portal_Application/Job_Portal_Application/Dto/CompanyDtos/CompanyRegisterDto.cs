@@ -20,18 +20,10 @@ namespace Job_Portal_Application.Dto.CompanyDtos
 
         [StringLength(200, ErrorMessage = "Company address must be at most 200 characters")]
         [Required(ErrorMessage = "CompanyDescription is required")]
-        public string CompanyDescription { get; set; }
-
-        [StringLength(200, ErrorMessage = "Company address must be at most 200 characters")]
         public string CompanyAddress { get; set; }
 
         public string City { get; set; }
 
-        [Range(1, int.MaxValue, ErrorMessage = "Company size must be greater than 0")]
-        public int CompanySize { get; set; }
-
-        [Url(ErrorMessage = "Invalid URL format")]
-        public string CompanyWebsite { get; set; }
 
 
     }

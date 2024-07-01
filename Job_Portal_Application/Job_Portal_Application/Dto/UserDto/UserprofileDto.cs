@@ -19,6 +19,7 @@ namespace Job_Portal_Application.Dto.profile
         public Guid ExperienceId { get; set; }
         public string CompanyName { get; set; }
         public string TitleName { get; set; }
+        public Guid titleId { get; set; }
         public DateOnly StartYear { get; set; }
         public DateOnly EndYear { get; set; }
         public int ExperienceDuration { get; set; }
@@ -32,8 +33,10 @@ namespace Job_Portal_Application.Dto.profile
 
     public class AreaOfInterestDto
     {
-        public Guid AreaOfInterestId { get; set; }
+        public Guid AreasOfInterestId { get; set; }
         public string TitleName { get; set; }
+
+        public Guid titleId { get; set; }
         public float Lpa { get; set; }
     }
 
@@ -48,8 +51,11 @@ namespace Job_Portal_Application.Dto.profile
 
     public class Userdetails
     {
+        public string? ProfilePictureUrl { get; set; }
         public Guid UserId { get; set; }
         public DateTime Dob { get; set; }
+
+        public string AboutMe {  get; set; }
         public string Email { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }

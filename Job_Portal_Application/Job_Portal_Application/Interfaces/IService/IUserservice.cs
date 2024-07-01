@@ -14,7 +14,8 @@ namespace Job_Portal_Application.Interfaces.IService
         Task<UserDto> UpdateUser(UpdateUserDto userDto, Guid UserId);
         Task<bool> DeleteUser(Guid UserId);
         Task<UserDto> UpdateResumeUrl(Guid userId, string resumeUrl);
-
+        Task<bool> DeleteUserProfilePicture(Guid userId);
+        Task<string> UploadUserProfilePicture(Guid userId, IFormFile profilePicture);
         Task<double> CalculateJobMatchPercentage(Guid jobId, Guid userId);
         Task<UserProfileDto> GetUserProfile(Guid userId);
         Task<List<UserSkillDto>> GetSkills(Guid userId);

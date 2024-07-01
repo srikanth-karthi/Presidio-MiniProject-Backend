@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Job_Portal_Application.Models;
 using Job_Portal_Application.Validation;
 
 namespace Job_Portal_Application.Dto.ExperienceDtos
@@ -9,6 +10,7 @@ namespace Job_Portal_Application.Dto.ExperienceDtos
     public class AddExperienceDto
     {
 
+ 
 
         [Required(ErrorMessage = "CompanyName is required")]
         [StringLength(255, ErrorMessage = "CompanyName cannot exceed 255 characters")]

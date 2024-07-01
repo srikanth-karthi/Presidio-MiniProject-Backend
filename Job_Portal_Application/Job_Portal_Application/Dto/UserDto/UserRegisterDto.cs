@@ -18,23 +18,10 @@ namespace Job_Portal_Application.Dto.UserDto
         [DataType(DataType.Date)]
         public DateTime Dob { get; set; }
 
-        [MaxLength(200, ErrorMessage = "Address cannot exceed 200 characters")]
-        public string? Address { get; set; }
 
         [MaxLength(100, ErrorMessage = "City cannot exceed 100 characters")]
-        public string? City { get; set; }
+        public string City { get; set; }
 
-        [Url(ErrorMessage = "Invalid URL format")]
-        [MaxLength(200, ErrorMessage = "Portfolio link cannot exceed 200 characters")]
-        public string? PortfolioLink { get; set; }
-
-        [RegularExpression(@"^\d{10}$", ErrorMessage = "Phone number must be exactly 10 digits")]
-        [StringLength(10, MinimumLength = 10, ErrorMessage = "Phone number must be exactly 10 characters long")]
-        public string? Phonenumber { get; set; }
-
-        [Url(ErrorMessage = "Invalid URL format")]
-        [MaxLength(200, ErrorMessage = "Resume URL cannot exceed 200 characters")]
-        public string? ResumeUrl { get; set; }
 
         [Required(ErrorMessage = "Password is required")]
         [MinLength(8, ErrorMessage = "Password must be at least 8 characters long")]

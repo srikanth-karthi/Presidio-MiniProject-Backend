@@ -11,10 +11,10 @@ namespace Job_Portal_Application.Interfaces.IService
 {
     public interface IExperienceService
     {
-        Task<ExperienceDto> AddExperience(AddExperienceDto experienceDto, Guid UserId);
-        Task<ExperienceDto> UpdateExperience(GetExperienceDto experienceDto, Guid UserId);
+        Task<Experience> AddExperience(AddExperienceDto experienceDto, Guid UserId);
+        Task<Experience> UpdateExperience(GetExperienceDto experienceDto, Guid UserId);
         Task<bool> DeleteExperience(Guid experienceId, Guid UserId);
-        Task<ExperienceDto> GetExperience(Guid experienceId, Guid UserId);
-        Task<IEnumerable<ExperienceDto>> GetAllExperiences( Guid UserId);
+        Task<Experience> GetExperience(Guid experienceId, Guid UserId);
+        Task<IEnumerable<Experience>> GetAllExperiences( Guid UserId);
     }
 }

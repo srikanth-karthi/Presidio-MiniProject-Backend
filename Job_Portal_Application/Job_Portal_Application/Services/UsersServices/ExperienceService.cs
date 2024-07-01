@@ -26,7 +26,7 @@ namespace Job_Portal_Application.Services.UsersServices
             _userRepository = userRepository;
         }
 
-        public async Task<ExperienceDto> AddExperience(AddExperienceDto experienceDto, Guid UserId)
+        public async Task<Experience> AddExperience(AddExperienceDto experienceDto, Guid UserId)
         {
             _ = await _titleRepository.Get(experienceDto.TitleId) ?? throw new TitleNotFoundException("Invalid TitleId. Title does not exist.");
 
@@ -42,11 +42,11 @@ namespace Job_Portal_Application.Services.UsersServices
                 EndYear = DateOnly.FromDateTime(experienceDto.EndYear)
             };
 
-            var addedExperience = await _experienceRepository.Add(experience);
-            return ToDto(addedExperience);
+            return await _experienceRepository.Add(experience);
+           // return ToDto(addedExperience);
         }
 
-        public async Task<ExperienceDto> UpdateExperience(GetExperienceDto experienceDto, Guid UserId)
+        public async Task<Experience> UpdateExperience(GetExperienceDto experienceDto, Guid UserId)
         {
             _ = await _titleRepository.Get(experienceDto.TitleId) ?? throw new TitleNotFoundException("Invalid TitleId. Title does not exist.");
 
@@ -60,7 +60,7 @@ namespace Job_Portal_Application.Services.UsersServices
             experience.StartYear = DateOnly.FromDateTime(experienceDto.StartYear);
             experience.EndYear = DateOnly.FromDateTime(experienceDto.EndYear);
 
-            return ToDto(await _experienceRepository.Update(experience));
+            return await _experienceRepository.Update(experience);
         }
 
         public async Task<bool> DeleteExperience(Guid experienceId, Guid UserId)
@@ -68,20 +68,20 @@ namespace Job_Portal_Application.Services.UsersServices
             return await _experienceRepository.Delete(await _experienceRepository.Get(experienceId, UserId) ?? throw new ExperienceNotFoundException("Experience not found"));
         }
 
-        public async Task<ExperienceDto> GetExperience(Guid experienceId, Guid userId)
+        public async Task<Experience> GetExperience(Guid experienceId, Guid userId)
         {
             var experience = await _experienceRepository.Get(experienceId, userId);
-            return ToDto(experience) ?? throw new ExperienceNotFoundException("Experience not found");
+            return experience ?? throw new ExperienceNotFoundException("Experience not found");
         }
 
-        public async Task<IEnumerable<ExperienceDto>> GetAllExperiences(Guid UserId)
+        public async Task<IEnumerable<Experience>> GetAllExperiences(Guid UserId)
         {
             var experiences = await _experienceRepository.GetAll(UserId);
             if (!experiences.Any())
             {
                 throw new ExperienceNotFoundException("Experience not found");
             }
-            return experiences.Select(j => ToDto(j));
+            return experiences;
         }
 
         private void ValidateExperienceDates(DateOnly birthDate, DateOnly startYear, DateOnly endYear)

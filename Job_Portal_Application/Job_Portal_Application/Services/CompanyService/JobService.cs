@@ -15,6 +15,7 @@ using Job_Portal_Application.Interfaces.IService;
 using Job_Portal_Application.Models;
 using Job_Portal_Application.Repository.SkillRepos;
 using Job_Portal_Application.Repository.UserRepos;
+using Job_Portal_Application.Services.UsersServices;
 using Microsoft.EntityFrameworkCore;
 
 namespace Job_Portal_Application.Services.CompanyService
@@ -26,14 +27,16 @@ namespace Job_Portal_Application.Services.CompanyService
         private readonly IRepository<Guid, Skill> _skillRepository;
         private readonly IJobSkillsRepository _jobSkillsRepository;
         private readonly IRepository<Guid, Title> _titleRepository;
+        private readonly IUserService _IUserService;
 
-        public JobService(IJobRepository jobRepository, IRepository<Guid, Title> titleRepository, ICompanyRepository companyRepository, IRepository<Guid, Skill> skillRepository, IJobSkillsRepository jobSkillsRepository)
+        public JobService(IUserService  IUserService,IJobRepository jobRepository, IRepository<Guid, Title> titleRepository, ICompanyRepository companyRepository, IRepository<Guid, Skill> skillRepository, IJobSkillsRepository jobSkillsRepository)
         {
             _jobRepository = jobRepository;
             _companyRepository = companyRepository;
             _skillRepository = skillRepository;
             _jobSkillsRepository = jobSkillsRepository;
             _titleRepository = titleRepository;
+            _IUserService = IUserService;
 
         }
 
@@ -106,9 +109,9 @@ namespace Job_Portal_Application.Services.CompanyService
 
 
 
-        public async Task<IEnumerable<JobDto>> GetAllJobs()
+        public async Task<IEnumerable<JobDto>> GetAllJobs(Guid companyId)
         {
-            var jobs = await _jobRepository.GetAll();
+            var jobs = await _jobRepository.GetAll( companyId);
             if (!jobs.Any()) throw new JobNotFoundException("No jobs found ");
             return jobs.Select(j => MapToJobDto(j)).ToList();
         }
@@ -179,52 +182,105 @@ namespace Job_Portal_Application.Services.CompanyService
 
         }
 
-
         private JobDto MapToJobDto(Job job)
         {
-            return new JobDto
+        
+            var jobDto = new JobDto
             {
                 JobId = job.JobId,
-                JobType = ((JobType)job.JobType).ToString(),
+                JobType = job.JobType.ToString(),
                 TitleId = job.TitleId,
                 CompanyName = job.Company.CompanyName,
-                DatePosted =job.DatePosted.ToDateTime(TimeOnly.MinValue),
+                DatePosted = job.DatePosted.ToDateTime(TimeOnly.MinValue),
                 TitleName = job.Title?.TitleName,
                 Status = job.Status,
                 ExperienceRequired = job.ExperienceRequired,
                 Lpa = job.Lpa,
                 JobDescription = job.JobDescription,
-                Skills = job.JobSkills.Select(js => js.Skill.Skill_Name).ToList()
+                companylogo = job.Company.LogoUrl
             };
 
+            // Map skills to SkillDto
+            jobDto.Skills = job.JobSkills.Select(js => new Skill
+            {
+                SkillId = js.SkillId,
+                SkillName = js.Skill.SkillName 
+            }).ToList();
+
+            return jobDto;
         }
-        public async Task<IEnumerable<JobDto>> GetJobs(
-            int pageNumber=1,
-            int pageSize=25 ,
-            Guid  ?JobTitle = null,
-            float? lpa = null,
-            bool recentlyPosted = false,
-            IEnumerable<Guid> skillIds = null,
-            float? experienceRequired = null,
-            string location = null,
-            Guid? companyId = null)
+
+        public async Task<List<JobDto>> GetJobs(
+    Guid userid,
+    int pageNumber = 1,
+    int pageSize = 25,
+    Guid? JobTitle = null,
+    float? minLpa = null,
+    float? maxLpa = null,
+    bool recentlyPosted = true,
+    IEnumerable<Guid> skillIds = null,
+    float? minExperience = null,
+    float? maxExperience = null,
+    string location = null,
+    Guid? companyId = null,
+    JobType? jobType = null
+)
         {
             var jobs = await _jobRepository.GetJobs(
                 pageNumber,
                 pageSize,
                 JobTitle,
-                lpa,
+                minLpa,
+                maxLpa,
                 recentlyPosted,
                 skillIds,
-                experienceRequired,
+                minExperience,
+                maxExperience,
                 location,
-                companyId);
+                companyId,
+                jobType);
 
             if (!jobs.Any())
                 throw new JobNotFoundException("No jobs found matching the specified criteria.");
 
-            return jobs.Select(j => MapToJobDto(j)).ToList();
+            var jobDtos = new List<JobDto>();
+            foreach (var job in jobs)
+            {
+                var jobDto = await MapToJob(job, userid);
+                jobDtos.Add(jobDto);
+            }
+
+            return jobDtos; // Return the list of job DTOs
         }
+
+        private async Task<JobDto> MapToJob(Job job, Guid UserId)
+        {
+            var jobDto = new JobDto
+            {
+                JobId = job.JobId,
+                JobType = job.JobType.ToString(),
+                TitleId = job.TitleId,
+                CompanyName = job.Company.CompanyName,
+                DatePosted = job.DatePosted.ToDateTime(TimeOnly.MinValue),
+                TitleName = job.Title?.TitleName,
+                Status = job.Status,
+                jobscrore = await _IUserService.CalculateJobMatchPercentage(job.JobId, UserId),
+                ExperienceRequired = job.ExperienceRequired,
+                Lpa = job.Lpa,
+                JobDescription = job.JobDescription,
+                companylogo = job.Company.LogoUrl
+            };
+
+            // Map skills to SkillDto
+            jobDto.Skills = job.JobSkills.Select(js => new Skill
+            {
+                SkillId = js.SkillId,
+                SkillName = js.Skill.SkillName
+            }).ToList();
+
+            return jobDto;
+        }
+
 
     }
 }

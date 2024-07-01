@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\SRIKANTH\\OneDrive\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Job_Portal_Application.csproj": {}
+    "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Job_Portal_Application.csproj": {}
   },
   "projects": {
-    "C:\\Users\\SRIKANTH\\OneDrive\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Job_Portal_Application.csproj": {
+    "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Job_Portal_Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\SRIKANTH\\OneDrive\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Job_Portal_Application.csproj",
+        "projectUniqueName": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Job_Portal_Application.csproj",
         "projectName": "Job_Portal_Application",
-        "projectPath": "C:\\Users\\SRIKANTH\\OneDrive\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Job_Portal_Application.csproj",
+        "projectPath": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Job_Portal_Application.csproj",
         "packagesPath": "C:\\Users\\SRIKANTH\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\SRIKANTH\\OneDrive\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\obj\\",
+        "outputPath": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\SRIKANTH\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -45,6 +45,14 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "AWSSDK.Core": {
+              "target": "Package",
+              "version": "[3.7.304.16, )"
+            },
+            "AWSSDK.S3": {
+              "target": "Package",
+              "version": "[3.7.309.4, )"
+            },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[8.0.5, )"

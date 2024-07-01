@@ -21,15 +21,16 @@ namespace Job_Portal_Application.Services.CompanyService
         private readonly IUserRepository _userRepository;
         private readonly ITokenService _tokenService;
         private readonly IRepository<Guid, Credential> _credentialRepository;
+        private readonly MinIOService _minioService;
 
-        public CompanyService(IRepository<Guid, Credential> CredentialRepository, ICompanyRepository companyRepository, IUserRepository userRepository, ITokenService tokenService)
+        public CompanyService(IRepository<Guid, Credential> credentialRepository, ICompanyRepository companyRepository, IUserRepository userRepository, ITokenService tokenService, MinIOService minioService)
         {
             _companyRepository = companyRepository;
             _userRepository = userRepository;
             _tokenService = tokenService;
-            _credentialRepository = CredentialRepository;
+            _credentialRepository = credentialRepository;
+            _minioService = minioService;
         }
-
         public async Task<CompanyDto> Register(CompanyRegisterDto companyDto)
         {
             var existingUser = await _userRepository.GetByEmail(companyDto.Email);
@@ -63,10 +64,7 @@ namespace Job_Portal_Application.Services.CompanyService
                 Email = companyDto.Email,
                 CompanyAddress = companyDto.CompanyAddress,
                 City = companyDto.City,
-                CompanySize = companyDto.CompanySize,
-                CompanyWebsite = companyDto.CompanyWebsite,
                 CredentialId=creadentials.CredentialId,
-                CompanyDescription= companyDto.CompanyDescription,
             };
 
             var addedCompany = await _companyRepository.Add(newCompany);
@@ -124,8 +122,46 @@ namespace Job_Portal_Application.Services.CompanyService
             var company = await _companyRepository.Get(companyId) ?? throw new CompanyNotFoundException("Company not found.");
             return MapToCompanyDto(company);
         }
+        public async Task<String> UploadCompanyLogo(Guid companyId, IFormFile logo)
+        {
+            var company = await _companyRepository.Get(companyId) ?? throw new CompanyNotFoundException("Company not found.");
 
+            if (logo == null || logo.Length == 0)
+                throw new ArgumentException("No logo selected");
 
+            var extension = Path.GetExtension(logo.FileName).ToLowerInvariant();
+            if (extension != ".jpg" && extension != ".jpeg" && extension != ".png" && extension != ".svg")
+                throw new ArgumentException("Invalid file type. Only JPG, JPEG, and PNG files are allowed.");
+
+            var uniqueFileName = $"company-logo/{companyId}{extension}";
+
+            using (var stream = logo.OpenReadStream())
+            {
+                await _minioService.UploadFileAsync(uniqueFileName, stream);
+            }
+
+            var logoUrl = $"{_minioService.GetServiceUrl()}{_minioService.GetBucketName()}/{uniqueFileName}";
+            company.LogoUrl = logoUrl;
+
+            await _companyRepository.Update(company);
+
+            return logoUrl;
+        }
+        public async Task<bool> DeleteCompanyLogo(Guid companyId)
+        {
+            var company = await _companyRepository.Get(companyId) ?? throw new CompanyNotFoundException("Company not found.");
+
+            if (string.IsNullOrEmpty(company.LogoUrl))
+                throw new InvalidOperationException("Company does not have a logo to delete.");
+
+            var logoPath = company.LogoUrl.Replace($"{_minioService.GetServiceUrl()}{_minioService.GetBucketName()}/", "");
+            await _minioService.DeleteFileAsync(logoPath);
+
+            company.LogoUrl = null;
+            await _companyRepository.Update(company);
+
+            return true;
+        }
 
 
         public async Task<IEnumerable<CompanyDto>> GetAllCompanies()
@@ -148,6 +184,7 @@ namespace Job_Portal_Application.Services.CompanyService
         {
             return new CompanyDto
             {
+                logoUrl= company.LogoUrl,
                 CompanyId = company.CompanyId,
                 CompanyName = company.CompanyName,
                 Email = company.Email,

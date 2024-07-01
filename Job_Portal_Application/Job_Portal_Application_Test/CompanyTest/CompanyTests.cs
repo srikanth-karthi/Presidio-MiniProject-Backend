@@ -51,7 +51,9 @@ namespace Job_Portal_Application_Test.CompanyTest
             ITokenService tokenService = new TokenServices(configuration);
 
             IRepository<Guid, Credential> _credentialRepository = new CredentialRepository(_context);
-            _companyService = new CompanyService(_credentialRepository,companyRepo, userRepo, tokenService);
+        MinIOService _minioService=new MinIOService(configuration);
+
+        _companyService = new CompanyService(_credentialRepository,companyRepo, userRepo, tokenService, _minioService);
         }
 
         [TearDown]
@@ -70,10 +72,7 @@ namespace Job_Portal_Application_Test.CompanyTest
                 Email = "contacts@techcorp.com",
                 CompanyAddress = "123 Tech Street",
                 City = "Tech City",
-                CompanySize = 1000,
-                CompanyWebsite = "https://www.techcorp.com",
-                Password = "password",
-                        CompanyDescription = ""
+
             };
 
             var result = await _companyService.Register(companyDto);
@@ -90,8 +89,7 @@ namespace Job_Portal_Application_Test.CompanyTest
                 Email = "contact@techcorp.com",
                 CompanyAddress = "123 Tech Street",
                 City = "Tech City",
-                CompanySize = 1000,
-                CompanyWebsite = "https://www.techcorp.com",
+              
                 Password = "password"
             };
 

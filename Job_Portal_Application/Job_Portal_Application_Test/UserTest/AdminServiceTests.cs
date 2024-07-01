@@ -52,22 +52,22 @@ namespace Job_Portal_Application_Test.UserTest
         [Test]
         public async Task CreateSkill_Success()
         {
-            var skill = new Skill { Skill_Name = "Test Skill" };
+            var skill = new Skill { SkillName = "Test Skill" };
 
             var result = await _adminService.CreateSkill(skill);
 
             Assert.NotNull(result);
-            Assert.AreEqual("Test Skill", result.Skill_Name);
+            Assert.AreEqual("Test Skill", result.SkillName);
         }
 
         [Test]
         public void CreateSkill_SkillAlreadyExists_ThrowsException()
         {
-            var skill = new Skill { Skill_Name = "Test Skill" };
+            var skill = new Skill { SkillName = "Test Skill" };
             _context.Skills.Add(skill);
             _context.SaveChanges();
 
-            var newSkill = new Skill { Skill_Name = "Test Skill" };
+            var newSkill = new Skill { SkillName = "Test Skill" };
 
             Assert.ThrowsAsync<SkillAlreadyExisitException>(async () =>
             {
@@ -78,7 +78,7 @@ namespace Job_Portal_Application_Test.UserTest
         [Test]
         public async Task DeleteSkill_Success()
         {
-            var skill = new Skill { Skill_Name = "Test Skill" };
+            var skill = new Skill { SkillName = "Test Skill" };
             _context.Skills.Add(skill);
             _context.SaveChanges();
 

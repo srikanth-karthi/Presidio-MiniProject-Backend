@@ -12,10 +12,11 @@ namespace Job_Portal_Application.Interfaces.IService
     public interface IJobActivityService
     {
         Task<JobActivityDto> ApplyForJob(Guid jobId, Guid companyId);
-        Task<IEnumerable<UserDto>> GetFilteredUser(Guid companyId, Guid jobId, int pageNumber = 1, int pageSize = 25, bool firstApplied = false, bool perfectMatchSkills = false, bool perfectMatchExperience = false, bool hasExperienceInJobTitle = false);
+        Task<IEnumerable<UserActivitydto>> GetFilteredUser(Guid companyId, Guid jobId, int pageNumber = 1, int pageSize = 25, bool firstApplied = false, bool perfectMatchSkills = false, bool perfectMatchExperience = false, bool hasExperienceInJobTitle = false);
         Task<IEnumerable<UserAppliedJobsDto>> GetJobsUserApplied(Guid companyId);
         Task<JobActivityDto> UpdateJobActivityStatus(UpdateJobactivityDto updateJobactivityDto);
         Task<JobActivityDto> GetJobActivityById(Guid jobActivityId);
         Task<IEnumerable<JobActivityDto>> GetJobActivitiesByJobId(Guid jobId);
+        Task<JobActivityDto> Updateresumestatus(Guid JobactivityId);
     }
 }

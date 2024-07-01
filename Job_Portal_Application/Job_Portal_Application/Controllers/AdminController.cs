@@ -34,7 +34,7 @@ namespace Job_Portal_Application.Controllers
 
             try
             {
-                var createdSkill = await _adminService.CreateSkill(new Skill { Skill_Name = SkillName });
+                var createdSkill = await _adminService.CreateSkill(new Skill { SkillName = SkillName });
                 return CreatedAtAction(nameof(CreateSkill), new { id = createdSkill.SkillId }, createdSkill);
             }
             catch (SkillAlreadyExisitException ex)

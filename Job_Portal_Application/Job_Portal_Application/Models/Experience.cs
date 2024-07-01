@@ -9,6 +9,9 @@ namespace Job_Portal_Application.Models
         [Key]
         public Guid ExperienceId { get; set; } = Guid.NewGuid();
 
+
+
+
         public Guid UserId { get; set; }
 
         [StringLength(255)]

@@ -68,9 +68,10 @@ namespace Job_Portal_Application.Repository
             return await _context.JobActivities
                 .Include(ja => ja.User)
                 .Where(ja => ja.JobId == jobId && ja.Job.CompanyId == companyId)
+                .OrderByDescending(ja => ja.AppliedDate)
                 .ToListAsync();
-
         }
+
 
         public async Task<IEnumerable<JobActivity>> GetFilteredUser(
               Guid companyId,
@@ -144,8 +145,10 @@ namespace Job_Portal_Application.Repository
                     .ThenInclude(j => j.JobSkills)
                         .ThenInclude(js => js.Skill)
                 .Where(ja => ja.UserId == userId)
+                .OrderByDescending(ja => ja.AppliedDate) 
                 .ToListAsync();
         }
+
 
 
         public async Task<IEnumerable<JobActivity>> GetJobActivitiesByJobId(Guid jobId)

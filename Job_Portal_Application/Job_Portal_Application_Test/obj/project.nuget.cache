@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "MFuxXi0qSjsFvM0kNbWOgRcMRkQlNsvxZlA0x3p7NBcCEJ98rl5c1kNRrxIquz/Vs5I0dW9rcM0MiFwmNGZgpw==",
+  "dgSpecHash": "9Q7ddfyNPTZ8aYui92yZH7P/hyBQN0Le3+G9Nfk/p3U4gbH4D4igo8+7Sx2XUJftHzyc+pYAs7jPuW6hDOx2dw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\SRIKANTH\\OneDrive\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application_Test\\Job_Portal_Application_Test.csproj",
+  "projectFilePath": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application_Test\\Job_Portal_Application_Test.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\SRIKANTH\\.nuget\\packages\\awssdk.core\\3.7.304.16\\awssdk.core.3.7.304.16.nupkg.sha512",
+    "C:\\Users\\SRIKANTH\\.nuget\\packages\\awssdk.s3\\3.7.309.4\\awssdk.s3.3.7.309.4.nupkg.sha512",
     "C:\\Users\\SRIKANTH\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\SRIKANTH\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",
     "C:\\Users\\SRIKANTH\\.nuget\\packages\\castle.core\\5.1.1\\castle.core.5.1.1.nupkg.sha512",

@@ -129,9 +129,16 @@ namespace Job_Portal_Application
 
             #endregion
 
-
+            builder.Services.AddSingleton<MinIOService>();
 
             builder.Services.AddHttpContextAccessor();
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAllOrigins",
+                    builder => builder.AllowAnyOrigin()
+                                      .AllowAnyHeader()
+                                      .AllowAnyMethod());
+            });
 
             var app = builder.Build();
 
@@ -141,6 +148,7 @@ namespace Job_Portal_Application
                 app.UseSwaggerUI();
             }
 
+            app.UseCors("AllowAllOrigins");
             app.UseAuthorization();
 
             app.MapControllers();

@@ -26,6 +26,22 @@ namespace Job_Portal_Application.Controllers
             _companyService = companyService;
         }
 
+
+        [HttpPost("upload-logo")]
+        [Authorize(Roles = "Company")]
+        public async Task<IActionResult> UploadLogo(IFormFile logo)
+        {
+            var LogoUrl = await _companyService.UploadCompanyLogo(Guid.Parse(User.FindFirst("id").Value), logo);
+            return Ok(new { message = "Logo uploaded successfully.", logoUrl = LogoUrl });
+        }
+
+        [HttpDelete("delete-logo")]
+        [Authorize(Roles = "Company")]
+        public async Task<IActionResult> DeleteLogo()
+        {
+            var result = await _companyService.DeleteCompanyLogo(Guid.Parse(User.FindFirst("id").Value));
+            return Ok(new { message = "Logo deleted successfully.", success = result });
+        }
         [HttpPost("register")]
         public async Task<IActionResult> RegisterCompany([FromBody] CompanyRegisterDto companyDto)
         {
@@ -160,9 +176,27 @@ namespace Job_Portal_Application.Controllers
                 return StatusCode(500, $"An error occurred: {ex.Message}");
             }
         }
-
-        [HttpGet]
+        [HttpGet("profile")]
         [Authorize(Roles = "Company")]
+        public async Task<IActionResult> GetCompany()
+        {
+            try
+            {
+                var company = await _companyService.GetCompany(Guid.Parse(User.FindFirst("id").Value));
+                return Ok(company);
+            }
+            catch (CompanyNotFoundException ex)
+            {
+                return NotFound(new { message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"An error occurred: {ex.Message}");
+            }
+        }
+        [HttpGet]
+
+        [Authorize(Roles = "User,Company")]
         public async Task<IActionResult> GetAllCompanies()
         {
             try

@@ -46,7 +46,7 @@ namespace Job_Portal_Application_Test.UserTest
             { "TokenKey:JWT", "y_J82VYvg5Jh8-DT89E1kz_FzHNN3tB_Sy4b_yLhoZ8Y6q-jVOWU3-xPFlPS6cYYicWlb0XhREXAf3OWTbnN3w==" }
                 })
               .Build();
-
+            MinIOService _minioService = new MinIOService(configuration);
             IUserRepository userRepo = new UserRepository(_context);
             ITokenService tokenService = new TokenServices(configuration);
             ICompanyRepository companyRepo = new CompanyRepository(_context);
@@ -62,7 +62,8 @@ namespace Job_Portal_Application_Test.UserTest
                             _credentialRepository,
                             jobRepository,
                             userRepo,
-                            tokenService
+                            tokenService,
+                            _minioService
             );
         }
 
@@ -90,11 +91,7 @@ namespace Job_Portal_Application_Test.UserTest
                 Name = "John Doe",
                 Email = "john.doe@example.com",
                 Dob = new DateTime(1990, 1, 1),
-                Address = "123 Main St",
-                City = "Anytown",
-                Phonenumber = "1234567890",
-                PortfolioLink = "https://portfolio.com",
-                ResumeUrl = "https://resume.com",
+           
                 Password = "password"
             };
 
@@ -112,11 +109,7 @@ namespace Job_Portal_Application_Test.UserTest
                 Name = "Jane Doe",
                 Email = "jane.doe@example.com",
                 Dob = new DateTime(1995, 1, 1),
-                Address = "456 Main St",
-                City = "Anytown",
-                Phonenumber = "9876543210",
-                PortfolioLink = "https://portfolio.com",
-                ResumeUrl = "https://resume.com",
+      
                 Password = "password"
             };
 
@@ -134,11 +127,7 @@ namespace Job_Portal_Application_Test.UserTest
                 Name = "Jane Doe",
                 Email = "contact@techcorp.com",
                 Dob = new DateTime(1995, 1, 1),
-                Address = "456 Main St",
-                City = "Anytown",
-                Phonenumber = "9876543210",
-                PortfolioLink = "https://portfolio.com",
-                ResumeUrl = "https://resume.com",
+            
                 Password = "password"
             };
 
@@ -156,11 +145,7 @@ namespace Job_Portal_Application_Test.UserTest
                 Name = "John Doe",
                 Email = "john.doe@example.com",
                 Dob = new DateTime(1990, 1, 1),
-                Address = "123 Main St",
-                City = "Anytown",
-                Phonenumber = "1234567890",
-                PortfolioLink = "https://portfolio.com",
-                ResumeUrl = "https://resume.com",
+  
                 Password = "password"
             };
 
@@ -210,11 +195,7 @@ namespace Job_Portal_Application_Test.UserTest
                 Name = "John Doe",
                 Email = "john.doe@example.com",
                 Dob = new DateTime(1990, 1, 1),
-                Address = "123 Main St",
-                City = "Anytown",
-                Phonenumber = "1234567890",
-                PortfolioLink = "https://portfolio.com",
-                ResumeUrl = "https://resume.com",
+  
                 Password = "password"
             };
 
@@ -246,11 +227,7 @@ namespace Job_Portal_Application_Test.UserTest
                 Name = "John Doe",
                 Email = "john.doe@example.com",
                 Dob = new DateTime(1990, 1, 1),
-                Address = "123 Main St",
-                City = "Anytown",
-                Phonenumber = "1234567890",
-                PortfolioLink = "https://portfolio.com",
-                ResumeUrl = "https://resume.com",
+ 
                 Password = "password"
             };
 
@@ -280,11 +257,7 @@ namespace Job_Portal_Application_Test.UserTest
                 Name = "John Doe",
                 Email = "john.doe@example.com",
                 Dob = new DateTime(1990, 1, 1),
-                Address = "123 Main St",
-                City = "Anytown",
-                Phonenumber = "1234567890",
-                PortfolioLink = "https://portfolio.com",
-                ResumeUrl = "https://resume.com",
+
                 Password = "password"
             };
 
@@ -313,11 +286,7 @@ namespace Job_Portal_Application_Test.UserTest
                 Name = "John Doe",
                 Email = "john.doe@example.com",
                 Dob = new DateTime(1990, 1, 1),
-                Address = "123 Main St",
-                City = "Anytown",
-                Phonenumber = "1234567890",
-                PortfolioLink = "https://portfolio.com",
-                ResumeUrl = "https://resume.com",
+    
                 Password = "password"
             };
 
@@ -337,11 +306,7 @@ namespace Job_Portal_Application_Test.UserTest
                 Name = "John Doe",
                 Email = "john.doe@example.com",
                 Dob = new DateTime(1990, 1, 1),
-                Address = "123 Main St",
-                City = "Anytown",
-                Phonenumber = "1234567890",
-                PortfolioLink = "https://portfolio.com",
-                  ResumeUrl = "https://resume.com",
+
                 Password = "password"
             };
 

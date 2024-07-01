@@ -25,15 +25,18 @@ namespace Job_Portal_Application.Services.UsersServices
         private readonly ICompanyRepository _companyRepository;
         private readonly IRepository<Guid, Skill> _skillRepository;
 
-        public UserService(IRepository<Guid, Skill> skillRepository, ICompanyRepository companyRepository, IUserSkillsRepository UserSkillsRepository,IRepository<Guid, Credential> CredentialRepository, IJobRepository jobRepository, IUserRepository userRepository, ITokenService tokenService)
+        private readonly MinIOService _minioService;
+
+        public UserService(IRepository<Guid, Skill> skillRepository, ICompanyRepository companyRepository, IUserSkillsRepository UserSkillsRepository, IRepository<Guid, Credential> CredentialRepository, IJobRepository jobRepository, IUserRepository userRepository, ITokenService tokenService, MinIOService minioService)
         {
             _userRepository = userRepository;
             _tokenService = tokenService;
             _jobRepository = jobRepository;
-            _credentialRepository= CredentialRepository;
+            _credentialRepository = CredentialRepository;
             _userSkillsRepository = UserSkillsRepository;
             _companyRepository = companyRepository;
             _skillRepository = skillRepository;
+            _minioService = minioService;
         }
 
         public async Task<UserDto> Register(UserRegisterDto userDto)
@@ -70,18 +73,56 @@ namespace Job_Portal_Application.Services.UsersServices
                     Name = userDto.Name,
                     Email = userDto.Email,
                     CredentialId = creadentials.CredentialId,
+                    City=userDto.City,
                     Dob = DateOnly.FromDateTime(userDto.Dob),
-                    Address = userDto.Address,
-                    City = userDto.City,
-                    PortfolioLink = userDto.PortfolioLink,
-                    Phonenumber = userDto.Phonenumber,
-                    ResumeUrl = userDto.ResumeUrl,
+
            
                 };
 
            return  ToUserDto(await _userRepository.Add(newUser));
            
             
+        }
+        public async Task<string> UploadUserProfilePicture(Guid userId, IFormFile profilePicture)
+        {
+            var user = await _userRepository.Get(userId) ?? throw new UserNotFoundException("User not found.");
+
+            if (profilePicture == null || profilePicture.Length == 0)
+                throw new ArgumentException("No profile picture selected");
+
+            var extension = Path.GetExtension(profilePicture.FileName).ToLowerInvariant();
+            if (extension != ".jpg" && extension != ".jpeg" && extension != ".png")
+                throw new ArgumentException("Invalid file type. Only JPG, JPEG, and PNG files are allowed.");
+
+            var uniqueFileName = $"user-profile/{userId}{extension}";
+
+            using (var stream = profilePicture.OpenReadStream())
+            {
+                await _minioService.UploadFileAsync(uniqueFileName, stream);
+            }
+
+            var profilePictureUrl = $"{_minioService.GetServiceUrl()}{_minioService.GetBucketName()}/{uniqueFileName}";
+            user.ProfilePictureUrl = profilePictureUrl;
+
+            await _userRepository.Update(user);
+
+            return profilePictureUrl;
+        }
+
+        public async Task<bool> DeleteUserProfilePicture(Guid userId)
+        {
+            var user = await _userRepository.Get(userId) ?? throw new UserNotFoundException("User not found.");
+
+            if (string.IsNullOrEmpty(user.ProfilePictureUrl))
+                throw new InvalidOperationException("User does not have a profile picture to delete.");
+
+            var profilePicturePath = user.ProfilePictureUrl.Replace($"{_minioService.GetServiceUrl()}{_minioService.GetBucketName()}/", "");
+            await _minioService.DeleteFileAsync(profilePicturePath);
+
+            user.ProfilePictureUrl = null;
+            await _userRepository.Update(user);
+
+            return true;
         }
 
         public async Task<string> Login(LoginDto userDto)
@@ -105,12 +146,19 @@ namespace Job_Portal_Application.Services.UsersServices
             throw new InvalidCredentialsException("Invalid password.");
         }
 
-        public async Task<IEnumerable<JobDto>> GetRecommendedJobs( int pageNumber, int pageSize, Guid UserId)
+        public async Task<IEnumerable<JobDto>> GetRecommendedJobs(int pageNumber, int pageSize, Guid UserId)
         {
             var jobs = await _userRepository.GetRecommendedJobsForUser(UserId, pageNumber, pageSize);
-            if (!jobs.Any()) throw new JobNotFoundException(" Job does not exist.");
+            if (!jobs.Any()) throw new JobNotFoundException("Job does not exist.");
 
-            return jobs.Select(j => MapToJobDto(j));
+            var jobDtos = new List<JobDto>();
+            foreach (var job in jobs)
+            {
+                var jobDto = await MapToJobDto(job, UserId);
+                jobDtos.Add(jobDto);
+            }
+
+            return jobDtos;
         }
 
         public async Task<UserDto> UpdateUser(UpdateUserDto userDto, Guid UserId)
@@ -123,6 +171,8 @@ namespace Job_Portal_Application.Services.UsersServices
             user.PortfolioLink = userDto.PortfolioLink;
             user.Phonenumber = userDto.PhoneNumber;
             user.ResumeUrl = userDto.ResumeUrl;
+            user.AboutMe=userDto.Aboutme;
+            user.Dob = (DateOnly)(userDto.Dob.HasValue ? DateOnly.FromDateTime(userDto.Dob.Value) : (DateOnly?)null);
 
             return ToUserDto(await _userRepository.Update(user));
 
@@ -139,8 +189,6 @@ namespace Job_Portal_Application.Services.UsersServices
         {
             var user = await _userRepository.GetUserProfile(userId) ?? throw new UserNotFoundException("User not found.");
 
-         
-
             var userProfileDto = new UserProfileDto
             {
                 UserId = user.UserId,
@@ -151,7 +199,9 @@ namespace Job_Portal_Application.Services.UsersServices
                 City = user.City,
                 PortfolioLink = user.PortfolioLink,
                 PhoneNumber = user.Phonenumber,
+                AboutMe=user.AboutMe,
                 ResumeUrl = user.ResumeUrl,
+                ProfilePictureUrl = user.ProfilePictureUrl, // Include profile picture URL
                 Educations = user.Educations.Select(e => new EducationDto
                 {
                     EducationId = e.EducationId,
@@ -165,6 +215,7 @@ namespace Job_Portal_Application.Services.UsersServices
                 Experiences = user.Experiences.Select(e => new ExperienceDto
                 {
                     ExperienceId = e.ExperienceId,
+                    titleId = e.TitleId,
                     CompanyName = e.CompanyName,
                     TitleName = e.Title.TitleName,
                     StartYear = e.StartYear,
@@ -174,13 +225,13 @@ namespace Job_Portal_Application.Services.UsersServices
                 UserSkills = user.UserSkills.Select(us => new Dto.profile.UserSkillDto
                 {
                     SkillId = us.Skill.SkillId,
-                    SkillName = us.Skill.Skill_Name
+                    SkillName = us.Skill.SkillName
                 }).ToList(),
-
                 AreasOfInterests = user.AreasOfInterests.Select(aoi => new AreaOfInterestDto
                 {
-                    AreaOfInterestId = aoi.AreasOfInterestId,
+                    AreasOfInterestId = aoi.AreasOfInterestId,
                     TitleName = aoi.Title.TitleName,
+                    titleId= aoi.Title.TitleId,
                     Lpa = aoi.Lpa
                 }).ToList()
             };
@@ -240,7 +291,7 @@ namespace Job_Portal_Application.Services.UsersServices
             return new UserSkillDto()
             {
                 SkillId = value.SkillId,
-                SkillName = value.Skill_Name
+                SkillName = value.SkillName
             };
         }
 
@@ -296,27 +347,33 @@ namespace Job_Portal_Application.Services.UsersServices
             return response;
 
         }
-
-
-        private JobDto MapToJobDto(Job job)
+        private async Task<JobDto> MapToJobDto(Job job, Guid UserId)
         {
-            return new JobDto
+            var jobDto = new JobDto
             {
                 JobId = job.JobId,
-            JobType = job.JobType.ToString(),
+                JobType = job.JobType.ToString(),
                 TitleId = job.TitleId,
                 CompanyName = job.Company.CompanyName,
                 DatePosted = job.DatePosted.ToDateTime(TimeOnly.MinValue),
                 TitleName = job.Title?.TitleName,
                 Status = job.Status,
+                jobscrore = await CalculateJobMatchPercentage(job.JobId, UserId),
                 ExperienceRequired = job.ExperienceRequired,
                 Lpa = job.Lpa,
                 JobDescription = job.JobDescription,
-                Skills = job.JobSkills.Select(js => js.Skill.Skill_Name).ToList()
-
+                companylogo = job.Company.LogoUrl
             };
-        }
 
+            // Map skills to SkillDto
+            jobDto.Skills = job.JobSkills.Select(js => new Skill
+            {
+                SkillId = js.SkillId,
+                SkillName = js.Skill.SkillName
+            }).ToList();
+
+            return jobDto;
+        }
         public  UserDto ToUserDto( User user)
         {
             return new UserDto
@@ -329,7 +386,9 @@ namespace Job_Portal_Application.Services.UsersServices
                 City = user.City,
                 PortfolioLink = user.PortfolioLink,
                 PhoneNumber = user.Phonenumber,
-                ResumeUrl = user.ResumeUrl
+                ResumeUrl = user.ResumeUrl,
+                AboutMe = user.AboutMe
+
             };
         }
 

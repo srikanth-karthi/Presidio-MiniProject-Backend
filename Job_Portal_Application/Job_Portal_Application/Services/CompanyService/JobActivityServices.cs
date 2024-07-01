@@ -43,20 +43,33 @@ namespace Job_Portal_Application.Services
             return MapToDto(jobActivity);
         }
 
-        public async Task<IEnumerable<UserDto>> GetFilteredUser(Guid companyId, Guid jobId, int pageNumber = 1, int pageSize = 25, bool firstApplied = false, bool perfectMatchSkills = false, bool perfectMatchExperience = false, bool hasExperienceInJobTitle = false)
+        public async Task<IEnumerable<UserActivitydto>> GetFilteredUser(Guid companyId, Guid jobId, int pageNumber = 1, int pageSize = 25, bool firstApplied = false, bool perfectMatchSkills = false, bool perfectMatchExperience = false, bool hasExperienceInJobTitle = false)
         {
-
             var jobActivities = await _jobActivityRepository.GetFilteredUser(companyId, jobId, pageNumber, pageSize, firstApplied, perfectMatchSkills, perfectMatchExperience, hasExperienceInJobTitle);
 
-   
             if (!jobActivities.Any())
             {
-
                 throw new JobNotFoundException($"No User found for Job ID: {jobId} with the specified filters.");
             }
 
-            return jobActivities.Select(j => MapToUserDto(j.User));
+            return jobActivities.Select(j => MapToUserActivityDto(j));
         }
+
+        private UserActivitydto MapToUserActivityDto(JobActivity jobActivity)
+        {
+            return new UserActivitydto
+            {
+                JobactivityId = jobActivity.JobApplicationId,
+                UserId = jobActivity.User.UserId,
+                Dob = jobActivity.User.Dob.ToDateTime(TimeOnly.MinValue),
+                Email = jobActivity.User.Email,
+                logourl = jobActivity.User.ProfilePictureUrl,
+                Name = jobActivity.User.Name,
+                AppliedDate = jobActivity.AppliedDate,
+                Status = jobActivity.Status
+            };
+        }
+
 
 
         public async Task<IEnumerable<UserAppliedJobsDto>> GetJobsUserApplied(Guid UserId)
@@ -78,6 +91,16 @@ namespace Job_Portal_Application.Services
             return MapToDto(await _jobActivityRepository.Update(jobActivity));
         }
 
+
+        public async Task<JobActivityDto> Updateresumestatus(Guid JobactivityId)
+        {
+            var jobActivity = await _jobActivityRepository.Get(JobactivityId) ?? throw new JobActivityNotFoundException("Job activity not found.");
+            jobActivity.ResumeViewed = true;
+            jobActivity.UpdatedDate = DateTime.UtcNow;
+    
+
+            return MapToDto(await _jobActivityRepository.Update(jobActivity));
+        }
         public async Task<JobActivityDto> GetJobActivityById(Guid jobActivityId)
         {
             var jobActivity = await _jobActivityRepository.Get(jobActivityId) ?? throw new JobActivityNotFoundException("Job activity not found.");
@@ -100,6 +123,8 @@ namespace Job_Portal_Application.Services
             {
                 JobactivityId = jobActivity.JobApplicationId,
                 UserId = jobActivity.UserId,
+                name = jobActivity.User?.Name ?? string.Empty,  // Using string.Empty instead of ""
+                logourl = jobActivity.User?.ProfilePictureUrl ?? string.Empty,
                 JobId = jobActivity.JobId,
                 Status = Enum.GetName(typeof(JobStatus), jobActivity.Status),  
                 ResumeViewed = jobActivity.ResumeViewed,
@@ -116,6 +141,7 @@ namespace Job_Portal_Application.Services
             {
                 UserId = user.UserId,
                 Name = user.Name,
+                logourl=user.ProfilePictureUrl,
                 Email = user.Email,
                 Dob = user.Dob.ToDateTime(TimeOnly.MinValue),
                 Address = user.Address,
@@ -132,6 +158,7 @@ namespace Job_Portal_Application.Services
             {
                 JobactivityId = jobActivity.JobApplicationId,
                 JobId = jobActivity.JobId,
+                
                 JobType = jobActivity.Job.JobType.ToString(),
                 TitleName = jobActivity.Job.Title.TitleName,
                 CompanyName = jobActivity.Job.Company.CompanyName,
@@ -139,7 +166,9 @@ namespace Job_Portal_Application.Services
                 ResumeViewed = jobActivity.ResumeViewed,
                 Applicationstatus = jobActivity.Status.ToString(),
                 Comments = jobActivity.Comments,
-                AppliedDate = jobActivity.AppliedDate
+                AppliedDate = jobActivity.AppliedDate,
+                logourl=jobActivity.Job.Company.LogoUrl,
+                UpdatedDate=jobActivity.UpdatedDate
             };
         }
 

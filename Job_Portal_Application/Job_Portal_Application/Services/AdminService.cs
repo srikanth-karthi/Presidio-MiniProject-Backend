@@ -22,13 +22,13 @@ namespace Job_Portal_Application.Services
 
         public async Task<Skill> CreateSkill(Skill skill)
         {
-            if (skill == null || string.IsNullOrWhiteSpace(skill.Skill_Name))
+            if (skill == null || string.IsNullOrWhiteSpace(skill.SkillName))
             {
                 throw new ArgumentNullException(nameof(skill), "Skill or Skill name cannot be null or empty.");
             }
 
             var existingSkills = await _skillservice.GetAllSkills();
-            if (existingSkills.Any(s => s.Skill_Name != null && s.Skill_Name.Trim().ToLower() == skill.Skill_Name.Trim().ToLower()))
+            if (existingSkills.Any(s => s.SkillName != null && s.SkillName.Trim().ToLower() == skill.SkillName.Trim().ToLower()))
             {
                 throw new SkillAlreadyExisitException("Skill already exists.");
             }
