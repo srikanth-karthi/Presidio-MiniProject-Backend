@@ -3,44 +3,60 @@
   "WorkspaceRootPath": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{F2B10CCB-92D0-405D-A581-1BCCB7E2F9EF}|Job_Portal_Application\\Job_Portal_Application.csproj|c:\\users\\srikanth\\desktop\\presidio-mini-project\\job_portal_application\\job_portal_application\\services\\companyservice\\jobactivityservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F2B10CCB-92D0-405D-A581-1BCCB7E2F9EF}|Job_Portal_Application\\Job_Portal_Application.csproj|solutionrelative:job_portal_application\\services\\companyservice\\jobactivityservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{F2B10CCB-92D0-405D-A581-1BCCB7E2F9EF}|Job_Portal_Application\\Job_Portal_Application.csproj|c:\\users\\srikanth\\desktop\\presidio-mini-project\\job_portal_application\\job_portal_application\\controllers\\jobactivitycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F2B10CCB-92D0-405D-A581-1BCCB7E2F9EF}|Job_Portal_Application\\Job_Portal_Application.csproj|solutionrelative:job_portal_application\\controllers\\jobactivitycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2B10CCB-92D0-405D-A581-1BCCB7E2F9EF}|Job_Portal_Application\\Job_Portal_Application.csproj|c:\\users\\srikanth\\desktop\\presidio-mini-project\\job_portal_application\\job_portal_application\\controllers\\resumeuploadcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F2B10CCB-92D0-405D-A581-1BCCB7E2F9EF}|Job_Portal_Application\\Job_Portal_Application.csproj|solutionrelative:job_portal_application\\controllers\\resumeuploadcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F2B10CCB-92D0-405D-A581-1BCCB7E2F9EF}|Job_Portal_Application\\Job_Portal_Application.csproj|c:\\users\\srikanth\\desktop\\presidio-mini-project\\job_portal_application\\job_portal_application\\context\\context.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F2B10CCB-92D0-405D-A581-1BCCB7E2F9EF}|Job_Portal_Application\\Job_Portal_Application.csproj|solutionrelative:job_portal_application\\context\\context.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F2B10CCB-92D0-405D-A581-1BCCB7E2F9EF}|Job_Portal_Application\\Job_Portal_Application.csproj|c:\\users\\srikanth\\desktop\\presidio-mini-project\\job_portal_application\\job_portal_application\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F2B10CCB-92D0-405D-A581-1BCCB7E2F9EF}|Job_Portal_Application\\Job_Portal_Application.csproj|solutionrelative:job_portal_application\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F2B10CCB-92D0-405D-A581-1BCCB7E2F9EF}|Job_Portal_Application\\Job_Portal_Application.csproj|c:\\users\\srikanth\\desktop\\presidio-mini-project\\job_portal_application\\job_portal_application\\models\\skills.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F2B10CCB-92D0-405D-A581-1BCCB7E2F9EF}|Job_Portal_Application\\Job_Portal_Application.csproj|solutionrelative:job_portal_application\\models\\skills.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F2B10CCB-92D0-405D-A581-1BCCB7E2F9EF}|Job_Portal_Application\\Job_Portal_Application.csproj|c:\\users\\srikanth\\desktop\\presidio-mini-project\\job_portal_application\\job_portal_application\\repository\\jobactivityrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F2B10CCB-92D0-405D-A581-1BCCB7E2F9EF}|Job_Portal_Application\\Job_Portal_Application.csproj|solutionrelative:job_portal_application\\repository\\jobactivityrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F2B10CCB-92D0-405D-A581-1BCCB7E2F9EF}|Job_Portal_Application\\Job_Portal_Application.csproj|c:\\users\\srikanth\\desktop\\presidio-mini-project\\job_portal_application\\job_portal_application\\services\\companyservice\\jobactivityservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F2B10CCB-92D0-405D-A581-1BCCB7E2F9EF}|Job_Portal_Application\\Job_Portal_Application.csproj|solutionrelative:job_portal_application\\services\\companyservice\\jobactivityservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F2B10CCB-92D0-405D-A581-1BCCB7E2F9EF}|Job_Portal_Application\\Job_Portal_Application.csproj|c:\\users\\srikanth\\desktop\\presidio-mini-project\\job_portal_application\\job_portal_application\\dto\\jobdtos\\postjobdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F2B10CCB-92D0-405D-A581-1BCCB7E2F9EF}|Job_Portal_Application\\Job_Portal_Application.csproj|solutionrelative:job_portal_application\\dto\\jobdtos\\postjobdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F2B10CCB-92D0-405D-A581-1BCCB7E2F9EF}|Job_Portal_Application\\Job_Portal_Application.csproj|c:\\users\\srikanth\\desktop\\presidio-mini-project\\job_portal_application\\job_portal_application\\controllers\\jobcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F2B10CCB-92D0-405D-A581-1BCCB7E2F9EF}|Job_Portal_Application\\Job_Portal_Application.csproj|solutionrelative:job_portal_application\\controllers\\jobcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F2B10CCB-92D0-405D-A581-1BCCB7E2F9EF}|Job_Portal_Application\\Job_Portal_Application.csproj|c:\\users\\srikanth\\desktop\\presidio-mini-project\\job_portal_application\\job_portal_application\\services\\companyservice\\jobservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F2B10CCB-92D0-405D-A581-1BCCB7E2F9EF}|Job_Portal_Application\\Job_Portal_Application.csproj|solutionrelative:job_portal_application\\services\\companyservice\\jobservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Migrations\\20240619020737_skill.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Job_Portal_Application\\Migrations\\20240619020737_skill.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F2B10CCB-92D0-405D-A581-1BCCB7E2F9EF}|Job_Portal_Application\\Job_Portal_Application.csproj|c:\\users\\srikanth\\desktop\\presidio-mini-project\\job_portal_application\\job_portal_application\\services\\companyservice\\jobservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F2B10CCB-92D0-405D-A581-1BCCB7E2F9EF}|Job_Portal_Application\\Job_Portal_Application.csproj|solutionrelative:job_portal_application\\services\\companyservice\\jobservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F2B10CCB-92D0-405D-A581-1BCCB7E2F9EF}|Job_Portal_Application\\Job_Portal_Application.csproj|c:\\users\\srikanth\\desktop\\presidio-mini-project\\job_portal_application\\job_portal_application\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F2B10CCB-92D0-405D-A581-1BCCB7E2F9EF}|Job_Portal_Application\\Job_Portal_Application.csproj|solutionrelative:job_portal_application\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2B10CCB-92D0-405D-A581-1BCCB7E2F9EF}|Job_Portal_Application\\Job_Portal_Application.csproj|c:\\users\\srikanth\\desktop\\presidio-mini-project\\job_portal_application\\job_portal_application\\models\\skills.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F2B10CCB-92D0-405D-A581-1BCCB7E2F9EF}|Job_Portal_Application\\Job_Portal_Application.csproj|solutionrelative:job_portal_application\\models\\skills.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2B10CCB-92D0-405D-A581-1BCCB7E2F9EF}|Job_Portal_Application\\Job_Portal_Application.csproj|c:\\users\\srikanth\\desktop\\presidio-mini-project\\job_portal_application\\job_portal_application\\models\\userskills.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F2B10CCB-92D0-405D-A581-1BCCB7E2F9EF}|Job_Portal_Application\\Job_Portal_Application.csproj|solutionrelative:job_portal_application\\models\\userskills.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2B10CCB-92D0-405D-A581-1BCCB7E2F9EF}|Job_Portal_Application\\Job_Portal_Application.csproj|c:\\users\\srikanth\\desktop\\presidio-mini-project\\job_portal_application\\job_portal_application\\controllers\\jobcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F2B10CCB-92D0-405D-A581-1BCCB7E2F9EF}|Job_Portal_Application\\Job_Portal_Application.csproj|solutionrelative:job_portal_application\\controllers\\jobcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2B10CCB-92D0-405D-A581-1BCCB7E2F9EF}|Job_Portal_Application\\Job_Portal_Application.csproj|c:\\users\\srikanth\\desktop\\presidio-mini-project\\job_portal_application\\job_portal_application\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F2B10CCB-92D0-405D-A581-1BCCB7E2F9EF}|Job_Portal_Application\\Job_Portal_Application.csproj|solutionrelative:job_portal_application\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2B10CCB-92D0-405D-A581-1BCCB7E2F9EF}|Job_Portal_Application\\Job_Portal_Application.csproj|c:\\users\\srikanth\\desktop\\presidio-mini-project\\job_portal_application\\job_portal_application\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{F2B10CCB-92D0-405D-A581-1BCCB7E2F9EF}|Job_Portal_Application\\Job_Portal_Application.csproj|solutionrelative:job_portal_application\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2B10CCB-92D0-405D-A581-1BCCB7E2F9EF}|Job_Portal_Application\\Job_Portal_Application.csproj|c:\\users\\srikanth\\desktop\\presidio-mini-project\\job_portal_application\\job_portal_application\\repository\\jobactivityrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F2B10CCB-92D0-405D-A581-1BCCB7E2F9EF}|Job_Portal_Application\\Job_Portal_Application.csproj|solutionrelative:job_portal_application\\repository\\jobactivityrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2B10CCB-92D0-405D-A581-1BCCB7E2F9EF}|Job_Portal_Application\\Job_Portal_Application.csproj|c:\\users\\srikanth\\desktop\\presidio-mini-project\\job_portal_application\\job_portal_application\\dto\\jobdtos\\postjobdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F2B10CCB-92D0-405D-A581-1BCCB7E2F9EF}|Job_Portal_Application\\Job_Portal_Application.csproj|solutionrelative:job_portal_application\\dto\\jobdtos\\postjobdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F2B10CCB-92D0-405D-A581-1BCCB7E2F9EF}|Job_Portal_Application\\Job_Portal_Application.csproj|c:\\users\\srikanth\\desktop\\presidio-mini-project\\job_portal_application\\job_portal_application\\dto\\companydtos\\companyupdatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -57,10 +73,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{F2B10CCB-92D0-405D-A581-1BCCB7E2F9EF}|Job_Portal_Application\\Job_Portal_Application.csproj|c:\\users\\srikanth\\desktop\\presidio-mini-project\\job_portal_application\\job_portal_application\\models\\users.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F2B10CCB-92D0-405D-A581-1BCCB7E2F9EF}|Job_Portal_Application\\Job_Portal_Application.csproj|solutionrelative:job_portal_application\\models\\users.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F2B10CCB-92D0-405D-A581-1BCCB7E2F9EF}|Job_Portal_Application\\Job_Portal_Application.csproj|c:\\users\\srikanth\\desktop\\presidio-mini-project\\job_portal_application\\job_portal_application\\controllers\\resumeuploadcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F2B10CCB-92D0-405D-A581-1BCCB7E2F9EF}|Job_Portal_Application\\Job_Portal_Application.csproj|solutionrelative:job_portal_application\\controllers\\resumeuploadcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F2B10CCB-92D0-405D-A581-1BCCB7E2F9EF}|Job_Portal_Application\\Job_Portal_Application.csproj|c:\\users\\srikanth\\desktop\\presidio-mini-project\\job_portal_application\\job_portal_application\\repository\\companyrepos\\jobrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -206,10 +218,6 @@
       "RelativeMoniker": "D:0:0:{F2B10CCB-92D0-405D-A581-1BCCB7E2F9EF}|Job_Portal_Application\\Job_Portal_Application.csproj|solutionrelative:job_portal_application\\controllers\\usereducationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F2B10CCB-92D0-405D-A581-1BCCB7E2F9EF}|Job_Portal_Application\\Job_Portal_Application.csproj|c:\\users\\srikanth\\desktop\\presidio-mini-project\\job_portal_application\\job_portal_application\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{F2B10CCB-92D0-405D-A581-1BCCB7E2F9EF}|Job_Portal_Application\\Job_Portal_Application.csproj|solutionrelative:job_portal_application\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{F2B10CCB-92D0-405D-A581-1BCCB7E2F9EF}|Job_Portal_Application\\Job_Portal_Application.csproj|c:\\users\\srikanth\\desktop\\presidio-mini-project\\job_portal_application\\job_portal_application\\dto\\userdto\\userprofiledto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F2B10CCB-92D0-405D-A581-1BCCB7E2F9EF}|Job_Portal_Application\\Job_Portal_Application.csproj|solutionrelative:job_portal_application\\dto\\userdto\\userprofiledto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -262,10 +270,6 @@
       "RelativeMoniker": "D:0:0:{173F4149-C68D-4F55-90A0-5C76DFB0F29D}|Job_Portal_Application_Test\\Job_Portal_Application_Test.csproj|solutionrelative:job_portal_application_test\\testjobportalcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F2B10CCB-92D0-405D-A581-1BCCB7E2F9EF}|Job_Portal_Application\\Job_Portal_Application.csproj|c:\\users\\srikanth\\desktop\\presidio-mini-project\\job_portal_application\\job_portal_application\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F2B10CCB-92D0-405D-A581-1BCCB7E2F9EF}|Job_Portal_Application\\Job_Portal_Application.csproj|solutionrelative:job_portal_application\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{F2B10CCB-92D0-405D-A581-1BCCB7E2F9EF}|Job_Portal_Application\\Job_Portal_Application.csproj|c:\\users\\srikanth\\desktop\\presidio-mini-project\\job_portal_application\\job_portal_application\\services\\adminservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F2B10CCB-92D0-405D-A581-1BCCB7E2F9EF}|Job_Portal_Application\\Job_Portal_Application.csproj|solutionrelative:job_portal_application\\services\\adminservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -305,7 +309,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 107,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 10,
           "Children": [
             {
               "$type": "Bookmark",
@@ -313,11 +317,11 @@
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+              "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
             },
             {
               "$type": "Bookmark",
@@ -325,7 +329,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 5,
               "Title": "20240619020737_skill.cs",
               "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Migrations\\20240619020737_skill.cs",
               "RelativeDocumentMoniker": "Job_Portal_Application\\Migrations\\20240619020737_skill.cs",
@@ -337,59 +341,145 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 4,
               "Title": "JobService.cs",
               "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Services\\CompanyService\\JobService.cs",
               "RelativeDocumentMoniker": "Job_Portal_Application\\Services\\CompanyService\\JobService.cs",
               "ToolTip": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Services\\CompanyService\\JobService.cs",
               "RelativeToolTip": "Job_Portal_Application\\Services\\CompanyService\\JobService.cs",
-              "ViewState": "AQIAAOsAAAAAAAAAAAAiwP0AAAAIAAAA",
+              "ViewState": "AQIAANQAAAAAAAAAAAAcwP0AAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-06-19T02:02:40.033Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
+              "Title": "Context.cs",
+              "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Context\\Context.cs",
+              "RelativeDocumentMoniker": "Job_Portal_Application\\Context\\Context.cs",
+              "ToolTip": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Context\\Context.cs",
+              "RelativeToolTip": "Job_Portal_Application\\Context\\Context.cs",
+              "ViewState": "AQIAAE8BAAAAAAAAAAAAAGIAAAAwAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-17T12:01:37.92Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\appsettings.json",
+              "RelativeDocumentMoniker": "Job_Portal_Application\\appsettings.json",
+              "ToolTip": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\appsettings.json",
+              "RelativeToolTip": "Job_Portal_Application\\appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAArAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-06-20T11:21:46.21Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ResumeUploadController.cs",
+              "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Controllers\\ResumeUploadController.cs",
+              "RelativeDocumentMoniker": "Job_Portal_Application\\Controllers\\ResumeUploadController.cs",
+              "ToolTip": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Controllers\\ResumeUploadController.cs",
+              "RelativeToolTip": "Job_Portal_Application\\Controllers\\ResumeUploadController.cs",
+              "ViewState": "AQIAAF4AAAAAAAAAAAAkwG8AAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-20T10:20:45.103Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "JobActivityController.cs",
               "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Controllers\\JobActivityController.cs",
               "RelativeDocumentMoniker": "Job_Portal_Application\\Controllers\\JobActivityController.cs",
               "ToolTip": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Controllers\\JobActivityController.cs",
               "RelativeToolTip": "Job_Portal_Application\\Controllers\\JobActivityController.cs",
-              "ViewState": "AQIAACUAAAAAAAAAAAAcwE4AAAAIAAAA",
+              "ViewState": "AQIAAF8AAAAAAAAAAAAmwBAAAAA3AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-06-24T07:22:56.475Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Skills.cs",
-              "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Models\\Skills.cs",
-              "RelativeDocumentMoniker": "Job_Portal_Application\\Models\\Skills.cs",
-              "ToolTip": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Models\\Skills.cs",
-              "RelativeToolTip": "Job_Portal_Application\\Models\\Skills.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAsAAAA",
+              "DocumentIndex": 0,
+              "Title": "JobActivityServices.cs",
+              "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Services\\CompanyService\\JobActivityServices.cs",
+              "RelativeDocumentMoniker": "Job_Portal_Application\\Services\\CompanyService\\JobActivityServices.cs",
+              "ToolTip": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Services\\CompanyService\\JobActivityServices.cs",
+              "RelativeToolTip": "Job_Portal_Application\\Services\\CompanyService\\JobActivityServices.cs",
+              "ViewState": "AQIAAEgAAAAAAAAAAAAqwFQAAABLAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-19T02:01:02.808Z",
+              "WhenOpened": "2024-06-17T11:33:24.932Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 9,
               "Title": "JobController.cs",
               "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Controllers\\JobController.cs",
               "RelativeDocumentMoniker": "Job_Portal_Application\\Controllers\\JobController.cs",
               "ToolTip": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Controllers\\JobController.cs",
               "RelativeToolTip": "Job_Portal_Application\\Controllers\\JobController.cs",
-              "ViewState": "AQIAABwAAAAAAAAAAAAQwCQAAAAQAAAA",
+              "ViewState": "AQIAABwAAAAAAAAAAAAQwDAAAAAQAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-25T08:36:12.134Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-25T08:36:12.134Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 8,
+              "Title": "UserSkills.cs",
+              "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Models\\UserSkills.cs",
+              "RelativeDocumentMoniker": "Job_Portal_Application\\Models\\UserSkills.cs",
+              "ToolTip": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Models\\UserSkills.cs",
+              "RelativeToolTip": "Job_Portal_Application\\Models\\UserSkills.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAUAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-02T12:31:02.953Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "AdminController.cs",
+              "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Controllers\\AdminController.cs",
+              "RelativeDocumentMoniker": "Job_Portal_Application\\Controllers\\AdminController.cs",
+              "ToolTip": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Controllers\\AdminController.cs",
+              "RelativeToolTip": "Job_Portal_Application\\Controllers\\AdminController.cs",
+              "ViewState": "AQIAADUAAAAAAAAAAAAgwDoAAAARAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-17T04:51:54.675Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Skills.cs",
+              "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Models\\Skills.cs",
+              "RelativeDocumentMoniker": "Job_Portal_Application\\Models\\Skills.cs",
+              "ToolTip": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Models\\Skills.cs",
+              "RelativeToolTip": "Job_Portal_Application\\Models\\Skills.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAbAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-19T02:01:02.808Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Program.cs",
+              "RelativeDocumentMoniker": "Job_Portal_Application\\Program.cs",
+              "ToolTip": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Program.cs",
+              "RelativeToolTip": "Job_Portal_Application\\Program.cs",
+              "ViewState": "AQIAAFoAAAAAAAAAAAAwwJsAAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-18T15:09:42.31Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
               "Title": "JobActivityRepository.cs",
               "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Repository\\JobActivityRepository.cs",
               "RelativeDocumentMoniker": "Job_Portal_Application\\Repository\\JobActivityRepository.cs",
@@ -397,38 +487,11 @@
               "RelativeToolTip": "Job_Portal_Application\\Repository\\JobActivityRepository.cs",
               "ViewState": "AQIAAGkAAAAAAAAAAAAiwH8AAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-24T10:07:02.595Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-24T10:07:02.595Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Program.cs",
-              "RelativeDocumentMoniker": "Job_Portal_Application\\Program.cs",
-              "ToolTip": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Program.cs",
-              "RelativeToolTip": "Job_Portal_Application\\Program.cs",
-              "ViewState": "AQIAAEgAAAAAAAAAAAAiwFYAAAAQAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-18T15:09:42.31Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Context.cs",
-              "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Context\\Context.cs",
-              "RelativeDocumentMoniker": "Job_Portal_Application\\Context\\Context.cs",
-              "ToolTip": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Context\\Context.cs",
-              "RelativeToolTip": "Job_Portal_Application\\Context\\Context.cs",
-              "ViewState": "AQIAAAEAAAAAAAAAAAAiwBEAAAAIAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-17T12:01:37.92Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 13,
               "Title": "PostJobDto.cs",
               "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Dto\\JobDtos\\PostJobDto.cs",
               "RelativeDocumentMoniker": "Job_Portal_Application\\Dto\\JobDtos\\PostJobDto.cs",
@@ -436,25 +499,11 @@
               "RelativeToolTip": "Job_Portal_Application\\Dto\\JobDtos\\PostJobDto.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAB4AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-01T10:43:27.456Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-01T10:43:27.456Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "JobActivityServices.cs",
-              "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Services\\CompanyService\\JobActivityServices.cs",
-              "RelativeDocumentMoniker": "Job_Portal_Application\\Services\\CompanyService\\JobActivityServices.cs",
-              "ToolTip": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Services\\CompanyService\\JobActivityServices.cs",
-              "RelativeToolTip": "Job_Portal_Application\\Services\\CompanyService\\JobActivityServices.cs",
-              "ViewState": "AQIAACAAAAAAAAAAAAAiwC8AAAAMAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-17T11:33:24.932Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 14,
               "Title": "CompanyUpdateDto.cs",
               "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Dto\\CompanyDtos\\CompanyUpdateDto.cs",
               "RelativeDocumentMoniker": "Job_Portal_Application\\Dto\\CompanyDtos\\CompanyUpdateDto.cs",
@@ -466,7 +515,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 16,
               "Title": "UpdateUserDto.cs",
               "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Dto\\UserDto\\UpdateUserDto.cs",
               "RelativeDocumentMoniker": "Job_Portal_Application\\Dto\\UserDto\\UpdateUserDto.cs",
@@ -478,7 +527,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 73,
+              "DocumentIndex": 74,
               "Title": "20240630085537_aboutme.cs",
               "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Migrations\\20240630085537_aboutme.cs",
               "RelativeDocumentMoniker": "Job_Portal_Application\\Migrations\\20240630085537_aboutme.cs",
@@ -490,7 +539,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 18,
               "Title": "JobRepository.cs",
               "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Repository\\CompanyRepos\\JobRepository.cs",
               "RelativeDocumentMoniker": "Job_Portal_Application\\Repository\\CompanyRepos\\JobRepository.cs",
@@ -502,7 +551,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 15,
               "Title": "Company.cs",
               "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Models\\Company.cs",
               "RelativeDocumentMoniker": "Job_Portal_Application\\Models\\Company.cs",
@@ -514,19 +563,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "ResumeUploadController.cs",
-              "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Controllers\\ResumeUploadController.cs",
-              "RelativeDocumentMoniker": "Job_Portal_Application\\Controllers\\ResumeUploadController.cs",
-              "ToolTip": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Controllers\\ResumeUploadController.cs",
-              "RelativeToolTip": "Job_Portal_Application\\Controllers\\ResumeUploadController.cs",
-              "ViewState": "AQIAABwAAAAAAAAAAAAQwGwAAAAMAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-20T10:20:45.103Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 17,
               "Title": "Users.cs",
               "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Models\\Users.cs",
               "RelativeDocumentMoniker": "Job_Portal_Application\\Models\\Users.cs",
@@ -538,7 +575,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 21,
               "Title": "UserRepository.cs",
               "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Repository\\UserRepos\\UserRepository.cs",
               "RelativeDocumentMoniker": "Job_Portal_Application\\Repository\\UserRepos\\UserRepository.cs",
@@ -550,7 +587,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 24,
               "Title": "JobTests.cs",
               "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application_Test\\CompanyTest\\JobTests.cs",
               "RelativeDocumentMoniker": "Job_Portal_Application_Test\\CompanyTest\\JobTests.cs",
@@ -562,7 +599,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 19,
               "Title": "JobDto.cs",
               "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Dto\\JobDtos\\JobDto.cs",
               "RelativeDocumentMoniker": "Job_Portal_Application\\Dto\\JobDtos\\JobDto.cs",
@@ -574,7 +611,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 20,
               "Title": "Userservice.cs",
               "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Services\\UsersServices\\Userservice.cs",
               "RelativeDocumentMoniker": "Job_Portal_Application\\Services\\UsersServices\\Userservice.cs",
@@ -586,7 +623,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 22,
               "Title": "JobType.cs",
               "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Dto\\Enums\\JobType.cs",
               "RelativeDocumentMoniker": "Job_Portal_Application\\Dto\\Enums\\JobType.cs",
@@ -598,7 +635,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 23,
               "Title": "20240628181930_init.cs",
               "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Migrations\\20240628181930_init.cs",
               "RelativeDocumentMoniker": "Job_Portal_Application\\Migrations\\20240628181930_init.cs",
@@ -610,7 +647,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 25,
               "Title": "UserTests.cs",
               "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application_Test\\UserTest\\UserTests.cs",
               "RelativeDocumentMoniker": "Job_Portal_Application_Test\\UserTest\\UserTests.cs",
@@ -622,7 +659,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 26,
               "Title": "Job_Portal_Application_Test.csproj",
               "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application_Test\\Job_Portal_Application_Test.csproj",
               "RelativeDocumentMoniker": "Job_Portal_Application_Test\\Job_Portal_Application_Test.csproj",
@@ -634,7 +671,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 27,
               "Title": "IJobService.cs",
               "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Interfaces\\IService\\IJobService.cs",
               "RelativeDocumentMoniker": "Job_Portal_Application\\Interfaces\\IService\\IJobService.cs",
@@ -646,7 +683,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 29,
               "Title": "JobActivity.cs",
               "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Models\\JobActivity.cs",
               "RelativeDocumentMoniker": "Job_Portal_Application\\Models\\JobActivity.cs",
@@ -658,7 +695,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 28,
               "Title": "IJobActivityService.cs",
               "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Interfaces\\IService\\IJobActivityService.cs",
               "RelativeDocumentMoniker": "Job_Portal_Application\\Interfaces\\IService\\IJobActivityService.cs",
@@ -670,7 +707,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 30,
               "Title": "UpdateJobactivityDto.cs",
               "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Dto\\JobActivityDto\\UpdateJobactivityDto.cs",
               "RelativeDocumentMoniker": "Job_Portal_Application\\Dto\\JobActivityDto\\UpdateJobactivityDto.cs",
@@ -682,7 +719,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 32,
               "Title": "JobSkills.cs",
               "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Models\\JobSkills.cs",
               "RelativeDocumentMoniker": "Job_Portal_Application\\Models\\JobSkills.cs",
@@ -694,7 +731,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 31,
               "Title": "JobActivityDto.cs",
               "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Dto\\JobActivityDto\\JobActivityDto.cs",
               "RelativeDocumentMoniker": "Job_Portal_Application\\Dto\\JobActivityDto\\JobActivityDto.cs",
@@ -706,7 +743,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 33,
               "Title": "Jobs.cs",
               "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Models\\Jobs.cs",
               "RelativeDocumentMoniker": "Job_Portal_Application\\Models\\Jobs.cs",
@@ -718,7 +755,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 34,
               "Title": "UserAppliedJobsDto.cs",
               "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Dto\\JobActivityDto\\UserAppliedJobsDto.cs",
               "RelativeDocumentMoniker": "Job_Portal_Application\\Dto\\JobActivityDto\\UserAppliedJobsDto.cs",
@@ -730,7 +767,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 36,
               "Title": "JobStatus.cs",
               "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Dto\\Enums\\JobStatus.cs",
               "RelativeDocumentMoniker": "Job_Portal_Application\\Dto\\Enums\\JobStatus.cs",
@@ -742,7 +779,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 35,
               "Title": "UserDto.cs",
               "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Dto\\UserDto\\UserDto.cs",
               "RelativeDocumentMoniker": "Job_Portal_Application\\Dto\\UserDto\\UserDto.cs",
@@ -754,7 +791,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
+              "DocumentIndex": 37,
               "Title": "CompanyController.cs",
               "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Controllers\\CompanyController.cs",
               "RelativeDocumentMoniker": "Job_Portal_Application\\Controllers\\CompanyController.cs",
@@ -767,7 +804,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
+              "DocumentIndex": 38,
               "Title": "AreasOfInterestService.cs",
               "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Services\\UsersServices\\AreasOfInterestService.cs",
               "RelativeDocumentMoniker": "Job_Portal_Application\\Services\\UsersServices\\AreasOfInterestService.cs",
@@ -779,7 +816,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 36,
+              "DocumentIndex": 39,
               "Title": "IJobRepository.cs",
               "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Interfaces\\IRepository\\IJobRepository.cs",
               "RelativeDocumentMoniker": "Job_Portal_Application\\Interfaces\\IRepository\\IJobRepository.cs",
@@ -791,7 +828,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 37,
+              "DocumentIndex": 40,
               "Title": "TokenServices.cs",
               "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Services\\TokenServices.cs",
               "RelativeDocumentMoniker": "Job_Portal_Application\\Services\\TokenServices.cs",
@@ -803,7 +840,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 38,
+              "DocumentIndex": 41,
               "Title": "UserRegisterDto.cs",
               "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Dto\\UserDto\\UserRegisterDto.cs",
               "RelativeDocumentMoniker": "Job_Portal_Application\\Dto\\UserDto\\UserRegisterDto.cs",
@@ -815,7 +852,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 39,
+              "DocumentIndex": 42,
               "Title": "LoginDto.cs",
               "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Dto\\UserDto\\LoginDto.cs",
               "RelativeDocumentMoniker": "Job_Portal_Application\\Dto\\UserDto\\LoginDto.cs",
@@ -827,7 +864,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 40,
+              "DocumentIndex": 43,
               "Title": "JobsSearchRequest.cs",
               "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Dto\\JobDtos\\JobsSearchRequest.cs",
               "RelativeDocumentMoniker": "Job_Portal_Application\\Dto\\JobDtos\\JobsSearchRequest.cs",
@@ -839,7 +876,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 41,
+              "DocumentIndex": 44,
               "Title": "UserController.cs",
               "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Controllers\\UserController.cs",
               "RelativeDocumentMoniker": "Job_Portal_Application\\Controllers\\UserController.cs",
@@ -852,7 +889,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 42,
+              "DocumentIndex": 45,
               "Title": "SkillController.cs",
               "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Controllers\\SkillController.cs",
               "RelativeDocumentMoniker": "Job_Portal_Application\\Controllers\\SkillController.cs",
@@ -864,7 +901,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 43,
+              "DocumentIndex": 46,
               "Title": "CompanyService.cs",
               "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Services\\CompanyService\\CompanyService.cs",
               "RelativeDocumentMoniker": "Job_Portal_Application\\Services\\CompanyService\\CompanyService.cs",
@@ -876,7 +913,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 44,
+              "DocumentIndex": 47,
               "Title": "CompanyRepository.cs",
               "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Repository\\CompanyRepos\\CompanyRepository.cs",
               "RelativeDocumentMoniker": "Job_Portal_Application\\Repository\\CompanyRepos\\CompanyRepository.cs",
@@ -888,7 +925,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 45,
+              "DocumentIndex": 48,
               "Title": "TitleController.cs",
               "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Controllers\\TitleController.cs",
               "RelativeDocumentMoniker": "Job_Portal_Application\\Controllers\\TitleController.cs",
@@ -900,7 +937,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 46,
+              "DocumentIndex": 49,
               "Title": "CompanyRegisterDto.cs",
               "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Dto\\CompanyDtos\\CompanyRegisterDto.cs",
               "RelativeDocumentMoniker": "Job_Portal_Application\\Dto\\CompanyDtos\\CompanyRegisterDto.cs",
@@ -912,7 +949,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 47,
+              "DocumentIndex": 50,
               "Title": "CompanyTests.cs",
               "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application_Test\\CompanyTest\\CompanyTests.cs",
               "RelativeDocumentMoniker": "Job_Portal_Application_Test\\CompanyTest\\CompanyTests.cs",
@@ -924,7 +961,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 48,
+              "DocumentIndex": 51,
               "Title": "Microsoft.Common.CurrentVersion.targets",
               "DocumentMoniker": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
               "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
@@ -936,7 +973,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 49,
+              "DocumentIndex": 52,
               "Title": "CompanyRepository.cs",
               "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Dto\\CompanyDtos\\CompanyRepository.cs",
               "RelativeDocumentMoniker": "Job_Portal_Application\\Dto\\CompanyDtos\\CompanyRepository.cs",
@@ -948,7 +985,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 50,
+              "DocumentIndex": 53,
               "Title": "UserEducationController.cs",
               "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Controllers\\UserEducationController.cs",
               "RelativeDocumentMoniker": "Job_Portal_Application\\Controllers\\UserEducationController.cs",
@@ -960,19 +997,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 51,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\appsettings.json",
-              "RelativeDocumentMoniker": "Job_Portal_Application\\appsettings.json",
-              "ToolTip": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\appsettings.json",
-              "RelativeToolTip": "Job_Portal_Application\\appsettings.json",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAABkAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-06-20T11:21:46.21Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 52,
+              "DocumentIndex": 54,
               "Title": "UserprofileDto.cs",
               "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Dto\\UserDto\\UserprofileDto.cs",
               "RelativeDocumentMoniker": "Job_Portal_Application\\Dto\\UserDto\\UserprofileDto.cs",
@@ -984,7 +1009,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 53,
+              "DocumentIndex": 55,
               "Title": "IExperienceService.cs",
               "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Interfaces\\IService\\IExperienceService.cs",
               "RelativeDocumentMoniker": "Job_Portal_Application\\Interfaces\\IService\\IExperienceService.cs",
@@ -996,7 +1021,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 54,
+              "DocumentIndex": 56,
               "Title": "AddAreasOfInterestDTO.cs",
               "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Dto\\AreaofIntrestDto\\AddAreasOfInterestDTO.cs",
               "RelativeDocumentMoniker": "Job_Portal_Application\\Dto\\AreaofIntrestDto\\AddAreasOfInterestDTO.cs",
@@ -1008,7 +1033,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 58,
+              "DocumentIndex": 60,
               "Title": "EducationDto.cs",
               "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Dto\\EducationDtos\\EducationDto.cs",
               "RelativeDocumentMoniker": "Job_Portal_Application\\Dto\\EducationDtos\\EducationDto.cs",
@@ -1020,7 +1045,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 56,
+              "DocumentIndex": 58,
               "Title": "EducationService.cs",
               "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Services\\UsersServices\\EducationService.cs",
               "RelativeDocumentMoniker": "Job_Portal_Application\\Services\\UsersServices\\EducationService.cs",
@@ -1032,7 +1057,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 55,
+              "DocumentIndex": 57,
               "Title": "ExperienceService.cs",
               "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Services\\UsersServices\\ExperienceService.cs",
               "RelativeDocumentMoniker": "Job_Portal_Application\\Services\\UsersServices\\ExperienceService.cs",
@@ -1044,7 +1069,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 59,
+              "DocumentIndex": 61,
               "Title": "Education.cs",
               "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Models\\Education.cs",
               "RelativeDocumentMoniker": "Job_Portal_Application\\Models\\Education.cs",
@@ -1056,7 +1081,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 57,
+              "DocumentIndex": 59,
               "Title": "AddEducationDto.cs",
               "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Dto\\EducationDtos\\AddEducationDto.cs",
               "RelativeDocumentMoniker": "Job_Portal_Application\\Dto\\EducationDtos\\AddEducationDto.cs",
@@ -1068,7 +1093,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 60,
+              "DocumentIndex": 62,
               "Title": "AreasOfInterestDto.cs",
               "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Dto\\AreaofIntrestDto\\AreasOfInterestDto.cs",
               "RelativeDocumentMoniker": "Job_Portal_Application\\Dto\\AreaofIntrestDto\\AreasOfInterestDto.cs",
@@ -1080,7 +1105,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 61,
+              "DocumentIndex": 63,
               "Title": "AddExperienceDto.cs",
               "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Dto\\ExperienceDto\\AddExperienceDto.cs",
               "RelativeDocumentMoniker": "Job_Portal_Application\\Dto\\ExperienceDto\\AddExperienceDto.cs",
@@ -1092,7 +1117,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 64,
+              "DocumentIndex": 66,
               "Title": "TestJobportalContext.cs",
               "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application_Test\\TestJobportalContext.cs",
               "RelativeDocumentMoniker": "Job_Portal_Application_Test\\TestJobportalContext.cs",
@@ -1104,7 +1129,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 63,
+              "DocumentIndex": 65,
               "Title": "AdminServiceTests.cs",
               "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application_Test\\UserTest\\AdminServiceTests.cs",
               "RelativeDocumentMoniker": "Job_Portal_Application_Test\\UserTest\\AdminServiceTests.cs",
@@ -1116,7 +1141,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 62,
+              "DocumentIndex": 64,
               "Title": "20240619020627_skills.cs",
               "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Migrations\\20240619020627_skills.cs",
               "RelativeDocumentMoniker": "Job_Portal_Application\\Migrations\\20240619020627_skills.cs",
@@ -1128,7 +1153,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 66,
+              "DocumentIndex": 67,
               "Title": "AdminService.cs",
               "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Services\\AdminService.cs",
               "RelativeDocumentMoniker": "Job_Portal_Application\\Services\\AdminService.cs",
@@ -1140,19 +1165,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 65,
-              "Title": "AdminController.cs",
-              "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Controllers\\AdminController.cs",
-              "RelativeDocumentMoniker": "Job_Portal_Application\\Controllers\\AdminController.cs",
-              "ToolTip": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Controllers\\AdminController.cs",
-              "RelativeToolTip": "Job_Portal_Application\\Controllers\\AdminController.cs",
-              "ViewState": "AQIAABEAAAAAAAAAAAA5wCQAAABUAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-17T04:51:54.675Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 67,
+              "DocumentIndex": 68,
               "Title": "Experience.cs",
               "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Models\\Experience.cs",
               "RelativeDocumentMoniker": "Job_Portal_Application\\Models\\Experience.cs",
@@ -1164,7 +1177,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 68,
+              "DocumentIndex": 69,
               "Title": "ExperienceDTO.cs",
               "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Dto\\ExperienceDto\\ExperienceDTO.cs",
               "RelativeDocumentMoniker": "Job_Portal_Application\\Dto\\ExperienceDto\\ExperienceDTO.cs",
@@ -1176,7 +1189,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 69,
+              "DocumentIndex": 70,
               "Title": "ApplyjobDto.cs",
               "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Dto\\JobActivityDto\\ApplyjobDto.cs",
               "RelativeDocumentMoniker": "Job_Portal_Application\\Dto\\JobActivityDto\\ApplyjobDto.cs",
@@ -1188,7 +1201,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 70,
+              "DocumentIndex": 71,
               "Title": "FilteredJobActivitiesDto.cs",
               "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Dto\\JobActivityDto\\FilteredJobActivitiesDto.cs",
               "RelativeDocumentMoniker": "Job_Portal_Application\\Dto\\JobActivityDto\\FilteredJobActivitiesDto.cs",
@@ -1200,7 +1213,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 71,
+              "DocumentIndex": 72,
               "Title": "IUserservice.cs",
               "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Interfaces\\IService\\IUserservice.cs",
               "RelativeDocumentMoniker": "Job_Portal_Application\\Interfaces\\IService\\IUserservice.cs",
@@ -1212,7 +1225,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 72,
+              "DocumentIndex": 73,
               "Title": "FileController.cs",
               "DocumentMoniker": "C:\\Users\\SRIKANTH\\Desktop\\Presidio-Mini-Project\\Job_Portal_Application\\Job_Portal_Application\\Controllers\\FileController.cs",
               "RelativeDocumentMoniker": "Job_Portal_Application\\Controllers\\FileController.cs",

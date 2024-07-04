@@ -96,7 +96,8 @@ namespace Job_Portal_Application.Context
             modelBuilder.Entity<JobSkills>()
                 .HasOne(js => js.Skill)
                 .WithMany()
-                .HasForeignKey(js => js.SkillId);
+                .HasForeignKey(js => js.SkillId)
+                             .OnDelete(DeleteBehavior.Restrict);
 
             // User and UserSkills
             modelBuilder.Entity<User>()
@@ -108,7 +109,8 @@ namespace Job_Portal_Application.Context
             modelBuilder.Entity<UserSkills>()
                 .HasOne(us => us.Skill)
                 .WithMany()
-                .HasForeignKey(us => us.SkillId);
+                .HasForeignKey(us => us.SkillId)
+                             .OnDelete(DeleteBehavior.Restrict);
 
             // Job and Company
             modelBuilder.Entity<Job>()

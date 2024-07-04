@@ -57,9 +57,12 @@ namespace Job_Portal_Application.Controllers
                 var result = await _adminService.DeleteSkill(id);
                 if (result)
                 {
-                    return Ok("Skill deleted Sucessfully");
+                    return Ok(new
+                    {
+                        message = "Skill deleted Sucessfully"
+                    });
                 }
-                return NotFound("Skill not found");
+                return NotFound(new { message = "Skill not found" });
             }
             catch (SkillNotFoundException ex)
             {
@@ -101,9 +104,9 @@ namespace Job_Portal_Application.Controllers
                 var result = await _adminService.DeleteTitle(id);
                 if (result)
                 {
-                    return Ok("Task deleted Sucessfully");
+                    return Ok(new { message = "Task deleted Sucessfully" });
                 }
-                return NotFound("Title not found");
+                return NotFound(new { message = "Title not found" });
             }
             catch (TitleNotFoundException ex)
             {
